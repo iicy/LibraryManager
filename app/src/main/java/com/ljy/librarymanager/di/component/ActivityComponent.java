@@ -6,6 +6,8 @@ import android.content.Context;
 import com.ljy.librarymanager.di.module.ActivityModule;
 import com.ljy.librarymanager.di.scope.ContextLife;
 import com.ljy.librarymanager.di.scope.PerActivity;
+import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
+import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 
 import dagger.Component;
 
@@ -25,15 +27,8 @@ public interface ActivityComponent {
 
     Activity getActivity();
 
-//    void inject(NewsActivity newsActivity);
-//
-//    void inject(NewsDetailActivity newsDetailActivity);
-//
-//    void inject(NewsChannelActivity newsChannelActivity);
-//
-//    void inject(NewsPhotoDetailActivity newsPhotoDetailActivity);
+    void inject(LoginActivity loginActivity);
 
-    //void inject(PhotoActivity photoActivity);
+    void inject(MainActivity mainActivity);
 
-    //void inject(PhotoDetailActivity photoDetailActivity);
 }

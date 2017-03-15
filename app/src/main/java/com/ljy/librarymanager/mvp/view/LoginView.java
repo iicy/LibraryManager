@@ -8,4 +8,7 @@ import com.ljy.librarymanager.mvp.base.BaseView;
 
 public interface LoginView extends BaseView {
 
+    void login(String username, String password);
+
+//    void test(Integer data);
 }

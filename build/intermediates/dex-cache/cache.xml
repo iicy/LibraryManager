@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c755536e5a100d9c76c8ea0b72f76c018f7a9de2">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-24.2.0_73eb6d3a3831cc9cc4494f6834370463af7e9aba.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.0_57edd85397ec30bd99462a2cee5c984882a59dc7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-24.2.0_0f59e44e1c3868df048f5778ae4b39e5f329e5f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="45f5eda279825ff470e3f51019d374d1ef61e000">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.2.0_865bb7d78ebe01ddcb47dcf2dc5051547211abb3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-24.2.0_ff8ffa8a1d90401211e6a7d4a8becfd9f2e337eb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\cn.bmob.android\bmob-sdk\3.5.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e47f10299673ab68f24c595f96b18086cc9a8384">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\cn.bmob.android-bmob-sdk-3.5.0_3658cdd6be6cf83cfa1c00b60f6f9e4bc392b9af.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-24.2.0_911710a9c389707cc29aac829819dbb475500789.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\cn.bmob.android\bmob-sdk\3.5.0\jars\libs\gson-2.6.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="dd625f5e7bba8235782b5dc4244c3fd26953190f">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\gson-2.6.2_fff1c15bd51005f65052b2788986dce4437dce08.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\cn.bmob.android\bmob-sdk\3.5.0\jars\libs\rxandroid-1.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="19beef6debb6a22febc28777464c71bfccbafe3d">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\rxandroid-1.2.0_19ac132c31d6adee56040c46d7f9c4e80de6388f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\cn.bmob.android\bmob-sdk\3.5.0\jars\libs\okio-1.7.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="bbeca71da43c8f4bc9ceedec002060f53437ad26">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\okio-1.7.0_37a598f27f3321dfa056875c5c5eb46e88f60d2f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.0_45f918ddc9389f07d44a914f666f2014601d75b6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\cn.bmob.android\bmob-sdk\3.5.0\jars\libs\okhttp-3.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7cb33d9f82d3b8521c6594b180f4dd9fc6d49f2">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\okhttp-3.3.1_e9ebfd165be8f8a35bbcfe0be0e2db00172d4bfb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.0_f5b9816770e34d1549f44b3b2a3d8b5d36c90e71.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\luojiayu\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.4.0\ea392375cf9ff59234a82e7928a204215ccc98cd\butterknife-annotations-8.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ea392375cf9ff59234a82e7928a204215ccc98cd">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\butterknife-annotations-8.4.0_461b6e0295f0932d959f7fac4da2d1a4f0483c7b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-24.2.0_97ae1786e78f36b57907609db0305ec0c01fb3e8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-24.2.0_7eb3f812756ae0cffc0ce41fac9a1f1bf19df0e4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\cn.bmob.android\bmob-sdk\3.5.0\jars\libs\rxjava-1.1.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ac615240b277e7fd3950d7b35f73b733f310cede">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\rxjava-1.1.6_ceb64a47aee567cd18925cecda2dad10f9b7d679.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="96e33a7aaee00ab64270e2a9887b8f9ef32c8b73">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-24.2.0_b5fb288a5d57c97037a9836159a488476febbea6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\luojiayu\.gradle\caches\modules-2\files-2.1\cn.bmob.android\http-legacy\1.0\5320fd78dd7f154e586970d4f02befc9b58432aa\http-legacy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5320fd78dd7f154e586970d4f02befc9b58432aa">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\http-legacy-1.0_148c9dfc2f2cedb7cab954d3bc63e02d570849d5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="045be695d968dd707691cc55d23746dbf8cf569a">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.0_d04e00e68aff794e780525e1b419617e41c5578a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\luojiayu\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\javax.inject-1_8f4b4c50add20b6100f3f1decb038ce23fcfa90d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\luojiayu\.gradle\caches\modules-2\files-2.1\com.google.dagger\dagger\2.4\6b290a792253035c9fcc912d6a4d7efb3e850211\dagger-2.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6b290a792253035c9fcc912d6a4d7efb3e850211">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\dagger-2.4_bb390ce7397648f66e25adb5eba3fc7d1c6809f4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\luojiayu\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\glide-3.7.0_a561f6c6bc59ee17cccc2351f5fd5b6c3865414e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\design\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="23eb0d2998a782213b56168cbf23a0688b9111d9">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-design-24.2.0_a8054367dd5c73fc3808d8ae07d891ccaf346516.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\luojiayu\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.0\support-annotations-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\support-annotations-24.2.0_ab33ea57877d9280745b35750da635eba92eeeca.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\luojiayu\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao\3.2.0\e70040568b2929b8e5869ad1ffca8e4386dc53bc\greendao-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e70040568b2929b8e5869ad1ffca8e4386dc53bc">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\greendao-3.2.0_cc81fdb6fb63444fd774fd1219299e7ecc6c6efd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.0\jars\libs\internal_impl-24.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6e02e34594ebe9c0501ffda8dd48497f81b82977">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.0_56a1faef5bb5cd4fe7ce24d2d924e1d9166fd644.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\luojiayu\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao-api\3.2.0\c6d610abe1d75d758431c9234917a349abc0a0ac\greendao-api-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c6d610abe1d75d758431c9234917a349abc0a0ac">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\greendao-api-3.2.0_a3c6c0c4dc7a8cc8307f123c9a38c9a764e53fcc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-24.2.0_affb95d817f42ad5c43016a7de52548d9abfa383.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\cn.bmob.android\bmob-sdk\3.5.0\jars\libs\BmobSDK_3.5.0_20160630.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="8eb5c605a02f792e326c5ac8e4feb2c18dd171ad">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\BmobSDK_3.5.0_20160630_0989e2c88b951d5c2d1f6e2a487fd78263634472.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-24.2.0_53d9f77bf245d005cb0eed1860d897ae67af87a2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="a07818a1ecabdb149998823429cce555af4b9cba">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.jakewharton-butterknife-8.4.0_5e170ad327b8dd16076dc50a324c365ea777f40f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android Projects\LibraryManager-master\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="D:\Android Projects\LibraryManager-master\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-24.2.0_5964daeb8dab92cb764883e1b7462e7d3abb9347.jar" />
+    </item>
+
+</items>
