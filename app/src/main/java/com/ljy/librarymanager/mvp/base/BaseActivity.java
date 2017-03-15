@@ -14,20 +14,31 @@ import android.widget.Toast;
 
 
 import com.ljy.librarymanager.MyApplication;
+import com.ljy.librarymanager.di.component.ActivityComponent;
+import com.ljy.librarymanager.di.component.DaggerActivityComponent;
+import com.ljy.librarymanager.di.module.ActivityModule;
+import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 	protected Context mContext;
 	private ConnectivityManager manager;
+	protected ActivityComponent mActivityComponent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);// 锁定竖屏
-		// setTheme(R.style.AnimationActivity);//设置切换动画
 		mContext = getActivityContext();
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);// 锁定竖屏
+		//创建dagger组件
+		mActivityComponent = DaggerActivityComponent.builder()
+				.appComponent(MyApplication.getInstance().getApplicationComponent())
+				.activityModule(new ActivityModule(this))
+				.build();
+		// setTheme(R.style.AnimationActivity);//设置切换动画
 		initView();
+		//先设置了layout才能使用butterknife
 		ButterKnife.bind(this);
 		initdata();
 		MyApplication.getInstance().addActivity(this);

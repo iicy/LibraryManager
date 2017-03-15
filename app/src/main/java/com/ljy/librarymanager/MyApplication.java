@@ -3,6 +3,10 @@ package com.ljy.librarymanager;
 import android.app.Activity;
 import android.app.Application;
 
+import com.ljy.librarymanager.di.component.AppComponent;
+import com.ljy.librarymanager.di.component.DaggerAppComponent;
+import com.ljy.librarymanager.di.module.AppModule;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +16,7 @@ import java.util.List;
  *  */
 
 public class MyApplication extends Application {
+    private AppComponent mApplicationComponent;
     //记录当前栈里所有activity
     private List<Activity> activities = new ArrayList<Activity>();
     //记录需要一次性关闭的页面
@@ -20,6 +25,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        initApplicationComponent();
     }
     /**
      * 应用实例
@@ -95,4 +101,15 @@ public class MyApplication extends Application {
         }
         System.exit(0);
     }
+
+    private void initApplicationComponent() {
+        mApplicationComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
+    }
+
+    public AppComponent getApplicationComponent() {
+        return mApplicationComponent;
+    }
+
 }
