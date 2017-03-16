@@ -1,6 +1,8 @@
 package com.ljy.librarymanager.mvp.ui.activity;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.presenter.LoginPresenter;
+import com.ljy.librarymanager.mvp.ui.fragment.BooksListFragment;
 import com.ljy.librarymanager.mvp.view.LoginView;
 import com.ljy.librarymanager.mvp.view.MainView;
 import com.ljy.librarymanager.utils.CheckCodeUtil;
@@ -27,6 +30,11 @@ public class MainActivity extends BaseActivity implements MainView {
     @BindView(R.id.main_toolbar)
     Toolbar main_toolbar;
 
+    private FragmentTransaction ft;
+
+    @Inject
+    BooksListFragment booksListFragment;
+
     @Override
     protected void loadViewLayout() {
         setContentView(R.layout.activity_main);
@@ -38,6 +46,7 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void init() {
         main_toolbar.setTitle("");
         setSupportActionBar(main_toolbar);
+        changeFragment(booksListFragment);
     }
 
     @Override
@@ -75,4 +84,10 @@ public class MainActivity extends BaseActivity implements MainView {
 
     }
 
+    @Override
+    public void changeFragment(Fragment fragment) {
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_fragment,fragment);
+        ft.commit();
+    }
 }
