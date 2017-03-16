@@ -6,6 +6,7 @@ import android.content.Context;
 import com.ljy.librarymanager.di.module.FragmentModule;
 import com.ljy.librarymanager.di.scope.ContextLife;
 import com.ljy.librarymanager.di.scope.PerFragment;
+import com.ljy.librarymanager.mvp.ui.fragment.BooksListFragment;
 
 import dagger.Component;
 
@@ -24,5 +25,5 @@ public interface FragmentComponent {
 
     Activity getActivity();
 
-//    void inject(NewsListFragment newsListFragment);
+    void inject(BooksListFragment booksListFragment);
 }
