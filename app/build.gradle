@@ -54,4 +54,5 @@ dependencies {
 //    compile 'io.reactivex:rxandroid:1.2.1'
     //greendao
     compile 'org.greenrobot:greendao:3.2.0'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
