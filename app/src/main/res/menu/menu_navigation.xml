@@ -5,7 +5,16 @@
             android:title="主页" />
         <item
             android:id="@+id/nav_overview"
-            android:title="总览" />
+            android:title="分类" />
+        <item
+            android:id="@+id/nav_booking"
+            android:title="预订记录" />
+        <item
+            android:id="@+id/nav_borrow"
+            android:title="借阅记录" />
+        <item
+            android:id="@+id/nav_collection"
+            android:title="收藏" />
         <item
             android:id="@+id/nav_settings"
             android:title="设置" />

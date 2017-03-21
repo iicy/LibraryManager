@@ -22,7 +22,6 @@ import butterknife.BindView;
 
 public class BooksListFragment extends BaseFragment implements BooksListView {
 
-
     @Inject
     Activity mActivity;
 
