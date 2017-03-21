@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/search_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:titleTextColor="@android:color/white">
+        <com.ljy.librarymanager.widget.SearchView
+            android:id="@+id/search_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></com.ljy.librarymanager.widget.SearchView>
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/test"
+        android:text="12222"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
