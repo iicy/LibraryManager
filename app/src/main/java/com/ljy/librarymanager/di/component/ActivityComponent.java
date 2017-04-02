@@ -8,6 +8,7 @@ import com.ljy.librarymanager.di.scope.ContextLife;
 import com.ljy.librarymanager.di.scope.PerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 
 import dagger.Component;
 
@@ -30,5 +31,7 @@ public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
 
     void inject(MainActivity mainActivity);
+
+    void inject(ManagerActivity managerActivity);
 
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/nav_manager_announcement"
+            android:title="公告管理" />
+        <item
+            android:id="@+id/nav_manager_category"
+            android:title="分类管理" />
+        <item
+            android:id="@+id/nav_manager_booking"
+            android:title="预订记录" />
+        <item
+            android:id="@+id/nav_manager_borrow"
+            android:title="借阅记录" />
+        <item
+            android:id="@+id/nav_manager_user"
+            android:title="用户管理" />
+        <item
+            android:id="@+id/nav_settings"
+            android:title="设置" />
+        <item
+            android:id="@+id/nav_about"
+            android:title="关于" />
+</menu>
