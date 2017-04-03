@@ -12,10 +12,6 @@ public class BasePresenter<T extends BaseView, E> {
         mView = (T) view;
     }
 
-    public void beforeRequest() {
-        mView.showProgress();
-    }
-
     public void success(E data) {
         mView.hideProgress();
     }

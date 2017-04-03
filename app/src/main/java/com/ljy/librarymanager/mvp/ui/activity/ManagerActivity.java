@@ -114,7 +114,7 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
     @Override
     public void changeFragment(Fragment fragment) {
         ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_fragment,fragment);
+        ft.replace(R.id.manager_fragment,fragment);
         ft.commit();
     }
 

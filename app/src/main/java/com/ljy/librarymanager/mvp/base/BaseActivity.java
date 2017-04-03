@@ -14,12 +14,14 @@ import android.widget.Toast;
 
 
 import com.ljy.librarymanager.MyApplication;
+import com.ljy.librarymanager.common.Constant;
 import com.ljy.librarymanager.di.component.ActivityComponent;
 import com.ljy.librarymanager.di.component.DaggerActivityComponent;
 import com.ljy.librarymanager.di.module.ActivityModule;
 import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 
 import butterknife.ButterKnife;
+import cn.bmob.v3.Bmob;
 
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 	protected Context mContext;
@@ -40,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 		initView();
 		//先设置了layout才能使用butterknife
 		ButterKnife.bind(this);
+		Bmob.initialize(this, Constant.appID);
 		initdata();
 		MyApplication.getInstance().addActivity(this);
 	}
