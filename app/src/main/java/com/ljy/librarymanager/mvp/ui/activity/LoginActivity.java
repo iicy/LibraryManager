@@ -3,6 +3,7 @@ package com.ljy.librarymanager.mvp.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
+import com.ljy.librarymanager.common.Constant;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.LoginPresenter;
 import com.ljy.librarymanager.mvp.view.LoginView;
 import com.ljy.librarymanager.utils.CheckCodeUtil;
+import com.ljy.librarymanager.utils.Encryption;
 
 import javax.inject.Inject;
 
@@ -111,10 +114,31 @@ public class LoginActivity extends BaseActivity implements LoginView {
     public void login(User user) {
         if(user.getPermission().equals("0")){
             Intent i = new Intent(LoginActivity.this,ManagerActivity.class);
+            i.putExtra("account",user.getAccount());
+            i.putExtra("password", user.getPassword());
+            i.putExtra("permission",user.getPermission());
+            i.putExtra("username",user.getUsername());
             startActivity(i);
         }else{
             Intent i = new Intent(LoginActivity.this,MainActivity.class);
+            i.putExtra("account",user.getAccount());
+            i.putExtra("password", user.getPassword());
+            i.putExtra("permission",user.getPermission());
+            i.putExtra("username",user.getUsername());
             startActivity(i);
+        }
+        try {
+            SharedPreferences sp = this.getSharedPreferences("loginFlag", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("login", true);
+            editor.putString("account",user.getAccount());
+            editor.putString("password", Encryption.EncodeAES(user.getPassword(), Constant.key));
+            Log.e("encryption","en:"+Encryption.EncodeAES(user.getPassword(), Constant.key));
+            editor.putString("permission",user.getPermission());
+            editor.putString("username",user.getUsername());
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         finish();
     }
