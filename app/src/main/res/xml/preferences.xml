@@ -5,11 +5,10 @@
         android:key="set_local"
         android:title="常规" />
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="apply_wireless"
-        android:summary="使用无线网络在应用程序（例如Google地图）中查看位置"
-        android:title="使用无线网络"></CheckBoxPreference>
+    <Preference
+        android:key="logout"
+        android:title="注销账号"
+        />
 
     <CheckBoxPreference
         android:key="apply_gps"
