@@ -35,6 +35,7 @@
         <activity android:name=".mvp.ui.activity.MainActivity"/>
         <activity android:name=".mvp.ui.activity.ManagerActivity"/>
         <activity android:name=".mvp.ui.activity.SearchActivity"/>
+        <activity android:name=".mvp.ui.activity.PreferenceActivity"/>
     </application>
 
 </manifest>
