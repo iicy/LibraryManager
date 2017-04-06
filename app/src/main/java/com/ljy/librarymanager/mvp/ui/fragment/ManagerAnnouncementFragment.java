@@ -12,6 +12,7 @@ import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 import com.ljy.librarymanager.mvp.view.ManagerAnnouncementView;
+import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
 import javax.inject.Inject;
 
@@ -25,6 +26,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ManagerAnnouncementFragment extends BaseFragment implements ManagerAnnouncementView {
 
+    @BindView(R.id.list)
+    LoadMoreRecyclerView list;
 
     @Inject
     Activity mActivity;
