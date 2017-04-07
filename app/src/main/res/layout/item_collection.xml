@@ -14,7 +14,7 @@
         android:padding="5dp">
 
         <ImageView
-            android:id="@+id/item_book_icon"
+            android:id="@+id/item_collection_icon"
             android:layout_width="50dp"
             android:layout_height="80dp"
             android:layout_marginRight="30dp"
@@ -23,32 +23,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/item_book_icon"
+            android:layout_toRightOf="@id/item_collection_icon"
             android:gravity="center_vertical"
             android:layout_centerVertical="true"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/item_book_name"
+                android:id="@+id/item_collection_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="book_name"
                 android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/item_book_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="book_author" />
 
             <TextView
-                android:id="@+id/item_book_pulication"
+                android:id="@+id/item_collection_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="book_pulication" />
+                android:text="2017/04/07 14:00" />
         </LinearLayout>
 
     </RelativeLayout>
