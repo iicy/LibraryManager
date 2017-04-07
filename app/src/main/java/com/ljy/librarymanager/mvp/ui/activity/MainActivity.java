@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity implements MainView {
         main_toolbar.setTitle("主页");
         main_toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(main_toolbar);
-        changeFragment(booksListFragment);
+        changeFragment(homeListFragment);
         drawerToggle = new ActionBarDrawerToggle(this, main_drawer, main_toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerToggle.syncState();
         main_drawer.setDrawerListener(drawerToggle);
