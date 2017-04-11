@@ -85,6 +85,10 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
                         startActivity(new Intent(ManagerActivity.this,SearchActivity.class));
                         break;
                     }
+                    case R.id.manager_toolbar_add:{
+                        startActivity(new Intent(ManagerActivity.this,AddAnnouncementActivity.class));
+                        break;
+                    }
                 }
                 return false;
             }

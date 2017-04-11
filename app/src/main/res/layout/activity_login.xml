@@ -62,6 +62,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_checkcode_edittext"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/white"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="登录" />
