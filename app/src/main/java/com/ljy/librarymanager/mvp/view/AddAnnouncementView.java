@@ -10,5 +10,5 @@ import com.ljy.librarymanager.mvp.entity.Announcement;
 
 public interface AddAnnouncementView extends BaseView {
 
-    void add(Announcement announcement);
+    void add();
 }

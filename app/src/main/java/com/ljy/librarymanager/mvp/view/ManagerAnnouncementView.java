@@ -12,4 +12,6 @@ import java.util.List;
 public interface ManagerAnnouncementView extends BaseView{
 
     void setList(List<Announcement> list);
+
+    void deleteSuccess();
 }

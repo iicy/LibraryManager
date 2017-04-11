@@ -46,6 +46,11 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
     private FragmentTransaction ft;
     private ActionBarDrawerToggle drawerToggle;
 
+    private String account;
+    private String password;
+    private String permission;
+    private String username;
+
     @Inject
     ManagerAnnouncementFragment managerAnnouncementFragment;
     @Inject
@@ -73,6 +78,12 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
         drawerToggle = new ActionBarDrawerToggle(this, manager_drawer, manager_toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerToggle.syncState();
         manager_drawer.setDrawerListener(drawerToggle);
+
+        Intent intent = getIntent();
+        account = intent.getStringExtra("account");
+        password = intent.getStringExtra("password");
+        permission = intent.getStringExtra("permission");
+        username = intent.getStringExtra("username");
     }
 
     @Override
@@ -86,7 +97,12 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
                         break;
                     }
                     case R.id.manager_toolbar_add:{
-                        startActivity(new Intent(ManagerActivity.this,AddAnnouncementActivity.class));
+                        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.manager_fragment);
+                        if(fragment instanceof ManagerAnnouncementFragment){
+                            Intent intent = new Intent(ManagerActivity.this,AddAnnouncementActivity.class);
+                            intent.putExtra("account",account);
+                            startActivity(intent);
+                        }
                         break;
                     }
                 }

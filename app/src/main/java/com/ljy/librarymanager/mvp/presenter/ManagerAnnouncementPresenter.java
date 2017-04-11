@@ -28,10 +28,18 @@ public class ManagerAnnouncementPresenter extends BasePresenter<ManagerAnnouncem
         managerAnnouncementModel.getList(this);
     }
 
+    public void delete(Announcement announcement){
+        managerAnnouncementModel.delete(this,announcement);
+    }
+
     @Override
     public void success(List<Announcement> data) {
         super.success(data);
         mView.setList(data);
+    }
+
+    public void deleteSuccess(){
+        mView.deleteSuccess();
     }
 
     @Override

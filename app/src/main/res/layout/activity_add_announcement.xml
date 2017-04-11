@@ -12,8 +12,26 @@
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:titleTextColor="@android:color/white"
-        app:titleTextAppearance="@style/Toolbar.TitleText"/>
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
 
+    <EditText
+        android:gravity="start"
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_edit"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center"
+        android:text="保存"
+        android:textColor="@color/white" />
 
 </LinearLayout>
 
