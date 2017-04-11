@@ -6,6 +6,7 @@ import android.content.Context;
 import com.ljy.librarymanager.di.module.ActivityModule;
 import com.ljy.librarymanager.di.scope.ContextLife;
 import com.ljy.librarymanager.di.scope.PerActivity;
+import com.ljy.librarymanager.mvp.ui.activity.AddAnnouncementActivity;
 import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
@@ -34,4 +35,5 @@ public interface ActivityComponent {
 
     void inject(ManagerActivity managerActivity);
 
+    void inject(AddAnnouncementActivity addAnnouncementActivity);
 }
