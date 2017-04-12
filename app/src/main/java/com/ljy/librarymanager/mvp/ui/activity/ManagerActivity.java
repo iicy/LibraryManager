@@ -17,13 +17,11 @@ import android.view.View;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
-import com.ljy.librarymanager.mvp.ui.fragment.BooksListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerAnnouncementFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerBookingFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerBorrowFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerCategoryFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerUserFragment;
-import com.ljy.librarymanager.mvp.view.MainView;
 import com.ljy.librarymanager.mvp.view.ManagerView;
 
 import javax.inject.Inject;
@@ -93,7 +91,7 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.manager_toolbar_search: {
-                        startActivity(new Intent(ManagerActivity.this,SearchActivity.class));
+                        startActivity(new Intent(ManagerActivity.this,SearchBarActivity.class));
                         break;
                     }
                     case R.id.manager_toolbar_add:{

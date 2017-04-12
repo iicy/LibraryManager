@@ -24,8 +24,6 @@ public class SearchView extends LinearLayout implements TextWatcher, View.OnClic
     private EditText editText;
     private Button bt_clear;
 
-    private String text = "";
-
     public SearchView(final Context context, AttributeSet attrs) {
         super(context, attrs);
         /**加载布局文件*/
@@ -71,13 +69,10 @@ public class SearchView extends LinearLayout implements TextWatcher, View.OnClic
         editText.setText("");
     }
 
-    public String getSearchText() {
-        return text;
-    }
 
     //声明接口回调 EditText 来让 Activity 获取搜索内容
     public interface OnSearchListener {
-        public void onCheckBoxClick(EditText v);
+        void onCheckBoxClick(EditText v);
     }
 
     private OnSearchListener mOnSearchListener;

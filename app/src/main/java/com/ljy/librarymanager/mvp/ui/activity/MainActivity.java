@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity implements MainView {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.main_toolbar_search: {
-                        startActivity(new Intent(MainActivity.this,SearchActivity.class));
+                        startActivity(new Intent(MainActivity.this,SearchBarActivity.class));
                         break;
                     }
                 }

@@ -13,16 +13,48 @@
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:titleTextColor="@android:color/white">
+
         <com.ljy.librarymanager.widget.SearchView
             android:id="@+id/search_search_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></com.ljy.librarymanager.widget.SearchView>
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/test"
-        android:text="12222"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/history_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="历史记录" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <com.ljy.librarymanager.widget.LoadMoreRecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.ljy.librarymanager.widget.LoadMoreRecyclerView>
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center"
+            android:text="清除记录"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -34,7 +34,7 @@
         <activity android:name=".mvp.ui.activity.LoginActivity"/>
         <activity android:name=".mvp.ui.activity.MainActivity"/>
         <activity android:name=".mvp.ui.activity.ManagerActivity"/>
-        <activity android:name=".mvp.ui.activity.SearchActivity"/>
+        <activity android:name=".mvp.ui.activity.SearchBarActivity"/>
         <activity android:name=".mvp.ui.activity.PreferenceActivity"/>
         <activity android:name=".mvp.ui.activity.AddAnnouncementActivity"/>
     </application>

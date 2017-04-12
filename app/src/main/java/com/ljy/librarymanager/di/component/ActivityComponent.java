@@ -10,6 +10,8 @@ import com.ljy.librarymanager.mvp.ui.activity.AddAnnouncementActivity;
 import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
+import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
+import com.ljy.librarymanager.mvp.view.SearchBarView;
 
 import dagger.Component;
 
@@ -30,6 +32,8 @@ public interface ActivityComponent {
     Activity getActivity();
 
     void inject(LoginActivity loginActivity);
+
+    void inject(SearchBarActivity searchBarActivity);
 
     void inject(MainActivity mainActivity);
 
