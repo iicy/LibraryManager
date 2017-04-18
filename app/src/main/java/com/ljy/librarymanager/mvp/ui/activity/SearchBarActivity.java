@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +38,6 @@ import butterknife.BindView;
 
 public class SearchBarActivity extends BaseActivity implements SearchBarView {
 
-    @BindView(R.id.search_toolbar)
-    Toolbar search_toolbar;
     @BindView(R.id.search_search_view)
     SearchView search_search_view;
     @BindView(R.id.history_text)
@@ -71,20 +70,12 @@ public class SearchBarActivity extends BaseActivity implements SearchBarView {
 
     @Override
     protected void init() {
-        search_toolbar.setTitle("");
-        setSupportActionBar(search_toolbar);
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(announcementListAdapter);
     }
 
     @Override
     protected void setListener() {
-        search_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         search_search_view.setOnSearchListener(new SearchView.OnSearchListener() {
             @Override
             public void onCheckBoxClick(EditText v) {
@@ -102,6 +93,12 @@ public class SearchBarActivity extends BaseActivity implements SearchBarView {
                         return false;
                     }
                 });
+            }
+        });
+        search_search_view.setOnBackListener(new SearchView.OnBackListener() {
+            @Override
+            public void onBackClick(ImageButton v) {
+                finish();
             }
         });
         clear_cache.setOnClickListener(this);

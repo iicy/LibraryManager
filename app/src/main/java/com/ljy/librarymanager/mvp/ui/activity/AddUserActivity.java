@@ -8,13 +8,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Announcement;
+import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.AddAnnouncementPresenter;
+import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.view.AddAnnouncementView;
+import com.ljy.librarymanager.mvp.view.AddUserView;
 
 import javax.inject.Inject;
 
@@ -24,28 +28,37 @@ import butterknife.BindView;
  * Created by luojiayu on 2017/4/11.
  */
 
-public class AddAnnouncementActivity extends BaseActivity implements AddAnnouncementView {
+public class AddUserActivity extends BaseActivity implements AddUserView {
 
-    @BindView(R.id.add_announcement_toolbar)
+    @BindView(R.id.add_user_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.content)
-    EditText et_content;
+    @BindView(R.id.username)
+    EditText et_username;
+    @BindView(R.id.account)
+    EditText et_account;
+    @BindView(R.id.password)
+    EditText et_password;
+    @BindView(R.id.manager)
+    RadioButton rb_manager;
+    @BindView(R.id.simple_user)
+    RadioButton rb_simple_user;
     @BindView(R.id.save)
     Button bt_save;
     private ProgressDialog pg;
-    private String content;
+    private String username;
     private String account;
+    private String password;
 
     @Inject
-    AddAnnouncementPresenter mPresenter;
+    AddUserPresenter mPresenter;
 
     @Override
     protected void loadViewLayout() {
-        setContentView(R.layout.activity_add_announcement);
+        setContentView(R.layout.activity_add_user);
         //注入对象
         mActivityComponent.inject(this);
         mPresenter.attachView(this);
-        pg = new ProgressDialog(AddAnnouncementActivity.this);
+        pg = new ProgressDialog(AddUserActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pg.setMessage("正在保存！");
         pg.setCancelable(false);
@@ -53,13 +66,11 @@ public class AddAnnouncementActivity extends BaseActivity implements AddAnnounce
 
     @Override
     protected void init() {
-        mToolbar.setTitle("添加公告");
+        mToolbar.setTitle("添加用户");
         mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
-        Intent intent = getIntent();
-        account = intent.getStringExtra("account");
     }
 
     @Override
@@ -88,11 +99,18 @@ public class AddAnnouncementActivity extends BaseActivity implements AddAnnounce
         switch (v.getId()) {
             case R.id.save: {
                 showProgress();
-                content = et_content.getText().toString();
-                Announcement announcement = new Announcement();
-                announcement.setAccount(account);
-                announcement.setContent(content);
-                mPresenter.add(announcement);
+                username = et_username.getText().toString();
+                account = et_account.getText().toString();
+                password = et_password.getText().toString();
+                User user = new User();
+                user.setUsername(username);
+                user.setAccount(account);
+                user.setPassword(password);
+                if(rb_manager.isChecked())
+                    user.setPermission("0");
+                else if(rb_simple_user.isChecked())
+                    user.setPermission("1");
+                mPresenter.add(user);
                 break;
             }
         }
@@ -100,7 +118,7 @@ public class AddAnnouncementActivity extends BaseActivity implements AddAnnounce
 
     @Override
     public void add() {
-        Toast.makeText(AddAnnouncementActivity.this, "保存成功！", Toast.LENGTH_LONG).show();
+        Toast.makeText(AddUserActivity.this, "保存成功！", Toast.LENGTH_LONG).show();
         finish();
     }
 
@@ -116,6 +134,6 @@ public class AddAnnouncementActivity extends BaseActivity implements AddAnnounce
 
     @Override
     public void showMsg(String message) {
-        Toast.makeText(AddAnnouncementActivity.this, "保存失败！", Toast.LENGTH_LONG).show();
+        Toast.makeText(AddUserActivity.this, "保存失败！该用户已存在！", Toast.LENGTH_LONG).show();
     }
 }

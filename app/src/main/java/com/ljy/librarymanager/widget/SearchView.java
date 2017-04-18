@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import com.ljy.librarymanager.R;
 
 public class SearchView extends LinearLayout implements TextWatcher, View.OnClickListener {
 
+    private ImageButton back;
     private EditText editText;
     private Button bt_clear;
 
@@ -29,6 +31,7 @@ public class SearchView extends LinearLayout implements TextWatcher, View.OnClic
         /**加载布局文件*/
         LayoutInflater.from(context).inflate(R.layout.layout_search_view, this, true);
         /***找出控件*/
+        back = (ImageButton) findViewById(R.id.back);
         editText = (EditText) findViewById(R.id.search_view_edit_text);
         bt_clear = (Button) findViewById(R.id.search_view_clear_bt);
         bt_clear.setVisibility(GONE);
@@ -39,6 +42,12 @@ public class SearchView extends LinearLayout implements TextWatcher, View.OnClic
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 mOnSearchListener.onCheckBoxClick(editText);
                 return false;
+            }
+        });
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnBackListener.onBackClick(back);
             }
         });
     }
@@ -79,5 +88,15 @@ public class SearchView extends LinearLayout implements TextWatcher, View.OnClic
 
     public void setOnSearchListener(OnSearchListener mOnCheckBoxListener) {
         this.mOnSearchListener = mOnCheckBoxListener;
+    }
+
+    public interface OnBackListener {
+        void onBackClick(ImageButton v);
+    }
+
+    private OnBackListener mOnBackListener;
+
+    public void setOnBackListener(OnBackListener mOnBackListener) {
+        this.mOnBackListener = mOnBackListener;
     }
 }
