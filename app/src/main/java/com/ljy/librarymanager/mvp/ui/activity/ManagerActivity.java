@@ -105,6 +105,15 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
                             Intent intent = new Intent(ManagerActivity.this,AddUserActivity.class);
                             startActivity(intent);
                         }
+                        if(fragment instanceof ManagerCategoryFragment){
+                            Intent intent = new Intent(ManagerActivity.this,AddCategoryActivity.class);
+                            startActivity(intent);
+                        }
+                        if(fragment instanceof ManagerBorrowFragment){
+                            Intent intent = new Intent(ManagerActivity.this,AddBorrowActivity.class);
+                            intent.putExtra("manager",account);
+                            startActivity(intent);
+                        }
                         break;
                     }
                 }

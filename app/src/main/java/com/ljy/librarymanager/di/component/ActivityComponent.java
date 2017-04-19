@@ -7,10 +7,16 @@ import com.ljy.librarymanager.di.module.ActivityModule;
 import com.ljy.librarymanager.di.scope.ContextLife;
 import com.ljy.librarymanager.di.scope.PerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.AddAnnouncementActivity;
+import com.ljy.librarymanager.mvp.ui.activity.AddBookActivity;
+import com.ljy.librarymanager.mvp.ui.activity.AddBorrowActivity;
+import com.ljy.librarymanager.mvp.ui.activity.AddCategoryActivity;
 import com.ljy.librarymanager.mvp.ui.activity.AddUserActivity;
+import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
+import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
 import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.view.SearchBarView;
 
@@ -43,4 +49,16 @@ public interface ActivityComponent {
     void inject(AddAnnouncementActivity addAnnouncementActivity);
 
     void inject(AddUserActivity addUserActivity);
+
+    void inject(AddCategoryActivity addCategoryActivity);
+
+    void inject(AddBookActivity addBookActivity);
+
+    void inject(AddBorrowActivity addBorrowActivity);
+
+    void inject(BookInfoActivity bookInfoActivity);
+
+    void inject(BookListActivity bookListActivity);
+
+    void inject(ManagerBookActivity managerBookActivity);
 }

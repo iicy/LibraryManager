@@ -38,6 +38,12 @@
         <activity android:name=".mvp.ui.activity.PreferenceActivity"/>
         <activity android:name=".mvp.ui.activity.AddAnnouncementActivity"/>
         <activity android:name=".mvp.ui.activity.AddUserActivity"/>
+        <activity android:name=".mvp.ui.activity.AddCategoryActivity"/>
+        <activity android:name=".mvp.ui.activity.AddBookActivity"/>
+        <activity android:name=".mvp.ui.activity.AddBorrowActivity"/>
+        <activity android:name=".mvp.ui.activity.BookInfoActivity"/>
+        <activity android:name=".mvp.ui.activity.BookListActivity"/>
+        <activity android:name=".mvp.ui.activity.ManagerBookActivity"/>
     </application>
 
 </manifest>

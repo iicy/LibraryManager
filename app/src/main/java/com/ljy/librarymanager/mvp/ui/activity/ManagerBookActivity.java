@@ -1,0 +1,182 @@
+package com.ljy.librarymanager.mvp.ui.activity;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import com.ljy.librarymanager.R;
+import com.ljy.librarymanager.adapter.BookListAdapter;
+import com.ljy.librarymanager.mvp.base.BaseActivity;
+import com.ljy.librarymanager.mvp.entity.Books;
+import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
+import com.ljy.librarymanager.mvp.presenter.ManagerBookPresenter;
+import com.ljy.librarymanager.mvp.view.BookListView;
+import com.ljy.librarymanager.mvp.view.ManagerBookView;
+import com.ljy.librarymanager.widget.DeleteDialog;
+import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+
+/**
+ * Created by luojiayu on 2017/4/11.
+ */
+
+public class ManagerBookActivity extends BaseActivity implements ManagerBookView {
+
+    @BindView(R.id.book_list_toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.list)
+    LoadMoreRecyclerView list;
+
+    private List<Books> mData;
+    private BookListAdapter mAdapter;
+    private ProgressDialog pg;
+
+    private String category;
+
+    @Inject
+    ManagerBookPresenter mPresenter;
+
+    @Override
+    protected void loadViewLayout() {
+        setContentView(R.layout.activity_booklist);
+        //注入对象
+        mActivityComponent.inject(this);
+        mPresenter.attachView(this);
+        pg = new ProgressDialog(ManagerBookActivity.this);
+        pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pg.setMessage("正在删除！");
+        pg.setCancelable(false);
+        mAdapter = new BookListAdapter(this,mData);
+        category = getIntent().getStringExtra("category");
+    }
+
+    @Override
+    protected void init() {
+        mToolbar.setTitle(category);
+        mToolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
+        mPresenter.getList(category);
+        list.setLayoutManager(new LinearLayoutManager(this));
+        list.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void setListener() {
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mAdapter.setOnItemLongClickListener(new BookListAdapter.OnRecyclerViewItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, final int position) {
+                DeleteDialog deleteDialog = new DeleteDialog(ManagerBookActivity.this);
+                deleteDialog.setOnConfirmListener(new DeleteDialog.OnConfirmListener() {
+                    @Override
+                    public void onConfirmListener() {
+                        showProgress();
+                        Books books = new Books();
+                        books.setObjectId(mData.get(position).getObjectId());
+                        mPresenter.delete(books);
+                    }
+                });
+                deleteDialog.show();
+            }
+        });
+        mAdapter.setOnItemClickListener(new BookListAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(ManagerBookActivity.this, BookInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("book",mData.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.manager_toolbar_add: {
+                        Intent intent = new Intent(ManagerBookActivity.this,AddBookActivity.class);
+                        intent.putExtra("category",category);
+                        startActivity(intent);
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    protected void processLogic() {
+
+    }
+
+    @Override
+    protected Context getActivityContext() {
+        return this;
+    }
+
+    @Override
+    public void onClick(View v) {
+    }
+
+    @Override
+    public void showProgress() {
+        pg.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        pg.dismiss();
+    }
+
+    @Override
+    public void showMsg(String message) {
+        Toast.makeText(ManagerBookActivity.this, message, Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void setList(List<Books> data) {
+        mData = data;
+        mAdapter.setNewData(mData);
+    }
+
+    @Override
+    public void deleteSuccess() {
+        hideProgress();
+        mPresenter.getList(category);
+        Toast.makeText(this, "删除成功！", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_manager_toolbar,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.getList(category);
+    }
+}

@@ -18,7 +18,6 @@ import android.view.View;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.ui.fragment.BookingListFragment;
-import com.ljy.librarymanager.mvp.ui.fragment.BooksListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.BorrowListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CategoryListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CollectionListFragment;
@@ -45,8 +44,6 @@ public class MainActivity extends BaseActivity implements MainView {
     private FragmentTransaction ft;
     private ActionBarDrawerToggle drawerToggle;
 
-    @Inject
-    BooksListFragment booksListFragment;
     @Inject
     HomeListFragment homeListFragment;
     @Inject
