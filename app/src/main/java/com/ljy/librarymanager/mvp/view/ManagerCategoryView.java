@@ -1,6 +1,9 @@
 package com.ljy.librarymanager.mvp.view;
 
 import com.ljy.librarymanager.mvp.base.BaseView;
+import com.ljy.librarymanager.mvp.entity.Category;
+
+import java.util.List;
 
 /**
  * Created by luojiayu on 2017/4/6.
@@ -8,5 +11,7 @@ import com.ljy.librarymanager.mvp.base.BaseView;
 
 public interface ManagerCategoryView extends BaseView{
 
-    void setList();
+    void setList(List<Category> data);
+
+    void deleteSuccess();
 }

@@ -7,7 +7,6 @@ import com.ljy.librarymanager.di.module.FragmentModule;
 import com.ljy.librarymanager.di.scope.ContextLife;
 import com.ljy.librarymanager.di.scope.PerFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.BookingListFragment;
-import com.ljy.librarymanager.mvp.ui.fragment.BooksListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.BorrowListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CategoryListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.HomeListFragment;
@@ -34,8 +33,6 @@ public interface FragmentComponent {
     Context getApplicationContext();
 
     Activity getActivity();
-
-    void inject(BooksListFragment booksListFragment);
 
     void inject(HomeListFragment homeListFragment);
 
