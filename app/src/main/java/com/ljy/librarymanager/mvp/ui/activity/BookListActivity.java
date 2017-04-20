@@ -134,7 +134,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_manager_toolbar,menu);
+        getMenuInflater().inflate(R.menu.menu_main_toolbar,menu);
         return super.onCreateOptionsMenu(menu);
     }
 

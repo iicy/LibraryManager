@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.presenter.ManagerAnnouncementPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerAnnouncementInfoActivity;
 import com.ljy.librarymanager.mvp.view.ManagerAnnouncementView;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
@@ -48,6 +51,8 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
     private AnnouncementListAdapter mAdapter;
     private ProgressDialog pg;
 
+    private String account;
+
     @Inject
     public ManagerAnnouncementFragment() {
     }
@@ -62,6 +67,7 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
         pg.setMessage("正在删除！");
         pg.setCancelable(false);
         mAdapter = new AnnouncementListAdapter(getActivity(),mData);
+        account = ManagerActivity.instance.getAccount();
         return view;
     }
 
@@ -81,6 +87,18 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
                     }
                 });
                 deleteDialog.show();
+            }
+        });
+        mAdapter.setOnItemClickListener(new AnnouncementListAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), ManagerAnnouncementInfoActivity.class);
+                Bundle bundle = new Bundle();
+                Announcement announcement =  mData.get(position);
+                announcement.setAccount(account);
+                bundle.putSerializable("announcement",announcement);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }

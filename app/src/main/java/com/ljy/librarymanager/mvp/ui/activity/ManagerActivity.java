@@ -48,6 +48,7 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
     private String password;
     private String permission;
     private String username;
+    public static ManagerActivity instance;
 
     @Inject
     ManagerAnnouncementFragment managerAnnouncementFragment;
@@ -69,6 +70,7 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
 
     @Override
     protected void init() {
+        instance = this;
         manager_toolbar.setTitle("公告管理");
         manager_toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(manager_toolbar);
@@ -202,6 +204,10 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_manager_toolbar,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public String getAccount(){
+        return account;
     }
 
 }

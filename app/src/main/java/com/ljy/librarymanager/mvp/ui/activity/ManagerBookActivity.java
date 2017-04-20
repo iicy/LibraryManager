@@ -102,7 +102,7 @@ public class ManagerBookActivity extends BaseActivity implements ManagerBookView
         mAdapter.setOnItemClickListener(new BookListAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(ManagerBookActivity.this, BookInfoActivity.class);
+                Intent intent = new Intent(ManagerBookActivity.this, ManagerBookInfoActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("book",mData.get(position));
                 intent.putExtras(bundle);

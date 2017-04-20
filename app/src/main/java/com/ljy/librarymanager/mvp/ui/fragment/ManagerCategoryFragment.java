@@ -76,6 +76,7 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
                         showProgress();
                         Category category = new Category();
                         category.setObjectId(mData.get(position).getObjectId());
+                        category.setCategory_name(mData.get(position).getCategory_name());
                         mPresenter.delete(category);
                     }
                 });
@@ -124,7 +125,7 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
 
     @Override
     public void showMsg(String message) {
-
+        Toast.makeText(getActivity(), "无法删除！该分类不为空！", Toast.LENGTH_LONG).show();
     }
 
     @Override
