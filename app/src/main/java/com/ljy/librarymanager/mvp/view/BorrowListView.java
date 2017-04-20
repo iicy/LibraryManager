@@ -2,6 +2,9 @@ package com.ljy.librarymanager.mvp.view;
 
 
 import com.ljy.librarymanager.mvp.base.BaseView;
+import com.ljy.librarymanager.mvp.entity.Borrow;
+
+import java.util.List;
 
 /**
  * Created by jiayu on 2017/3/11.
@@ -9,5 +12,5 @@ import com.ljy.librarymanager.mvp.base.BaseView;
 
 public interface BorrowListView extends BaseView {
 
-    void setList();
+    void setList(List<Borrow> data);
 }

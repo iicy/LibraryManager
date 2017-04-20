@@ -7,7 +7,7 @@
 
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/add_book_toolbar"
+        android:id="@+id/book_info_toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
@@ -40,6 +40,7 @@
                 android:gravity="start"
                 android:hint="书名"
                 android:padding="5dp"
+                android:text="书名："
                 android:textSize="20dp" />
 
             <EditText
@@ -53,6 +54,7 @@
                 android:gravity="start"
                 android:hint="作者"
                 android:padding="5dp"
+                android:text="作者："
                 android:textSize="20dp" />
 
             <EditText
@@ -66,6 +68,7 @@
                 android:gravity="start"
                 android:hint="分类"
                 android:padding="5dp"
+                android:text="分类："
                 android:textSize="20dp" />
 
             <EditText
@@ -79,6 +82,7 @@
                 android:gravity="start"
                 android:hint="出版社"
                 android:padding="5dp"
+                android:text="出版社："
                 android:textSize="20dp" />
 
             <EditText
@@ -92,6 +96,7 @@
                 android:gravity="start"
                 android:hint="出版日期"
                 android:padding="5dp"
+                android:text="出版日期："
                 android:textSize="20dp" />
 
             <EditText
@@ -104,8 +109,10 @@
                 android:background="@drawable/bg_edit"
                 android:gravity="start"
                 android:hint="库存"
-                android:inputType="number"
                 android:padding="5dp"
+                android:inputType="number"
+                android:maxLines="1"
+                android:text="0"
                 android:textSize="20dp" />
 
             <EditText
@@ -119,6 +126,7 @@
                 android:gravity="start"
                 android:hint="简介"
                 android:padding="5dp"
+                android:text="简介："
                 android:textSize="20dp" />
 
 
@@ -130,6 +138,17 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:gravity="center"
                 android:text="保存"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/bt_reset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="还原"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>

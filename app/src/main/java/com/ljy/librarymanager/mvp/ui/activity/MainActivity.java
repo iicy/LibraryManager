@@ -44,6 +44,12 @@ public class MainActivity extends BaseActivity implements MainView {
     private FragmentTransaction ft;
     private ActionBarDrawerToggle drawerToggle;
 
+    private String account;
+    private String password;
+    private String permission;
+    private String username;
+    public static MainActivity instance;
+
     @Inject
     HomeListFragment homeListFragment;
     @Inject
@@ -64,6 +70,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     protected void init() {
+        instance = this;
         main_toolbar.setTitle("主页");
         main_toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(main_toolbar);
@@ -71,6 +78,12 @@ public class MainActivity extends BaseActivity implements MainView {
         drawerToggle = new ActionBarDrawerToggle(this, main_drawer, main_toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerToggle.syncState();
         main_drawer.setDrawerListener(drawerToggle);
+
+        Intent intent = getIntent();
+        account = intent.getStringExtra("account");
+        password = intent.getStringExtra("password");
+        permission = intent.getStringExtra("permission");
+        username = intent.getStringExtra("username");
     }
 
     @Override
@@ -169,5 +182,9 @@ public class MainActivity extends BaseActivity implements MainView {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_toolbar,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public String getAccount(){
+        return account;
     }
 }

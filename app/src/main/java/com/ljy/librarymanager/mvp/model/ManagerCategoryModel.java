@@ -1,5 +1,6 @@
 package com.ljy.librarymanager.mvp.model;
 
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
@@ -40,12 +41,27 @@ public class ManagerCategoryModel {
         });
     }
 
-    public void delete(final ManagerCategoryPresenter managerCategoryPresenter,Category category){
-        category.delete(new UpdateListener() {
+    public void delete(final ManagerCategoryPresenter managerCategoryPresenter, final Category category){
+        BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
+        bmobQuery.addWhereEqualTo("category",category.getCategory_name());
+        bmobQuery.findObjects(new FindListener<Books>() {
             @Override
-            public void done(BmobException e) {
+            public void done(List<Books> list, BmobException e) {
                 if (e == null) {
-                    managerCategoryPresenter.deleteSuccess();
+                    if((list.size()==0)||(list==null)){
+                        category.delete(new UpdateListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                if (e == null) {
+                                    managerCategoryPresenter.deleteSuccess();
+                                } else {
+                                    managerCategoryPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                                }
+                            }
+                        });
+                    }else{
+                        managerCategoryPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                    }
                 } else {
                     managerCategoryPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
                 }

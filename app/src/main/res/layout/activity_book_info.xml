@@ -122,5 +122,16 @@
         android:text="预订"
         android:textColor="@color/white" />
 
+    <Button
+        android:id="@+id/bt_collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center"
+        android:text="收藏"
+        android:textColor="@color/white" />
+
 </LinearLayout>
 
