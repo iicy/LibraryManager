@@ -92,6 +92,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("book",mData.get(position));
                 intent.putExtras(bundle);
+                intent.putExtra("account",getIntent().getStringExtra("account"));
                 startActivity(intent);
             }
         });

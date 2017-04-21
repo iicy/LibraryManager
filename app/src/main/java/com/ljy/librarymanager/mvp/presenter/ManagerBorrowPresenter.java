@@ -2,6 +2,7 @@ package com.ljy.librarymanager.mvp.presenter;
 
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Booking;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.model.ManagerBookingModel;
 import com.ljy.librarymanager.mvp.model.ManagerBorrowModel;
@@ -29,6 +30,10 @@ public class ManagerBorrowPresenter extends BasePresenter<ManagerBorrowView, Lis
         managerBorrowModel.getList(this);
     }
 
+    public void getBorrow(Borrow borrow){
+        managerBorrowModel.getBorrow(this,borrow);
+    }
+
     public void delete(Borrow borrow){
         managerBorrowModel.delete(this,borrow);
     }
@@ -41,6 +46,10 @@ public class ManagerBorrowPresenter extends BasePresenter<ManagerBorrowView, Lis
 
     public void deleteSuccess(){
         mView.deleteSuccess();
+    }
+
+    public void getBorrowSuccess(Books book,Borrow borrow){
+        mView.getBorrowSuccess(book,borrow);
     }
 
     @Override

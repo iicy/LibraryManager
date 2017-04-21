@@ -14,9 +14,13 @@ import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
+import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
+import com.ljy.librarymanager.mvp.entity.Borrow;
+import com.ljy.librarymanager.mvp.entity.Collection;
 import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
+import com.ljy.librarymanager.mvp.presenter.BookInfoPresenter;
 import com.ljy.librarymanager.mvp.view.AddUserView;
 import com.ljy.librarymanager.mvp.view.BookInfoView;
 
@@ -52,12 +56,19 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
     Button bt_booking;
     @BindView(R.id.bt_collect)
     Button bt_collect;
+    @BindView(R.id.bt_undo_booking)
+    Button bt_undo_booking;
+    @BindView(R.id.bt_undo_collect)
+    Button bt_undo_collect;
     private ProgressDialog pg;
 
     private Books book;
+    private String account;
+    private String bookingId;
+    private String collectionId;
 
     @Inject
-    AddUserPresenter mPresenter;
+    BookInfoPresenter mPresenter;
 
     @Override
     protected void loadViewLayout() {
@@ -67,25 +78,32 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         mPresenter.attachView(this);
         pg = new ProgressDialog(BookInfoActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在请求！");
+        pg.setMessage("请稍候！");
         pg.setCancelable(false);
     }
 
     @Override
     protected void init() {
+        account = getIntent().getStringExtra("account");
         book = (Books) getIntent().getSerializableExtra("book");
         mToolbar.setTitle("");
         mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
-        tv_bookName.setText("书名："+book.getBookName());
-        tv_bookAuthor.setText("作者："+book.getAuthor());
-        tv_bookCategory.setText("分类："+book.getCategory());
-        tv_bookPublication.setText("出版社："+book.getPublication());
-        tv_bookPublicationDate.setText("出版日期："+book.getPublicationDate().getDate());
-        tv_bookStock.setText("库存："+book.getStock());
-        tv_bookSummary.setText("简介："+book.getSummary());
+        tv_bookName.setText("书名：" + book.getBookName());
+        tv_bookAuthor.setText("作者：" + book.getAuthor());
+        tv_bookCategory.setText("分类：" + book.getCategory());
+        tv_bookPublication.setText("出版社：" + book.getPublication());
+        tv_bookPublicationDate.setText("出版日期：" + book.getPublicationDate().getDate());
+        tv_bookStock.setText("库存：" + book.getStock());
+        tv_bookSummary.setText("简介：" + book.getSummary());
+        if (getIntent().getBooleanExtra("isManager", false)) {
+            bt_booking.setVisibility(View.GONE);
+            bt_collect.setVisibility(View.GONE);
+        }
+        mPresenter.hasBooking(account, book.getObjectId());
+        mPresenter.hasCollect(account, book.getObjectId());
     }
 
     @Override
@@ -98,6 +116,8 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         });
         bt_booking.setOnClickListener(this);
         bt_collect.setOnClickListener(this);
+        bt_undo_booking.setOnClickListener(this);
+        bt_undo_collect.setOnClickListener(this);
     }
 
     @Override
@@ -115,10 +135,38 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         switch (v.getId()) {
             case R.id.bt_booking: {
                 showProgress();
+                Booking booking = new Booking();
+                booking.setUser(account);
+                booking.setBookName(book.getBookName());
+                booking.setBookId(book.getObjectId());
+                mPresenter.addBooking(booking);
                 break;
             }
             case R.id.bt_collect: {
                 showProgress();
+                Collection collection = new Collection();
+                collection.setUser(account);
+                collection.setBookName(book.getBookName());
+                collection.setBookId(book.getObjectId());
+                mPresenter.addCollection(collection);
+                break;
+            }
+            case R.id.bt_undo_booking: {
+                showProgress();
+                if (bookingId != null) {
+                    Booking booking = new Booking();
+                    booking.setObjectId(bookingId);
+                    mPresenter.cancelBooking(booking);
+                }
+                break;
+            }
+            case R.id.bt_undo_collect: {
+                showProgress();
+                if (collectionId != null) {
+                    Collection collection = new Collection();
+                    collection.setObjectId(collectionId);
+                    mPresenter.cancelCollect(collection);
+                }
                 break;
             }
         }
@@ -136,11 +184,45 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
 
     @Override
     public void showMsg(String message) {
-        Toast.makeText(BookInfoActivity.this, "", Toast.LENGTH_LONG).show();
+        Toast.makeText(BookInfoActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void setInfo(Books data) {
+    public void success() {
+        mPresenter.hasBooking(account, book.getObjectId());
+        mPresenter.hasCollect(account, book.getObjectId());
+    }
 
+    @Override
+    public void hasBooking(boolean result, String id) {
+        if (result) {
+            bt_booking.setVisibility(View.GONE);
+            bt_undo_booking.setVisibility(View.VISIBLE);
+            bookingId = id;
+        } else {
+            bt_booking.setVisibility(View.VISIBLE);
+            bt_undo_booking.setVisibility(View.GONE);
+            bookingId = null;
+        }
+    }
+
+    @Override
+    public void hasCollect(boolean result, String id) {
+        if (result) {
+            bt_collect.setVisibility(View.GONE);
+            bt_undo_collect.setVisibility(View.VISIBLE);
+            collectionId = id;
+        } else {
+            bt_collect.setVisibility(View.VISIBLE);
+            bt_undo_collect.setVisibility(View.GONE);
+            collectionId = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.hasBooking(account, book.getObjectId());
+        mPresenter.hasCollect(account, book.getObjectId());
     }
 }

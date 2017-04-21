@@ -1,17 +1,14 @@
 package com.ljy.librarymanager.mvp.entity;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobDate;
 
 /**
  * Created by luojiayu on 2017/4/19.
  */
 
-public class Borrow extends BmobObject {
+public class Collection extends BmobObject{
 
     private String user;
-    private String status;
-    private String manager;
     private String bookName;
     private String bookId;
 
@@ -29,22 +26,6 @@ public class Borrow extends BmobObject {
 
     public void setUser(String user) {
         this.user = user;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getManager() {
-        return manager;
-    }
-
-    public void setManager(String manager) {
-        this.manager = manager;
     }
 
     public String getBookName() {

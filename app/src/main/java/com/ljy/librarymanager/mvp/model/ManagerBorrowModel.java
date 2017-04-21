@@ -1,6 +1,7 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Booking;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookingPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerBorrowPresenter;
@@ -27,6 +28,8 @@ public class ManagerBorrowModel {
     public void getList(final ManagerBorrowPresenter managerBorrowPresenter) {
         BmobQuery<Borrow> bmobQuery = new BmobQuery<Borrow>();
         bmobQuery.order("-createdAt");
+        bmobQuery.order("-updatedAt");
+        bmobQuery.order("status");
 //        bmobQuery.setLimit(10);
         bmobQuery.findObjects(new FindListener<Borrow>() {
             @Override
@@ -46,6 +49,21 @@ public class ManagerBorrowModel {
             public void done(BmobException e) {
                 if (e == null) {
                     managerBorrowPresenter.deleteSuccess();
+                } else {
+                    managerBorrowPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
+    }
+
+    public void getBorrow(final ManagerBorrowPresenter managerBorrowPresenter, final Borrow borrow) {
+        BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
+        bmobQuery.addWhereEqualTo("objectId", borrow.getBookId());
+        bmobQuery.findObjects(new FindListener<Books>() {
+            @Override
+            public void done(List<Books> list, BmobException e) {
+                if (e == null && list.size() != 0) {
+                    managerBorrowPresenter.getBorrowSuccess(list.get(0),borrow);
                 } else {
                     managerBorrowPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
                 }

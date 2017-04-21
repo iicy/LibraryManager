@@ -10,6 +10,15 @@ public class Booking extends BmobObject{
 
     private String user;
     private String bookName;
+    private String bookId;
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
+    }
 
     public String getUser() {
         return user;

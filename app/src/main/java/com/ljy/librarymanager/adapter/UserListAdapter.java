@@ -60,7 +60,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.account.setText(mList.get(position).getAccount());
+        String tag = "";
+        if (mList.get(position).getPermission().equals("0"))
+            tag = "(*)";
+        holder.account.setText(mList.get(position).getAccount() + "  " + tag);
         holder.itemView.setTag(position);
     }
 

@@ -12,6 +12,9 @@ import java.util.List;
 
 public interface BookInfoView extends BaseView{
 
-    void setInfo(Books data);
+    void success();
 
+    void hasBooking(boolean result,String id);
+
+    void hasCollect(boolean result,String id);
 }

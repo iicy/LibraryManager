@@ -26,13 +26,13 @@
         android:padding="5dp" />
 
     <EditText
-        android:id="@+id/bookname"
+        android:id="@+id/bookid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/bg_edit"
         android:gravity="start"
-        android:hint="书名"
+        android:hint="图书编号"
         android:maxLines="1"
         android:padding="5dp" />
 

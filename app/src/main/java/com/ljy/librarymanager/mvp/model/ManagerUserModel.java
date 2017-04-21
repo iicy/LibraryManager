@@ -27,6 +27,7 @@ public class ManagerUserModel {
     public void getList(final ManagerUserPresenter managerUserPresenter) {
         BmobQuery<User> bmobQuery = new BmobQuery<User>();
         bmobQuery.order("-updatedAt");
+        bmobQuery.order("-permission");
         bmobQuery.setLimit(10);
         bmobQuery.findObjects(new FindListener<User>() {
             @Override
