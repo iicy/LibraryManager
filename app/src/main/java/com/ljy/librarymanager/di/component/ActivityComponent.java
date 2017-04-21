@@ -19,6 +19,7 @@ import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerAnnouncementInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBookInfoActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerBorrowInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.view.SearchBarView;
 
@@ -67,4 +68,6 @@ public interface ActivityComponent {
     void inject(ManagerBookInfoActivity managerBookInfoActivity);
 
     void inject(ManagerAnnouncementInfoActivity managerAnnouncementInfoActivity);
+
+    void inject(ManagerBorrowInfoActivity managerBorrowInfoActivity);
 }

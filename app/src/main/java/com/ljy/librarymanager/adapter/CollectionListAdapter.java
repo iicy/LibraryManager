@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.entity.Booking;
-import com.ljy.librarymanager.mvp.entity.Borrow;
+import com.ljy.librarymanager.mvp.entity.Collection;
 
 import java.util.List;
 
@@ -21,11 +21,10 @@ import butterknife.ButterKnife;
  * Created by jiayu on 2016/11/2.
  */
 
-public class BorrowListAdapter extends RecyclerView.Adapter<BorrowListAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
+public class CollectionListAdapter extends RecyclerView.Adapter<CollectionListAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
     private LayoutInflater mLayoutInflater;
     private Context mContext;
-    private List<Borrow> mList;
-    private boolean SHOW_USER_TAG;
+    private List<Collection> mList;
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private OnRecyclerViewItemLongClickListener mOnItemLongClickListener = null;
@@ -38,14 +37,13 @@ public class BorrowListAdapter extends RecyclerView.Adapter<BorrowListAdapter.Vi
         void onItemLongClick(View view, int position);
     }
 
-    public BorrowListAdapter(Context context, List<Borrow> mList, boolean tag) {
+    public CollectionListAdapter(Context context, List<Collection> mList) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         this.mList = mList;
-        this.SHOW_USER_TAG = tag;
     }
 
-    public void setNewData(List<Borrow> mList) {
+    public void setNewData(List<Collection> mList) {
         this.mList = mList;
         notifyDataSetChanged();
     }
@@ -53,7 +51,7 @@ public class BorrowListAdapter extends RecyclerView.Adapter<BorrowListAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        view = mLayoutInflater.inflate(R.layout.item_borrow, parent, false);
+        view = mLayoutInflater.inflate(R.layout.item_collection, parent, false);
         ViewHolder vh = new ViewHolder(view);
         //将创建的View注册点击事件
         view.setOnClickListener(this);
@@ -63,20 +61,8 @@ public class BorrowListAdapter extends RecyclerView.Adapter<BorrowListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        String tag = "";
-        if(mList.get(position).getStatus().equals("1"))
-            tag = "(已归还)";
-        holder.bookName.setText("书名："+mList.get(position).getBookName()+"   "+tag);
-        if(SHOW_USER_TAG){
-            holder.userName.setText("用户："+mList.get(position).getUser());
-            holder.userName.setVisibility(View.VISIBLE);
-        }
-        if(mList.get(position).getUpdatedAt()!=null&&!mList.get(position).getUpdatedAt().equals(""))
-        {
-            holder.date.setText(mList.get(position).getUpdatedAt());
-        }else{
-            holder.date.setText(mList.get(position).getCreatedAt());
-        }
+        holder.bookName.setText("书名："+mList.get(position).getBookName());
+        holder.date.setText(mList.get(position).getCreatedAt());
         holder.itemView.setTag(position);
     }
 
@@ -110,13 +96,11 @@ public class BorrowListAdapter extends RecyclerView.Adapter<BorrowListAdapter.Vi
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.item_borrow_icon)
+        @BindView(R.id.item_collection_icon)
         ImageView icon;
-        @BindView(R.id.item_borrow_name)
+        @BindView(R.id.item_collection_name)
         TextView bookName;
-        @BindView(R.id.item_borrow_username)
-        TextView userName;
-        @BindView(R.id.item_borrow_date)
+        @BindView(R.id.item_collection_date)
         TextView date;
 
         ViewHolder(View view) {

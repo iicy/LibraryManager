@@ -1,6 +1,7 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Booking;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookingPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
@@ -26,7 +27,8 @@ public class ManagerBookingModel {
 
     public void getList(final ManagerBookingPresenter managerBookingPresenter) {
         BmobQuery<Booking> bmobQuery = new BmobQuery<Booking>();
-        bmobQuery.order("-category_name");
+        bmobQuery.order("-createdAt");
+        bmobQuery.order("-updatedAt");
 //        bmobQuery.setLimit(10);
         bmobQuery.findObjects(new FindListener<Booking>() {
             @Override
@@ -40,12 +42,27 @@ public class ManagerBookingModel {
         });
     }
 
-    public void delete(final ManagerBookingPresenter managerBookingPresenter,Booking booking){
+    public void delete(final ManagerBookingPresenter managerBookingPresenter, Booking booking) {
         booking.delete(new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
                     managerBookingPresenter.deleteSuccess();
+                } else {
+                    managerBookingPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
+    }
+
+    public void getBook(final ManagerBookingPresenter managerBookingPresenter, String bookId) {
+        BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
+        bmobQuery.addWhereEqualTo("objectId", bookId);
+        bmobQuery.findObjects(new FindListener<Books>() {
+            @Override
+            public void done(List<Books> list, BmobException e) {
+                if (e == null && list.size() != 0) {
+                    managerBookingPresenter.getBookSuccess(list.get(0));
                 } else {
                     managerBookingPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
                 }

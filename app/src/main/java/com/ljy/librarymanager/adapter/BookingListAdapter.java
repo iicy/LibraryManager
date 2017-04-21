@@ -63,9 +63,9 @@ public class BookingListAdapter extends RecyclerView.Adapter<BookingListAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.bookName.setText(mList.get(position).getBookName());
+        holder.bookName.setText("书名："+mList.get(position).getBookName());
         if(SHOW_USER_TAG){
-            holder.userName.setText(mList.get(position).getUser());
+            holder.userName.setText("用户："+mList.get(position).getUser());
             holder.userName.setVisibility(View.VISIBLE);
         }
         holder.date.setText(mList.get(position).getCreatedAt());

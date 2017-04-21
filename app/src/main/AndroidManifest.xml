@@ -46,6 +46,7 @@
         <activity android:name=".mvp.ui.activity.ManagerBookActivity"/>
         <activity android:name=".mvp.ui.activity.ManagerBookInfoActivity"/>
         <activity android:name=".mvp.ui.activity.ManagerAnnouncementInfoActivity"/>
+        <activity android:name=".mvp.ui.activity.ManagerBorrowInfoActivity"/>
     </application>
 
 </manifest>

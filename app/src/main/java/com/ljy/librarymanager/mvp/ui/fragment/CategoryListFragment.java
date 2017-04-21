@@ -13,6 +13,7 @@ import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.CategoryListPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
+import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.view.BorrowListView;
 import com.ljy.librarymanager.mvp.view.CategoryListView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
@@ -60,6 +61,7 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), BookListActivity.class);
                 intent.putExtra("category",mData.get(position).getCategory_name());
+                intent.putExtra("account", MainActivity.instance.getAccount());
                 startActivity(intent);
             }
         });

@@ -24,13 +24,18 @@ public class AddBorrowPresenter extends BasePresenter<AddBorrowView, String> {
     }
 
     public void add(Borrow borrow) {
-        addBorrowModel.add(this,borrow);
+        addBorrowModel.checkUserAndBook(this,borrow);
     }
 
     @Override
     public void success(String s) {
         super.success(s);
         mView.add();
+    }
+
+    public void checkSuccess(Borrow borrow,String bookName){
+        borrow.setBookName(bookName);
+        addBorrowModel.add(this,borrow);
     }
 
     @Override

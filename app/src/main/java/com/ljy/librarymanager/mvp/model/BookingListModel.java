@@ -26,7 +26,7 @@ public class BookingListModel {
     public void getList(final BookingListPresenter bookingListPresenter,String account) {
         BmobQuery<Booking> bmobQuery = new BmobQuery<Booking>();
         bmobQuery.addWhereEqualTo("user",account);
-        bmobQuery.order("-category_name");
+        bmobQuery.order("-createdAt");
 //        bmobQuery.setLimit(10);
         bmobQuery.findObjects(new FindListener<Booking>() {
             @Override

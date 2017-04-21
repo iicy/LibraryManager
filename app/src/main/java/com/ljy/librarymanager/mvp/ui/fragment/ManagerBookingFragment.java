@@ -2,6 +2,8 @@ package com.ljy.librarymanager.mvp.ui.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,10 @@ import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.BookingListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Booking;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookingPresenter;
+import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
+import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
 import com.ljy.librarymanager.mvp.view.ManagerAnnouncementView;
 import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.widget.DeleteDialog;
@@ -77,6 +82,12 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
                 deleteDialog.show();
             }
         });
+        mAdapter.setOnItemClickListener(new BookingListAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                mPresenter.getBook(mData.get(position).getBookId());
+            }
+        });
     }
 
     @Override
@@ -100,6 +111,16 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     }
 
     @Override
+    public void getBookSuccess(Books book) {
+        Intent intent = new Intent(getActivity(), BookInfoActivity.class);
+        intent.putExtra("isManager",true);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("book",book);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
     public void showProgress() {
         pg.show();
     }
@@ -111,7 +132,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
 
     @Override
     public void showMsg(String message) {
-
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override

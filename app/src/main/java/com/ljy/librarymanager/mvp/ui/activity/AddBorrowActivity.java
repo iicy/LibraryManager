@@ -33,8 +33,8 @@ public class AddBorrowActivity extends BaseActivity implements AddBorrowView {
     Toolbar mToolbar;
     @BindView(R.id.username)
     EditText et_username;
-    @BindView(R.id.bookname)
-    EditText et_bookname;
+    @BindView(R.id.bookid)
+    EditText et_bookid;
     @BindView(R.id.is_return)
     RadioButton is_return;
     @BindView(R.id.is_not_return)
@@ -97,7 +97,7 @@ public class AddBorrowActivity extends BaseActivity implements AddBorrowView {
             case R.id.save: {
                 showProgress();
                 Borrow borrow = new Borrow();
-                borrow.setBookName(et_bookname.getText().toString());
+                borrow.setBookId(et_bookid.getText().toString());
                 borrow.setManager(manager);
                 borrow.setUser(et_username.getText().toString());
                 if(is_not_return.isChecked())
@@ -128,6 +128,6 @@ public class AddBorrowActivity extends BaseActivity implements AddBorrowView {
 
     @Override
     public void showMsg(String message) {
-        Toast.makeText(AddBorrowActivity.this, "保存失败！", Toast.LENGTH_LONG).show();
+        Toast.makeText(AddBorrowActivity.this, message, Toast.LENGTH_LONG).show();
     }
 }

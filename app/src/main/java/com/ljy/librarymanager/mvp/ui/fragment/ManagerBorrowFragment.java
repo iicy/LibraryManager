@@ -2,6 +2,8 @@ package com.ljy.librarymanager.mvp.ui.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +14,10 @@ import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.BookingListAdapter;
 import com.ljy.librarymanager.adapter.BorrowListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.presenter.ManagerBorrowPresenter;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerBorrowInfoActivity;
 import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
 import com.ljy.librarymanager.widget.DeleteDialog;
@@ -79,6 +83,12 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
                 deleteDialog.show();
             }
         });
+        mAdapter.setOnItemClickListener(new BorrowListAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                mPresenter.getBorrow(mData.get(position));
+            }
+        });
     }
 
     @Override
@@ -99,6 +109,16 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
         hideProgress();
         mPresenter.getList();
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void getBorrowSuccess(Books book, Borrow borrow) {
+        Intent intent = new Intent(getActivity(), ManagerBorrowInfoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("book",book);
+        bundle.putSerializable("borrow",borrow);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override

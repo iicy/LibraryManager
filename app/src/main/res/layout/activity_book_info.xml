@@ -111,27 +111,61 @@
         android:text="简介："
         android:textSize="20dp" />
 
-
-    <Button
-        android:id="@+id/bt_booking"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:gravity="center"
-        android:text="预订"
-        android:textColor="@color/white" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/bt_collect"
+        <Button
+            android:id="@+id/bt_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center"
+            android:text="预订"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/bt_undo_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center"
+            android:text="取消预订"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:gravity="center"
-        android:text="收藏"
-        android:textColor="@color/white" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_collect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center"
+            android:text="收藏"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/bt_undo_collect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:gravity="center"
+            android:text="取消收藏"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </LinearLayout>
 
 </LinearLayout>
 

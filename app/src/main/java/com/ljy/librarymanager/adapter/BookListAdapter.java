@@ -62,9 +62,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.name.setText(mList.get(position).getBookName());
-        holder.author.setText(mList.get(position).getAuthor());
-        holder.pulication.setText(mList.get(position).getPublication());
-        holder.date.setText(mList.get(position).getPublicationDate().getDate());
+        holder.author.setText("作者："+mList.get(position).getAuthor());
+        holder.pulication.setText("出版社："+mList.get(position).getPublication());
+        holder.date.setText("出版日期："+mList.get(position).getPublicationDate().getDate());
         holder.itemView.setTag(position);
     }
 
