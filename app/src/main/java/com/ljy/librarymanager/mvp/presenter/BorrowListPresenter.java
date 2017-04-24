@@ -1,6 +1,7 @@
 package com.ljy.librarymanager.mvp.presenter;
 
 import com.ljy.librarymanager.mvp.base.BasePresenter;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.model.BorrowListModel;
 import com.ljy.librarymanager.mvp.model.ManagerBorrowModel;
@@ -28,10 +29,18 @@ public class BorrowListPresenter extends BasePresenter<BorrowListView, List<Borr
         borrowListModel.getList(this,account);
     }
 
+    public void getBook(String bookId){
+        borrowListModel.getBook(this,bookId);
+    }
+
     @Override
     public void success(List<Borrow> data) {
         super.success(data);
         mView.setList(data);
+    }
+
+    public void getBookSuccess(Books book){
+        mView.getBook(book);
     }
 
     @Override

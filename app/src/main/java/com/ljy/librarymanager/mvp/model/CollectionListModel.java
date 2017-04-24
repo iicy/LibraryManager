@@ -1,6 +1,7 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Booking;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Collection;
 import com.ljy.librarymanager.mvp.presenter.BookingListPresenter;
 import com.ljy.librarymanager.mvp.presenter.CollectionListPresenter;
@@ -32,6 +33,21 @@ public class CollectionListModel {
             public void done(List<Collection> list, BmobException e) {
                 if (e == null) {
                     collectionListPresenter.success(list);
+                } else {
+                    collectionListPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
+    }
+
+    public void getBook(final CollectionListPresenter collectionListPresenter,String bookId){
+        BmobQuery<Books> bmobQuery = new BmobQuery<>();
+        bmobQuery.addWhereEqualTo("objectId",bookId);
+        bmobQuery.findObjects(new FindListener<Books>() {
+            @Override
+            public void done(List<Books> list, BmobException e) {
+                if (e == null&&list.size()>0) {
+                    collectionListPresenter.getBookSuccess(list.get(0));
                 } else {
                     collectionListPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
                 }
