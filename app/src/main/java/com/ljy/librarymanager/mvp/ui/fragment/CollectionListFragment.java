@@ -1,6 +1,8 @@
 package com.ljy.librarymanager.mvp.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +11,10 @@ import android.view.ViewGroup;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.CollectionListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Collection;
 import com.ljy.librarymanager.mvp.presenter.CollectionListPresenter;
+import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.view.CategoryListView;
 import com.ljy.librarymanager.mvp.view.CollectionListView;
@@ -54,7 +58,12 @@ public class CollectionListFragment extends BaseFragment implements CollectionLi
 
     @Override
     protected void initListener() {
-
+        mAdapter.setOnItemClickListener(new CollectionListAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                mPresenter.getBook(mData.get(position).getBookId());
+            }
+        });
     }
 
     @Override
@@ -83,6 +92,16 @@ public class CollectionListFragment extends BaseFragment implements CollectionLi
     public void setList(List<Collection> data) {
         mData = data;
         mAdapter.setNewData(mData);
+    }
+
+    @Override
+    public void getBook(Books book) {
+        Intent intent = new Intent(getActivity(), BookInfoActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("book",book);
+        intent.putExtras(bundle);
+        intent.putExtra("account",MainActivity.instance.getAccount());
+        startActivity(intent);
     }
 
     @Override

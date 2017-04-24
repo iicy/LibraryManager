@@ -2,6 +2,7 @@ package com.ljy.librarymanager.mvp.presenter;
 
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Booking;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Collection;
 import com.ljy.librarymanager.mvp.model.BookingListModel;
 import com.ljy.librarymanager.mvp.model.CollectionListModel;
@@ -29,10 +30,18 @@ public class CollectionListPresenter extends BasePresenter<CollectionListView, L
         collectionListModel.getList(this,account);
     }
 
+    public void getBook(String bookId){
+        collectionListModel.getBook(this,bookId);
+    }
+
     @Override
     public void success(List<Collection> data) {
         super.success(data);
         mView.setList(data);
+    }
+
+    public void getBookSuccess(Books book){
+        mView.getBook(book);
     }
 
     @Override

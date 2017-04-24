@@ -2,6 +2,7 @@ package com.ljy.librarymanager.mvp.view;
 
 
 import com.ljy.librarymanager.mvp.base.BaseView;
+import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Collection;
 
 import java.util.List;
@@ -13,4 +14,6 @@ import java.util.List;
 public interface CollectionListView extends BaseView {
 
     void setList(List<Collection> data);
+
+    void getBook(Books book);
 }
