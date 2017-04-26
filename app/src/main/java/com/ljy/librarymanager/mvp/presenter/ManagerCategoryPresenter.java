@@ -26,6 +26,7 @@ public class ManagerCategoryPresenter extends BasePresenter<ManagerCategoryView,
     }
 
     public void getList() {
+        mView.showProgress();
         managerCategoryModel.getList(this);
     }
 

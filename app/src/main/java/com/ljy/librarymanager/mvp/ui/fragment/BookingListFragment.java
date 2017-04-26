@@ -1,6 +1,7 @@
 package com.ljy.librarymanager.mvp.ui.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +45,7 @@ public class BookingListFragment extends BaseFragment implements BookingListView
 
     private List<Booking> mData;
     private BookingListAdapter mAdapter;
+    private ProgressDialog pg;
 
     @Inject
     public BookingListFragment() {
@@ -54,6 +56,10 @@ public class BookingListFragment extends BaseFragment implements BookingListView
         View view = inflater.inflate(R.layout.fragment_bookinglist, container, false);
         mFragmentComponent.inject(this);
         mPresenter.attachView(this);
+        pg = new ProgressDialog(getActivity());
+        pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pg.setMessage("请稍候！");
+        pg.setCancelable(false);
         mAdapter = new BookingListAdapter(getActivity(),mData,false);
         return view;
     }
@@ -63,6 +69,7 @@ public class BookingListFragment extends BaseFragment implements BookingListView
         mAdapter.setOnItemClickListener(new BookingListAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                pg.show();
                 mPresenter.getBook(mData.get(position).getBookId());
             }
         });
@@ -70,7 +77,6 @@ public class BookingListFragment extends BaseFragment implements BookingListView
 
     @Override
     protected void initData() {
-        mPresenter.getList(MainActivity.instance.getAccount());
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(mAdapter);
     }
@@ -78,11 +84,18 @@ public class BookingListFragment extends BaseFragment implements BookingListView
     @Override
     public void setList(List<Booking> data) {
         mData = data;
+        if(data.size()==0){
+            MainActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            MainActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 
     @Override
     public void getBook(Books book) {
+        pg.dismiss();
         Intent intent = new Intent(getActivity(), BookInfoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("book",book);
@@ -93,12 +106,12 @@ public class BookingListFragment extends BaseFragment implements BookingListView
 
     @Override
     public void showProgress() {
-
+        MainActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-
+        MainActivity.instance.hideProgress();
     }
 
     @Override

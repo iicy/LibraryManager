@@ -8,16 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
-import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.entity.Books;
-import com.ljy.librarymanager.mvp.presenter.ManagerAnnouncementInfoPresenter;
+import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookInfoPresenter;
-import com.ljy.librarymanager.mvp.view.ManagerAnnouncementInfoView;
 import com.ljy.librarymanager.mvp.view.ManagerBookInfoView;
+import com.ljy.librarymanager.mvp.view.ManagerUserInfoView;
 
 import java.util.Date;
 
@@ -30,45 +30,54 @@ import cn.bmob.v3.datatype.BmobDate;
  * Created by luojiayu on 2017/4/11.
  */
 
-public class ManagerAnnouncementInfoActivity extends BaseActivity implements ManagerAnnouncementInfoView {
+public class ManagerUserInfoActivity extends BaseActivity implements ManagerUserInfoView {
 
-    @BindView(R.id.manager_announcement_toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.content)
-    EditText content;
-    @BindView(R.id.bt_save)
-    Button bt_save;
-    @BindView(R.id.bt_reset)
-    Button bt_reset;
+    @BindView(R.id.user_name)
+    TextView user_name;
+    @BindView(R.id.user_account)
+    TextView user_account;
+    @BindView(R.id.user_password)
+    TextView user_password;
+    @BindView(R.id.user_permission)
+    TextView user_permission;
+    @BindView(R.id.user_created_date)
+    TextView user_created_date;
     private ProgressDialog pg;
 
-    private Announcement announcement;
-
-    @Inject
-    ManagerAnnouncementInfoPresenter mPresenter;
+    private User user;
 
     @Override
     protected void loadViewLayout() {
-        setContentView(R.layout.activity_manager_announcement_info);
+        setContentView(R.layout.activity_manager_user_info);
         //注入对象
         mActivityComponent.inject(this);
-        mPresenter.attachView(this);
-        pg = new ProgressDialog(ManagerAnnouncementInfoActivity.this);
+        pg = new ProgressDialog(ManagerUserInfoActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("请稍候！");
+        pg.setMessage("正在加载！");
         pg.setCancelable(false);
     }
 
     @Override
     protected void init() {
         showProgress();
-        announcement = (Announcement) getIntent().getSerializableExtra("announcement");
+        user = (User) getIntent().getSerializableExtra("user");
         mToolbar.setTitle("");
         mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
-        reset();
+        user_name.setText("用户名：" + user.getUsername());
+        user_account.setText("账号：" + user.getAccount());
+        user_password.setText("密码：" + user.getPassword());
+        if (user.getPermission().equals("0")) {
+            user_permission.setText("权限：管理员");
+        } else {
+            user_permission.setText("权限：普通用户");
+        }
+        user_created_date.setText("创建日期：" + user.getCreatedAt());
+        hideProgress();
     }
 
     @Override
@@ -79,8 +88,6 @@ public class ManagerAnnouncementInfoActivity extends BaseActivity implements Man
                 finish();
             }
         });
-        bt_save.setOnClickListener(this);
-        bt_reset.setOnClickListener(this);
     }
 
     @Override
@@ -95,20 +102,6 @@ public class ManagerAnnouncementInfoActivity extends BaseActivity implements Man
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bt_save: {
-                showProgress();
-                announcement.setContent(content.getText().toString());
-                announcement.setAccount(announcement.getAccount());
-                mPresenter.save(announcement);
-                break;
-            }
-            case R.id.bt_reset: {
-                showProgress();
-                reset();
-                break;
-            }
-        }
     }
 
     @Override
@@ -123,18 +116,6 @@ public class ManagerAnnouncementInfoActivity extends BaseActivity implements Man
 
     @Override
     public void showMsg(String message) {
-        Toast.makeText(ManagerAnnouncementInfoActivity.this, "", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void saveSuccess() {
-        Toast.makeText(ManagerAnnouncementInfoActivity.this, "保存成功！", Toast.LENGTH_LONG).show();
-        finish();
-    }
-
-    @Override
-    public void reset() {
-        content.setText(announcement.getContent());
-        hideProgress();
+        Toast.makeText(ManagerUserInfoActivity.this, "", Toast.LENGTH_LONG).show();
     }
 }

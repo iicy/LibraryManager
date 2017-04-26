@@ -66,6 +66,7 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
     private String account;
     private String bookingId;
     private String collectionId;
+    private boolean isManager;
 
     @Inject
     BookInfoPresenter mPresenter;
@@ -84,8 +85,10 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
 
     @Override
     protected void init() {
+        showProgress();
         account = getIntent().getStringExtra("account");
         book = (Books) getIntent().getSerializableExtra("book");
+        isManager = getIntent().getBooleanExtra("isManager", false);
         mToolbar.setTitle("");
         mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
@@ -98,12 +101,14 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         tv_bookPublicationDate.setText("出版日期：" + book.getPublicationDate().getDate());
         tv_bookStock.setText("库存：" + book.getStock());
         tv_bookSummary.setText("简介：" + book.getSummary());
-        if (getIntent().getBooleanExtra("isManager", false)) {
+        if (isManager) {
             bt_booking.setVisibility(View.GONE);
             bt_collect.setVisibility(View.GONE);
+            bt_undo_booking.setVisibility(View.GONE);
+            bt_undo_collect.setVisibility(View.GONE);
         }
-        mPresenter.hasBooking(account, book.getObjectId());
-        mPresenter.hasCollect(account, book.getObjectId());
+//        mPresenter.hasBooking(account, book.getObjectId());
+//        mPresenter.hasCollect(account, book.getObjectId());
     }
 
     @Override
@@ -195,28 +200,34 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
 
     @Override
     public void hasBooking(boolean result, String id) {
-        if (result) {
-            bt_booking.setVisibility(View.GONE);
-            bt_undo_booking.setVisibility(View.VISIBLE);
-            bookingId = id;
-        } else {
-            bt_booking.setVisibility(View.VISIBLE);
-            bt_undo_booking.setVisibility(View.GONE);
-            bookingId = null;
+        if (!isManager) {
+            if (result) {
+                bt_booking.setVisibility(View.GONE);
+                bt_undo_booking.setVisibility(View.VISIBLE);
+                bookingId = id;
+            } else {
+                bt_booking.setVisibility(View.VISIBLE);
+                bt_undo_booking.setVisibility(View.GONE);
+                bookingId = null;
+            }
         }
+        hideProgress();
     }
 
     @Override
     public void hasCollect(boolean result, String id) {
-        if (result) {
-            bt_collect.setVisibility(View.GONE);
-            bt_undo_collect.setVisibility(View.VISIBLE);
-            collectionId = id;
-        } else {
-            bt_collect.setVisibility(View.VISIBLE);
-            bt_undo_collect.setVisibility(View.GONE);
-            collectionId = null;
+        if (!isManager) {
+            if (result) {
+                bt_collect.setVisibility(View.GONE);
+                bt_undo_collect.setVisibility(View.VISIBLE);
+                collectionId = id;
+            } else {
+                bt_collect.setVisibility(View.VISIBLE);
+                bt_undo_collect.setVisibility(View.GONE);
+                collectionId = null;
+            }
         }
+        hideProgress();
     }
 
     @Override

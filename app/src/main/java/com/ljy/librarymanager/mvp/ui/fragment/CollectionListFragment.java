@@ -68,19 +68,18 @@ public class CollectionListFragment extends BaseFragment implements CollectionLi
 
     @Override
     protected void initData() {
-        mPresenter.getList(MainActivity.instance.getAccount());
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(mAdapter);
     }
 
     @Override
     public void showProgress() {
-
+        MainActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-
+        MainActivity.instance.hideProgress();
     }
 
     @Override
@@ -91,6 +90,12 @@ public class CollectionListFragment extends BaseFragment implements CollectionLi
     @Override
     public void setList(List<Collection> data) {
         mData = data;
+        if(data.size()==0){
+            MainActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            MainActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 

@@ -27,6 +27,7 @@ public class CollectionListPresenter extends BasePresenter<CollectionListView, L
     }
 
     public void getList(String account) {
+        mView.showProgress();
         collectionListModel.getList(this,account);
     }
 

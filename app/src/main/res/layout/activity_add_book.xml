@@ -55,7 +55,7 @@
                 android:padding="5dp"
                 android:textSize="20dp" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/book_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,8 +64,6 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_edit"
                 android:gravity="start"
-                android:hint="分类"
-                android:padding="5dp"
                 android:textSize="20dp" />
 
             <EditText
@@ -120,7 +118,6 @@
                 android:hint="简介"
                 android:padding="5dp"
                 android:textSize="20dp" />
-
 
             <Button
                 android:id="@+id/bt_save"

@@ -17,6 +17,7 @@ import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.presenter.ManagerBorrowPresenter;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBorrowInfoActivity;
 import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
@@ -74,7 +75,7 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
                 deleteDialog.setOnConfirmListener(new DeleteDialog.OnConfirmListener() {
                     @Override
                     public void onConfirmListener() {
-                        showProgress();
+                        pg.show();
                         Borrow borrow = new Borrow();
                         borrow.setObjectId(mData.get(position).getObjectId());
                         mPresenter.delete(borrow);
@@ -93,7 +94,6 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
 
     @Override
     protected void initData() {
-        mPresenter.getList();
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(mAdapter);
     }
@@ -101,12 +101,18 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
     @Override
     public void setList(List<Borrow> data) {
         mData = data;
+        if(data.size()==0){
+            ManagerActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            ManagerActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 
     @Override
     public void deleteSuccess() {
-        hideProgress();
+        pg.dismiss();
         mPresenter.getList();
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
     }
@@ -123,12 +129,12 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
 
     @Override
     public void showProgress() {
-        pg.show();
+        ManagerActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-        pg.dismiss();
+        ManagerActivity.instance.hideProgress();
     }
 
     @Override

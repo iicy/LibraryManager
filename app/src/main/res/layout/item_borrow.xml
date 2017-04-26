@@ -17,7 +17,8 @@
             android:id="@+id/item_borrow_icon"
             android:layout_width="50dp"
             android:layout_height="80dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout

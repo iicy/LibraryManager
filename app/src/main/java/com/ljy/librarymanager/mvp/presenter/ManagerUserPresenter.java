@@ -26,6 +26,7 @@ public class ManagerUserPresenter extends BasePresenter<ManagerUserView, List<Us
     }
 
     public void getList() {
+        mView.showProgress();
         managerUserModel.getList(this);
     }
 

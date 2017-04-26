@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.presenter.BookListPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookPresenter;
+import com.ljy.librarymanager.mvp.ui.fragment.LoadingFragment;
 import com.ljy.librarymanager.mvp.view.BookInfoView;
 import com.ljy.librarymanager.mvp.view.BookListView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
@@ -39,12 +42,16 @@ public class BookListActivity extends BaseActivity implements BookListView {
 
     @BindView(R.id.book_list_toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.loading)
+    FrameLayout loading;
     @BindView(R.id.list)
     LoadMoreRecyclerView list;
 
     private List<Books> mData;
     private BookListAdapter mAdapter;
-    private ProgressDialog pg;
+    private FragmentTransaction ft;
+    private LoadingFragment loadingFragment;
+    private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
 
     private String category;
 
@@ -57,12 +64,9 @@ public class BookListActivity extends BaseActivity implements BookListView {
         //注入对象
         mActivityComponent.inject(this);
         mPresenter.attachView(this);
-        pg = new ProgressDialog(BookListActivity.this);
-        pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在加载！");
-        pg.setCancelable(false);
         mAdapter = new BookListAdapter(this,mData);
         category = getIntent().getStringExtra("category");
+        loadingFragment = new LoadingFragment();
     }
 
     @Override
@@ -72,7 +76,6 @@ public class BookListActivity extends BaseActivity implements BookListView {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
-        mPresenter.getList(category);
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(mAdapter);
     }
@@ -114,12 +117,22 @@ public class BookListActivity extends BaseActivity implements BookListView {
 
     @Override
     public void showProgress() {
-        pg.show();
+        ft = getSupportFragmentManager().beginTransaction();
+        if(getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT)==null){
+            ft.add(R.id.loading, loadingFragment, TAG_LOADING_FRAGMENT);
+        }
+        ft.show(loadingFragment);
+        loading.setVisibility(View.VISIBLE);
+        ft.commit();
     }
 
     @Override
     public void hideProgress() {
-        pg.dismiss();
+        ft = getSupportFragmentManager().beginTransaction();
+        loadingFragment =(LoadingFragment) getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
+        ft.hide(loadingFragment);
+        loading.setVisibility(View.GONE);
+        ft.commit();
     }
 
     @Override
@@ -130,6 +143,12 @@ public class BookListActivity extends BaseActivity implements BookListView {
     @Override
     public void setList(List<Books> data) {
         mData = data;
+        if(data.size()==0){
+            loadingFragment.setText("暂无数据");
+            showProgress();
+        }else{
+            loadingFragment.setText("请稍候...");
+        }
         mAdapter.setNewData(mData);
     }
 

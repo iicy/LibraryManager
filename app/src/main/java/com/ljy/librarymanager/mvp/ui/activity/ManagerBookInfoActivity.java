@@ -5,21 +5,26 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Books;
+import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookInfoPresenter;
 import com.ljy.librarymanager.mvp.view.BookInfoView;
 import com.ljy.librarymanager.mvp.view.ManagerBookInfoView;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,7 +46,7 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
     @BindView(R.id.book_author)
     EditText tv_bookAuthor;
     @BindView(R.id.book_category)
-    EditText tv_bookCategory;
+    Spinner tv_bookCategory;
     @BindView(R.id.book_publication)
     EditText tv_bookPublication;
     @BindView(R.id.book_publication_date)
@@ -55,7 +60,10 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
     @BindView(R.id.bt_reset)
     Button bt_reset;
     private ProgressDialog pg;
-
+    private String category;
+    private List<String> categoryList;
+    private ArrayAdapter<String> spinnerAdapter;
+    int defaultIndex=0;
     private Books book;
 
     @Inject
@@ -81,6 +89,8 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
+        category = book.getCategory();
+        mPresenter.getCategoryList();
         reset();
     }
 
@@ -113,7 +123,7 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
                 showProgress();
                 book.setBookName(tv_bookName.getText().toString());
                 book.setAuthor(tv_bookAuthor.getText().toString());
-                book.setCategory(tv_bookCategory.getText().toString());
+                book.setCategory(tv_bookCategory.getSelectedItem().toString());
                 book.setPublication(tv_bookPublication.getText().toString());
                 book.setPublicationDate(new BmobDate(new Date()).createBmobDate("yyyy-MM-dd HH:mm:ss",tv_bookPublicationDate.getText().toString()));
                 book.setStock(Integer.parseInt(tv_bookStock.getText().toString()));
@@ -153,10 +163,27 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
     public void reset() {
         tv_bookName.setText(book.getBookName());
         tv_bookAuthor.setText(book.getAuthor());
-        tv_bookCategory.setText(book.getCategory());
+//        tv_bookCategory.setText(book.getCategory());
+        tv_bookCategory.setSelection(defaultIndex);
         tv_bookPublication.setText(book.getPublication());
         tv_bookPublicationDate.setText(book.getPublicationDate().getDate());
         tv_bookStock.setText(book.getStock()+"");
         tv_bookSummary.setText(book.getSummary());
+    }
+
+    @Override
+    public void getCategory(List<Category> data) {
+        hideProgress();
+        categoryList = new ArrayList<>();
+        for(int i=0;i<data.size();i++){
+            categoryList.add(data.get(i).getCategory_name());
+            if(data.get(i).getCategory_name().equals(category)){
+                defaultIndex = i;
+            }
+        }
+        spinnerAdapter=new ArrayAdapter<>(this,R.layout.item_spinner,R.id.spinner_item, categoryList);
+        spinnerAdapter.setDropDownViewResource(R.layout.item_spinner);
+        tv_bookCategory.setAdapter(spinnerAdapter);
+        tv_bookCategory.setSelection(defaultIndex);
     }
 }

@@ -16,6 +16,7 @@ import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
 import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
 import com.ljy.librarymanager.mvp.view.ManagerCategoryView;
@@ -73,7 +74,7 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
                 deleteDialog.setOnConfirmListener(new DeleteDialog.OnConfirmListener() {
                     @Override
                     public void onConfirmListener() {
-                        showProgress();
+                        pg.show();
                         Category category = new Category();
                         category.setObjectId(mData.get(position).getObjectId());
                         category.setCategory_name(mData.get(position).getCategory_name());
@@ -95,7 +96,6 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
 
     @Override
     protected void initData() {
-        mPresenter.getList();
         mList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mList.setAdapter(mAdapter);
     }
@@ -103,24 +103,30 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
     @Override
     public void setList(List<Category> data) {
         mData = data;
+        if(data.size()==0){
+            ManagerActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            ManagerActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 
     @Override
     public void deleteSuccess() {
-        hideProgress();
+        pg.dismiss();
         mPresenter.getList();
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showProgress() {
-        pg.show();
+        ManagerActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-        pg.dismiss();
+        ManagerActivity.instance.hideProgress();
     }
 
     @Override
