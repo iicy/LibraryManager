@@ -25,6 +25,7 @@ public class CategoryListPresenter extends BasePresenter<CategoryListView, List<
     }
 
     public void getList() {
+        mView.showProgress();
         categoryListModel.getList(this);
     }
 

@@ -1,6 +1,7 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Books;
+import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookInfoPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookPresenter;
 
@@ -36,5 +37,18 @@ public class ManagerBookInfoModel {
         });
     }
 
-
+    public void getCategoryList(final ManagerBookInfoPresenter managerBookInfoPresenter) {
+        BmobQuery<Category> bmobQuery = new BmobQuery<Category>();
+        bmobQuery.order("-category_name");
+        bmobQuery.findObjects(new FindListener<Category>() {
+            @Override
+            public void done(List<Category> list, BmobException e) {
+                if (e == null) {
+                    managerBookInfoPresenter.getCategorySuccess(list);
+                } else {
+                    managerBookInfoPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
+    }
 }

@@ -18,6 +18,7 @@ import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookingPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.view.ManagerAnnouncementView;
 import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.widget.DeleteDialog;
@@ -73,7 +74,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
                 deleteDialog.setOnConfirmListener(new DeleteDialog.OnConfirmListener() {
                     @Override
                     public void onConfirmListener() {
-                        showProgress();
+                        pg.show();
                         Booking booking = new Booking();
                         booking.setObjectId(mData.get(position).getObjectId());
                         mPresenter.delete(booking);
@@ -92,7 +93,6 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
 
     @Override
     protected void initData() {
-        mPresenter.getList();
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(mAdapter);
     }
@@ -100,12 +100,18 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     @Override
     public void setList(List<Booking> data) {
         mData = data;
+        if(data.size()==0){
+            ManagerActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            ManagerActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 
     @Override
     public void deleteSuccess() {
-        hideProgress();
+        pg.dismiss();
         mPresenter.getList();
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
     }
@@ -122,12 +128,12 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
 
     @Override
     public void showProgress() {
-        pg.show();
+        ManagerActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-        pg.dismiss();
+        ManagerActivity.instance.hideProgress();
     }
 
     @Override

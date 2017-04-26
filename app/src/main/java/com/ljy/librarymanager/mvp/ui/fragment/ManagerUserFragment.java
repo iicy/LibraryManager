@@ -2,6 +2,8 @@ package com.ljy.librarymanager.mvp.ui.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,10 @@ import com.ljy.librarymanager.adapter.UserListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.ManagerUserPresenter;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerBookInfoActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerUserInfoActivity;
 import com.ljy.librarymanager.mvp.view.ManagerCategoryView;
 import com.ljy.librarymanager.mvp.view.ManagerUserView;
 import com.ljy.librarymanager.widget.DeleteDialog;
@@ -68,7 +74,7 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
                 deleteDialog.setOnConfirmListener(new DeleteDialog.OnConfirmListener() {
                     @Override
                     public void onConfirmListener() {
-                        showProgress();
+                        pg.show();
                         User user = new User();
                         user.setObjectId(mData.get(position).getObjectId());
                         mPresenter.delete(user);
@@ -77,11 +83,20 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
                 deleteDialog.show();
             }
         });
+        mAdapter.setOnItemClickListener(new UserListAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), ManagerUserInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user",mData.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     protected void initData() {
-        mPresenter.getList();
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(mAdapter);
     }
@@ -89,24 +104,30 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
     @Override
     public void setList(List<User> data) {
         mData = data;
+        if(data.size()==0){
+            ManagerActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            ManagerActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 
     @Override
     public void deleteSuccess() {
-        hideProgress();
+        pg.dismiss();
         mPresenter.getList();
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showProgress() {
-        pg.show();
+        ManagerActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-        pg.dismiss();
+        ManagerActivity.instance.hideProgress();
     }
 
     @Override

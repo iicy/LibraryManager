@@ -26,6 +26,7 @@ public class BorrowListPresenter extends BasePresenter<BorrowListView, List<Borr
     }
 
     public void getList(String account) {
+        mView.showProgress();
         borrowListModel.getList(this,account);
     }
 

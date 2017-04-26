@@ -26,6 +26,7 @@ public class BookingListPresenter extends BasePresenter<BookingListView, List<Bo
     }
 
     public void getList(String account) {
+        mView.showProgress();
         bookingListModel.getList(this,account);
     }
 

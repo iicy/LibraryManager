@@ -80,7 +80,7 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
                 deleteDialog.setOnConfirmListener(new DeleteDialog.OnConfirmListener() {
                     @Override
                     public void onConfirmListener() {
-                        showProgress();
+                        pg.show();
                         Announcement announcement = new Announcement();
                         announcement.setObjectId(mData.get(position).getObjectId());
                         mPresenter.delete(announcement);
@@ -105,7 +105,6 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
 
     @Override
     protected void initData() {
-        mPresenter.getList();
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(mAdapter);
     }
@@ -113,24 +112,30 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
     @Override
     public void setList(List<Announcement> list) {
         mData = list;
+        if(list.size()==0){
+            ManagerActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            ManagerActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 
     @Override
     public void deleteSuccess() {
-        hideProgress();
+        pg.dismiss();
         mPresenter.getList();
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showProgress() {
-        pg.show();
+        ManagerActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-        pg.dismiss();
+        ManagerActivity.instance.hideProgress();
     }
 
     @Override

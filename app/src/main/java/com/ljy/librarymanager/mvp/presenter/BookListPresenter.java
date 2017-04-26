@@ -25,6 +25,7 @@ public class BookListPresenter extends BasePresenter<BookListView, List<Books>> 
     }
 
     public void getList(String category) {
+        mView.showProgress();
         bookListModel.getList(this,category);
     }
 

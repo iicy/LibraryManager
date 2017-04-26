@@ -25,6 +25,7 @@ public class ManagerAnnouncementPresenter extends BasePresenter<ManagerAnnouncem
     }
 
     public void getList() {
+        mView.showProgress();
         managerAnnouncementModel.getList(this);
     }
 

@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
@@ -22,6 +23,7 @@ import com.ljy.librarymanager.mvp.ui.fragment.BorrowListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CategoryListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CollectionListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.HomeListFragment;
+import com.ljy.librarymanager.mvp.ui.fragment.LoadingFragment;
 import com.ljy.librarymanager.mvp.view.MainView;
 
 import javax.inject.Inject;
@@ -38,6 +40,8 @@ public class MainActivity extends BaseActivity implements MainView {
     DrawerLayout main_drawer;
     @BindView(R.id.main_toolbar)
     Toolbar main_toolbar;
+    @BindView(R.id.loading)
+    FrameLayout loading;
     @BindView(R.id.main_navigation)
     NavigationView main_navigation;
 
@@ -49,6 +53,8 @@ public class MainActivity extends BaseActivity implements MainView {
     private String permission;
     private String username;
     public static MainActivity instance;
+    private LoadingFragment loadingFragment;
+    private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
 
     @Inject
     HomeListFragment homeListFragment;
@@ -66,6 +72,7 @@ public class MainActivity extends BaseActivity implements MainView {
         setContentView(R.layout.activity_main);
         //注入对象
         mActivityComponent.inject(this);
+        loadingFragment = new LoadingFragment();
     }
 
     @Override
@@ -158,12 +165,22 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void showProgress() {
-
+        ft = getSupportFragmentManager().beginTransaction();
+        if(getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT)==null){
+            ft.add(R.id.loading, loadingFragment, TAG_LOADING_FRAGMENT);
+        }
+        ft.show(loadingFragment);
+        loading.setVisibility(View.VISIBLE);
+        ft.commit();
     }
 
     @Override
     public void hideProgress() {
-
+        ft = getSupportFragmentManager().beginTransaction();
+        loadingFragment =(LoadingFragment) getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
+        ft.hide(loadingFragment);
+        loading.setVisibility(View.GONE);
+        ft.commit();
     }
 
     @Override
@@ -186,5 +203,13 @@ public class MainActivity extends BaseActivity implements MainView {
 
     public String getAccount(){
         return account;
+    }
+
+    public void hasData(boolean b){
+        if(b){
+            loadingFragment.setText("正在加载...");
+        }else{
+            loadingFragment.setText("暂无数据");
+        }
     }
 }

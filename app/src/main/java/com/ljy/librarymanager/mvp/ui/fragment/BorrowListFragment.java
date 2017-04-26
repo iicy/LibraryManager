@@ -68,7 +68,6 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
 
     @Override
     protected void initData() {
-        mPresenter.getList(MainActivity.instance.getAccount());
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.setAdapter(mAdapter);
     }
@@ -76,6 +75,12 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
     @Override
     public void setList(List<Borrow> data) {
         mData = data;
+        if(data.size()==0){
+            MainActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            MainActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 
@@ -91,12 +96,12 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
 
     @Override
     public void showProgress() {
-
+        MainActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-
+        MainActivity.instance.hideProgress();
     }
 
     @Override

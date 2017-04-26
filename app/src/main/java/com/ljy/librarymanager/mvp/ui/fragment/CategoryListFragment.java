@@ -69,7 +69,6 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
 
     @Override
     protected void initData() {
-        mPresenter.getList();
         mList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mList.setAdapter(mAdapter);
     }
@@ -77,17 +76,23 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
     @Override
     public void setList(List<Category> data) {
         mData = data;
+        if(data.size()==0){
+            MainActivity.instance.hasData(false);
+            showProgress();
+        }else {
+            MainActivity.instance.hasData(true);
+        }
         mAdapter.setNewData(mData);
     }
 
     @Override
     public void showProgress() {
-
+        MainActivity.instance.showProgress();
     }
 
     @Override
     public void hideProgress() {
-
+        MainActivity.instance.hideProgress();
     }
 
     @Override

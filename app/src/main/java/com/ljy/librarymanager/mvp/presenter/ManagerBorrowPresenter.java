@@ -27,6 +27,7 @@ public class ManagerBorrowPresenter extends BasePresenter<ManagerBorrowView, Lis
     }
 
     public void getList() {
+        mView.showProgress();
         managerBorrowModel.getList(this);
     }
 
