@@ -2,4 +2,42 @@
     <string name="app_name">LibraryManager</string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+
+    <string name="user">用户</string>
+    <string name="username">用户名</string>
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="manager">管理员</string>
+    <string name="permission">权限</string>
+    <string name="normal_user">普通用户</string>
+    <string name="account_hint">请输入账号</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="old_password_hint">请输入旧密码</string>
+    <string name="new_password_hint">请输入新密码</string>
+    <string name="confirm_new_password_hint">请再次输入新密码</string>
+    <string name="checkcode_hint">请输入验证码</string>
+    <string name="loading">正在加载...</string>
+    <!-- button -->
+    <string name="save">保存</string>
+    <string name="reset">还原</string>
+    <string name="is_return">已还</string>
+    <string name="is_not_return">未还</string>
+    <string name="booking">预订</string>
+    <string name="cancel_booking">取消预订</string>
+    <string name="collect">收藏</string>
+    <string name="cancel_collect">取消收藏</string>
+    <string name="send_comment">发表评论</string>
+    <string name="login">登录</string>
+    <string name="send">发送</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <!-- book -->
+    <string name="bookId">图书编号</string>
+    <string name="bookName">书名</string>
+    <string name="author">作者</string>
+    <string name="category">分类</string>
+    <string name="publication">出版社</string>
+    <string name="publication_date">出版日期</string>
+    <string name="stock">库存</string>
+    <string name="summary">简介</string>
 </resources>

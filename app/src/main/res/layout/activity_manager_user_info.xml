@@ -9,7 +9,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"
         android:titleTextColor="@android:color/white"
         app:titleTextAppearance="@style/Toolbar.TitleText" />
@@ -27,66 +27,65 @@
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/small_padding"
                 android:gravity="start"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="用户名："
-                android:textSize="20dp" />
+                android:paddingLeft="@dimen/small_padding"
+                android:paddingRight="@dimen/small_padding"
+                android:text="@string/username"
+                android:textSize="@dimen/normal_text_size" />
 
             <TextView
                 android:id="@+id/user_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/small_padding"
                 android:gravity="start"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="账号："
-                android:textSize="20dp" />
+                android:paddingLeft="@dimen/small_padding"
+                android:paddingRight="@dimen/small_padding"
+                android:text="@string/account"
+                android:textSize="@dimen/normal_text_size" />
 
             <TextView
                 android:id="@+id/user_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/small_padding"
                 android:gravity="start"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="密码："
-                android:textSize="20dp" />
+                android:paddingLeft="@dimen/small_padding"
+                android:paddingRight="@dimen/small_padding"
+                android:text="@string/password"
+                android:textSize="@dimen/normal_text_size" />
 
             <TextView
                 android:id="@+id/user_permission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/small_padding"
                 android:gravity="start"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="权限："
-                android:textSize="20dp" />
+                android:paddingLeft="@dimen/small_padding"
+                android:paddingRight="@dimen/small_padding"
+                android:text="@string/permission"
+                android:textSize="@dimen/normal_text_size" />
 
             <TextView
                 android:id="@+id/user_created_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/small_padding"
                 android:gravity="start"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="创建日期："
-                android:textSize="20dp" />
+                android:paddingLeft="@dimen/small_padding"
+                android:paddingRight="@dimen/small_padding"
+                android:textSize="@dimen/normal_text_size" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

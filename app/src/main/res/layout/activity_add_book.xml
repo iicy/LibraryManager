@@ -9,7 +9,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/add_book_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"
         android:titleTextColor="@android:color/white"
         app:titleTextAppearance="@style/Toolbar.TitleText" />
@@ -33,51 +33,51 @@
                 android:id="@+id/book_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/normal_margin"
                 android:background="@drawable/bg_edit"
                 android:gravity="start"
-                android:hint="书名"
-                android:padding="5dp"
-                android:textSize="20dp" />
+                android:hint="@string/bookName"
+                android:padding="@dimen/small_padding"
+                android:textSize="@dimen/normal_text_size" />
 
             <EditText
                 android:id="@+id/book_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/normal_margin"
                 android:background="@drawable/bg_edit"
                 android:gravity="start"
-                android:hint="作者"
-                android:padding="5dp"
-                android:textSize="20dp" />
+                android:hint="@string/author"
+                android:padding="@dimen/small_padding"
+                android:textSize="@dimen/normal_text_size" />
 
             <Spinner
                 android:id="@+id/book_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/normal_margin"
                 android:background="@drawable/bg_edit"
                 android:gravity="start"
-                android:textSize="20dp" />
+                android:textSize="@dimen/normal_text_size" />
 
             <EditText
                 android:id="@+id/book_publication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/normal_margin"
                 android:background="@drawable/bg_edit"
                 android:gravity="start"
-                android:hint="出版社"
-                android:padding="5dp"
-                android:textSize="20dp" />
+                android:hint="@string/publication"
+                android:padding="@dimen/small_padding"
+                android:textSize="@dimen/normal_text_size" />
 
             <EditText
                 android:id="@+id/book_publication_date"
@@ -96,37 +96,37 @@
                 android:id="@+id/book_stock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/normal_margin"
                 android:background="@drawable/bg_edit"
                 android:gravity="start"
-                android:hint="库存"
+                android:hint="@string/stock"
                 android:inputType="number"
-                android:padding="5dp"
-                android:textSize="20dp" />
+                android:padding="@dimen/small_padding"
+                android:textSize="@dimen/normal_text_size" />
 
             <EditText
                 android:id="@+id/book_summary"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="@dimen/normal_edit_text_height"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/normal_margin"
                 android:background="@drawable/bg_edit"
                 android:gravity="start"
-                android:hint="简介"
-                android:padding="5dp"
-                android:textSize="20dp" />
+                android:hint="@string/summary"
+                android:padding="@dimen/small_padding"
+                android:textSize="@dimen/normal_text_size" />
 
             <Button
                 android:id="@+id/bt_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/normal_margin"
                 android:backgroundTint="@color/colorPrimary"
                 android:gravity="center"
-                android:text="保存"
+                android:text="@string/save"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>

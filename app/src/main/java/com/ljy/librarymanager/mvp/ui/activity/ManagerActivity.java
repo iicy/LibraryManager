@@ -11,10 +11,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
@@ -44,6 +46,9 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
     FrameLayout loading;
     @BindView(R.id.manager_navigation)
     NavigationView manager_navigation;
+
+    private TextView tv_username;
+    private TextView tv_account;
 
     private FragmentTransaction ft;
     private ActionBarDrawerToggle drawerToggle;
@@ -91,6 +96,12 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
         password = intent.getStringExtra("password");
         permission = intent.getStringExtra("permission");
         username = intent.getStringExtra("username");
+
+        View view = manager_navigation.getHeaderView(0);
+        tv_username= (TextView) view.findViewById(R.id.username);
+        tv_account= (TextView) view.findViewById(R.id.account);
+        tv_username.setText(username);
+        tv_account.setText(account);
     }
 
     @Override
@@ -121,6 +132,7 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
                         if(fragment instanceof ManagerBorrowFragment){
                             Intent intent = new Intent(ManagerActivity.this,AddBorrowActivity.class);
                             intent.putExtra("manager",account);
+                            intent.putExtra("passowrd",password);
                             startActivity(intent);
                         }
                         break;

@@ -15,46 +15,46 @@
         android:id="@+id/login_accounts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="@dimen/small_padding"
+        android:layout_marginRight="@dimen/small_padding"
         android:background="@android:color/white"
-        android:hint="请输入账号"
+        android:hint="@string/account_hint"
         android:inputType="number"
         android:maxLines="1"
-        android:padding="5dp" />
+        android:padding="@dimen/small_padding" />
 
     <EditText
         android:id="@+id/login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_accounts"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="@dimen/small_padding"
+        android:layout_marginRight="@dimen/small_padding"
+        android:layout_marginTop="@dimen/big_margin"
         android:background="@android:color/white"
-        android:hint="请输入密码"
+        android:hint="@string/password_hint"
         android:inputType="textPassword"
         android:maxLines="1"
-        android:padding="5dp" />
+        android:padding="@dimen/small_padding" />
 
     <EditText
         android:id="@+id/login_checkcode_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_password"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="@dimen/small_padding"
+        android:layout_marginTop="@dimen/big_margin"
         android:background="@android:color/white"
-        android:hint="请输入验证码"
-        android:padding="5dp" />
+        android:hint="@string/checkcode_hint"
+        android:padding="@dimen/small_padding" />
 
     <ImageView
         android:id="@+id/login_checkcode_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_password"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="@dimen/large_margin"
+        android:layout_marginTop="@dimen/big_margin"
         android:layout_toRightOf="@id/login_checkcode_edittext" />
 
     <Button
@@ -64,8 +64,8 @@
         android:layout_below="@id/login_checkcode_edittext"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/white"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/normal_margin"
         android:gravity="center"
-        android:text="登录" />
+        android:text="@string/login" />
 
 </RelativeLayout>

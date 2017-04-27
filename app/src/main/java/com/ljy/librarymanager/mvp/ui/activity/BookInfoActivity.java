@@ -2,6 +2,7 @@ package com.ljy.librarymanager.mvp.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -60,6 +61,8 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
     Button bt_undo_booking;
     @BindView(R.id.bt_undo_collect)
     Button bt_undo_collect;
+    @BindView(R.id.bt_send_comment)
+    Button bt_send_comment;
     private ProgressDialog pg;
 
     private Books book;
@@ -106,9 +109,8 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
             bt_collect.setVisibility(View.GONE);
             bt_undo_booking.setVisibility(View.GONE);
             bt_undo_collect.setVisibility(View.GONE);
+            bt_send_comment.setVisibility(View.GONE);
         }
-//        mPresenter.hasBooking(account, book.getObjectId());
-//        mPresenter.hasCollect(account, book.getObjectId());
     }
 
     @Override
@@ -123,6 +125,7 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         bt_collect.setOnClickListener(this);
         bt_undo_booking.setOnClickListener(this);
         bt_undo_collect.setOnClickListener(this);
+        bt_send_comment.setOnClickListener(this);
     }
 
     @Override
@@ -173,6 +176,12 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
                     mPresenter.cancelCollect(collection);
                 }
                 break;
+            }
+            case R.id.bt_send_comment:{
+                Intent intent = new Intent(BookInfoActivity.this,SendCommentActivity.class);
+                intent.putExtra("account",account);
+                intent.putExtra("bookId",book.getObjectId());
+                startActivity(intent);
             }
         }
     }

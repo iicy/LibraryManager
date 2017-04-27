@@ -9,7 +9,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/book_list_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"
         android:titleTextColor="@android:color/white"
         app:titleTextAppearance="@style/Toolbar.TitleText" />

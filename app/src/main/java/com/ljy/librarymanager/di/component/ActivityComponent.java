@@ -21,7 +21,9 @@ import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBookInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBorrowInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerUserInfoActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ModifyPasswordActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
+import com.ljy.librarymanager.mvp.ui.activity.SendCommentActivity;
 import com.ljy.librarymanager.mvp.view.SearchBarView;
 
 import dagger.Component;
@@ -73,4 +75,8 @@ public interface ActivityComponent {
     void inject(ManagerBorrowInfoActivity managerBorrowInfoActivity);
 
     void inject(ManagerUserInfoActivity managerUserInfoActivity);
+
+    void inject(SendCommentActivity sendCommentActivity);
+
+    void inject(ModifyPasswordActivity modifyPasswordActivity);
 }
