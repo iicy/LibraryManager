@@ -2,13 +2,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:padding="5dp"
+    android:padding="@dimen/small_padding"
     android:orientation="horizontal">
 
     <ImageButton
         android:id="@+id/back"
         android:layout_gravity="start|center_vertical"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/normal_margin"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:background="@drawable/ic_arrow_back"/>
@@ -18,23 +18,23 @@
         android:layout_height="30dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="@dimen/small_padding"
+        android:layout_marginBottom="@dimen/small_padding"
         android:background="@drawable/bg_search"
         android:orientation="horizontal">
 
         <Button
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/large_margin"
+            android:layout_height="@dimen/large_margin"
             android:layout_gravity="right|center_vertical"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/normal_margin"
             android:background="@drawable/ic_search_black" />
         <!-- 输入的搜索信息 -->
         <EditText
             android:id="@+id/search_view_edit_text"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/small_padding"
             android:layout_weight="4"
             android:background="@null"
             android:gravity="center_vertical"

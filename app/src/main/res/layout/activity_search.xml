@@ -8,29 +8,29 @@
     android:orientation="vertical">
 
 
-        <com.ljy.librarymanager.widget.SearchView
-            android:id="@+id/search_search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <com.ljy.librarymanager.widget.SearchView
+        android:id="@+id/search_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="@dimen/small_padding">
 
         <TextView
             android:id="@+id/history_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="@dimen/small_padding"
             android:text="历史记录" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="@dimen/small_padding"
             android:background="@android:color/darker_gray" />
 
         <com.ljy.librarymanager.widget.LoadMoreRecyclerView
@@ -39,11 +39,11 @@
             android:layout_height="wrap_content"></com.ljy.librarymanager.widget.LoadMoreRecyclerView>
 
         <Button
-            android:layout_marginTop="5dp"
             android:id="@+id/clear_cache"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/small_padding"
             android:backgroundTint="@color/colorPrimary"
             android:gravity="center"
             android:text="清除记录"

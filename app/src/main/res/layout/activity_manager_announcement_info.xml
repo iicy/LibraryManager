@@ -9,7 +9,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/manager_announcement_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"
         android:titleTextColor="@android:color/white"
         app:titleTextAppearance="@style/Toolbar.TitleText" />
@@ -25,30 +25,30 @@
                 android:gravity="start"
                 android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_margin="10dp"
+                android:layout_height="@dimen/big_edit_text_height"
+                android:layout_margin="@dimen/normal_margin"
                 android:background="@drawable/bg_edit"
-                android:padding="5dp" />
+                android:padding="@dimen/small_padding" />
 
             <Button
                 android:id="@+id/bt_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="@dimen/normal_margin"
                 android:backgroundTint="@color/colorPrimary"
                 android:gravity="center"
-                android:text="保存"
+                android:text="@string/save"
                 android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/bt_reset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginLeft="@dimen/normal_margin"
                 android:backgroundTint="@color/colorPrimary"
                 android:gravity="center"
-                android:text="还原"
+                android:text="@string/reset"
                 android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>

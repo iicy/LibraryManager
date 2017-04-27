@@ -9,29 +9,39 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/add_announcement_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"
         android:titleTextColor="@android:color/white"
         app:titleTextAppearance="@style/Toolbar.TitleText" />
 
-    <EditText
-        android:gravity="start"
-        android:id="@+id/content"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_edit"
-        android:padding="5dp" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:gravity="center"
-        android:text="保存"
-        android:textColor="@color/white" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/big_edit_text_height"
+                android:layout_margin="@dimen/normal_margin"
+                android:background="@drawable/bg_edit"
+                android:gravity="start"
+                android:padding="@dimen/small_padding" />
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/normal_margin"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/save"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 

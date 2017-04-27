@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="@dimen/normal_margin"
     app:cardElevation="1dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
@@ -11,14 +11,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp">
+        android:padding="@dimen/small_padding">
 
         <ImageView
             android:id="@+id/item_collection_icon"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="@dimen/pic_width"
+            android:layout_height="@dimen/pic_height"
+            android:layout_marginLeft="@dimen/normal_margin"
+            android:layout_marginRight="@dimen/large_margin"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
@@ -33,17 +33,15 @@
                 android:id="@+id/item_collection_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="book_name"
-                android:textSize="20dp" />
+                android:layout_marginTop="@dimen/small_padding"
+                android:textSize="@dimen/normal_text_size" />
 
 
             <TextView
                 android:id="@+id/item_collection_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="2017/04/07 14:00" />
+                android:layout_marginTop="@dimen/small_padding" />
         </LinearLayout>
 
     </RelativeLayout>

@@ -10,11 +10,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
@@ -44,6 +47,9 @@ public class MainActivity extends BaseActivity implements MainView {
     FrameLayout loading;
     @BindView(R.id.main_navigation)
     NavigationView main_navigation;
+
+    private TextView tv_username;
+    private TextView tv_account;
 
     private FragmentTransaction ft;
     private ActionBarDrawerToggle drawerToggle;
@@ -91,6 +97,12 @@ public class MainActivity extends BaseActivity implements MainView {
         password = intent.getStringExtra("password");
         permission = intent.getStringExtra("permission");
         username = intent.getStringExtra("username");
+
+        View view = main_navigation.getHeaderView(0);
+        tv_username= (TextView) view.findViewById(R.id.username);
+        tv_account= (TextView) view.findViewById(R.id.account);
+        tv_username.setText(username);
+        tv_account.setText(account);
     }
 
     @Override
@@ -138,6 +150,8 @@ public class MainActivity extends BaseActivity implements MainView {
                     }
                     case R.id.nav_settings:{
                         Intent i = new Intent(MainActivity.this,PreferenceActivity.class);
+                        i.putExtra("account",account);
+                        i.putExtra("password",password);
                         startActivity(i);
                         break;
                     }

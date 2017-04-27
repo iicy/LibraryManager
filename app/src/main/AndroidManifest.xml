@@ -48,6 +48,8 @@
         <activity android:name=".mvp.ui.activity.ManagerAnnouncementInfoActivity"/>
         <activity android:name=".mvp.ui.activity.ManagerBorrowInfoActivity"/>
         <activity android:name=".mvp.ui.activity.ManagerUserInfoActivity"/>
+        <activity android:name=".mvp.ui.activity.SendCommentActivity"/>
+        <activity android:name=".mvp.ui.activity.ModifyPasswordActivity"/>
     </application>
 
 </manifest>

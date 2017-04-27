@@ -7,7 +7,7 @@
 
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/add_category_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"
@@ -15,23 +15,22 @@
         app:titleTextAppearance="@style/Toolbar.TitleText" />
 
     <EditText
+        android:gravity="start"
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/big_edit_text_height"
         android:layout_margin="@dimen/normal_margin"
         android:background="@drawable/bg_edit"
-        android:gravity="start"
-        android:maxLines="1"
         android:padding="@dimen/small_padding" />
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/normal_margin"
         android:backgroundTint="@color/colorPrimary"
         android:gravity="center"
-        android:text="@string/save"
+        android:text="@string/send"
         android:textColor="@color/white" />
 
 </LinearLayout>

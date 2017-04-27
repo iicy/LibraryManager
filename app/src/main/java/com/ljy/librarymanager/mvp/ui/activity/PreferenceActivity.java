@@ -14,12 +14,19 @@ import com.ljy.librarymanager.widget.DeleteDialog;
 
 public class PreferenceActivity extends android.preference.PreferenceActivity {
 
+    private Preference modify_password;
     private Preference logout;
+
+    private String account;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+
+        account = getIntent().getStringExtra("account");
+        password = getIntent().getStringExtra("password");
 
         logout = findPreference("logout");
         logout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -39,7 +46,19 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
                         finish();
                     }
                 });
-                return false;
+                return true;
+            }
+        });
+
+        modify_password = findPreference("modify_password");
+        modify_password.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(PreferenceActivity.this,ModifyPasswordActivity.class);
+                intent.putExtra("account",account);
+                intent.putExtra("password",password);
+                startActivity(intent);
+                return true;
             }
         });
     }

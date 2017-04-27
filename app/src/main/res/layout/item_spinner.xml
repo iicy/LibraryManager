@@ -8,9 +8,8 @@
         android:id="@+id/spinner_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test"
-        android:padding="5dp"
+        android:padding="@dimen/small_padding"
         android:textColor="@android:color/black"
-        android:textSize="20dp" />
+        android:textSize="@dimen/normal_text_size" />
 
 </LinearLayout>
