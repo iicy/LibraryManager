@@ -25,6 +25,7 @@ public class HomeListModel {
 
     public void getList(final HomeListPresenter homeListPresenter) {
         BmobQuery<Announcement> bmobQuery = new BmobQuery<Announcement>();
+        bmobQuery.order("-updatedAt");
         bmobQuery.findObjects(new FindListener<Announcement>() {
             @Override
             public void done(List<Announcement> list, BmobException e) {

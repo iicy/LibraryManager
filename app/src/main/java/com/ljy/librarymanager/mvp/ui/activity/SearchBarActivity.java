@@ -20,6 +20,7 @@ import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.AnnouncementListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Announcement;
+import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.presenter.SearchBarPresenter;
 import com.ljy.librarymanager.mvp.view.SearchBarView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
@@ -51,6 +52,7 @@ public class SearchBarActivity extends BaseActivity implements SearchBarView {
     private List<Announcement> searchAnnoucementData;
     private AnnouncementListAdapter announcementListAdapter;
     private ProgressDialog pg;
+    private List mData;
 
     @Inject
     SearchBarPresenter searchBarPresenter;
@@ -66,6 +68,7 @@ public class SearchBarActivity extends BaseActivity implements SearchBarView {
         pg.setMessage("正在搜素！");
         pg.setCancelable(false);
         announcementListAdapter = new AnnouncementListAdapter(this, searchAnnoucementData);
+        mData = (List) getIntent().getSerializableExtra("list");
     }
 
     @Override

@@ -27,7 +27,7 @@ public class BorrowListModel {
     public void getList(final BorrowListPresenter borrowListPresenter,String account) {
         BmobQuery<Borrow> bmobQuery = new BmobQuery<Borrow>();
         bmobQuery.addWhereEqualTo("user",account);
-        bmobQuery.order("-createdAt");
+        bmobQuery.order("-createdAt").order("status");
 //        bmobQuery.setLimit(10);
         bmobQuery.findObjects(new FindListener<Borrow>() {
             @Override

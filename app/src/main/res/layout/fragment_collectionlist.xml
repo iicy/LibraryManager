@@ -5,11 +5,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <com.ljy.librarymanager.widget.LoadMoreRecyclerView
-        android:id="@+id/list"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.ljy.librarymanager.widget.LoadMoreRecyclerView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <FrameLayout
+                android:id="@+id/loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></FrameLayout>
+            <com.ljy.librarymanager.widget.LoadMoreRecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></com.ljy.librarymanager.widget.LoadMoreRecyclerView>
+        </LinearLayout>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

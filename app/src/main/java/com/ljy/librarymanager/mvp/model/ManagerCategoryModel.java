@@ -6,6 +6,7 @@ import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerUserPresenter;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,12 +28,11 @@ public class ManagerCategoryModel {
 
     public void getList(final ManagerCategoryPresenter managerCategoryPresenter) {
         BmobQuery<Category> bmobQuery = new BmobQuery<Category>();
-        bmobQuery.order("-category_name");
-//        bmobQuery.setLimit(10);
         bmobQuery.findObjects(new FindListener<Category>() {
             @Override
             public void done(List<Category> list, BmobException e) {
                 if (e == null) {
+                    Collections.sort(list);
                     managerCategoryPresenter.success(list);
                 } else {
                     managerCategoryPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());

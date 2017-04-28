@@ -1,12 +1,17 @@
 package com.ljy.librarymanager.mvp.ui.fragment;
 
+import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
+import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 
 import javax.inject.Inject;
 
@@ -29,7 +34,6 @@ public class LoadingFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-
     }
 
     @Override
@@ -37,7 +41,8 @@ public class LoadingFragment extends BaseFragment {
 
     }
 
-    public void setText(String s){
+    public void setText(String s) {
         text.setText(s);
     }
+
 }

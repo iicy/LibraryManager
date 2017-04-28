@@ -27,6 +27,7 @@ import com.ljy.librarymanager.mvp.ui.fragment.ManagerBorrowFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerCategoryFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerUserFragment;
 import com.ljy.librarymanager.mvp.view.ManagerView;
+import com.ljy.librarymanager.utils.RxBus;
 
 import javax.inject.Inject;
 
@@ -42,8 +43,6 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
     DrawerLayout manager_drawer;
     @BindView(R.id.manager_toolbar)
     Toolbar manager_toolbar;
-    @BindView(R.id.loading)
-    FrameLayout loading;
     @BindView(R.id.manager_navigation)
     NavigationView manager_navigation;
 
@@ -58,8 +57,6 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
     private String permission;
     private String username;
     public static ManagerActivity instance;
-    private LoadingFragment loadingFragment;
-    private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
 
     @Inject
     ManagerAnnouncementFragment managerAnnouncementFragment;
@@ -77,7 +74,6 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
         setContentView(R.layout.activity_manager);
         //注入对象
         mActivityComponent.inject(this);
-        loadingFragment = new LoadingFragment();
     }
 
     @Override
@@ -111,7 +107,8 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.manager_toolbar_search: {
-                        startActivity(new Intent(ManagerActivity.this,SearchBarActivity.class));
+                        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.manager_fragment);
+                        RxBus.getInstance().post("search",fragment);
                         break;
                     }
                     case R.id.manager_toolbar_add:{
@@ -199,22 +196,10 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
 
     @Override
     public void showProgress() {
-        ft = getSupportFragmentManager().beginTransaction();
-        if(getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT)==null){
-            ft.add(R.id.loading, loadingFragment, TAG_LOADING_FRAGMENT);
-        }
-        ft.show(loadingFragment);
-        loading.setVisibility(View.VISIBLE);
-        ft.commit();
     }
 
     @Override
     public void hideProgress() {
-        ft = getSupportFragmentManager().beginTransaction();
-        loadingFragment =(LoadingFragment) getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
-        ft.hide(loadingFragment);
-        loading.setVisibility(View.GONE);
-        ft.commit();
     }
 
     @Override
@@ -239,11 +224,4 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
         return account;
     }
 
-    public void hasData(boolean b){
-        if(b){
-            loadingFragment.setText("正在加载...");
-        }else{
-            loadingFragment.setText("暂无数据");
-        }
-    }
 }

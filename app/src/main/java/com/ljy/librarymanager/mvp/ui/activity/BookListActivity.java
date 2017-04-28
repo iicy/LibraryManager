@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -42,6 +43,8 @@ public class BookListActivity extends BaseActivity implements BookListView {
 
     @BindView(R.id.book_list_toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.refresh)
+    SwipeRefreshLayout refreshLayout;
     @BindView(R.id.loading)
     FrameLayout loading;
     @BindView(R.id.list)
@@ -99,6 +102,14 @@ public class BookListActivity extends BaseActivity implements BookListView {
                 startActivity(intent);
             }
         });
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadingFragment.setText("正在加载...");
+                mPresenter.getList(category);
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -147,7 +158,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
             loadingFragment.setText("暂无数据");
             showProgress();
         }else{
-            loadingFragment.setText("请稍候...");
+            loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
     }

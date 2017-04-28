@@ -22,12 +22,6 @@
             app:titleTextAppearance="@style/Toolbar.TitleText"/>
 
         <FrameLayout
-            android:id="@+id/loading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"/>
-
-        <FrameLayout
             android:id="@+id/main_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
