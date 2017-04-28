@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
@@ -19,16 +22,24 @@ import com.ljy.librarymanager.mvp.presenter.ManagerBookingPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
+import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.view.ManagerAnnouncementView;
 import com.ljy.librarymanager.mvp.view.ManagerBookingView;
+import com.ljy.librarymanager.utils.RxBus;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by luojiayu on 2017/3/16.
@@ -36,6 +47,10 @@ import butterknife.BindView;
 
 public class ManagerBookingFragment extends BaseFragment implements ManagerBookingView {
 
+    @BindView(R.id.refresh)
+    SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.loading)
+    FrameLayout loading;
     @BindView(R.id.list)
     LoadMoreRecyclerView list;
 
@@ -47,6 +62,10 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     private List<Booking> mData;
     private BookingListAdapter mAdapter;
     private ProgressDialog pg;
+    private FragmentTransaction ft;
+    private LoadingFragment loadingFragment;
+    private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
+    private Observable<ManagerBookingFragment> observable;
 
     @Inject
     public ManagerBookingFragment() {
@@ -61,7 +80,8 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pg.setMessage("正在删除！");
         pg.setCancelable(false);
-        mAdapter = new BookingListAdapter(getActivity(),mData,true);
+        mAdapter = new BookingListAdapter(getActivity(), mData, true);
+        loadingFragment = new LoadingFragment();
         return view;
     }
 
@@ -89,6 +109,14 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
                 mPresenter.getBook(mData.get(position).getBookId());
             }
         });
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadingFragment.setText("正在加载...");
+                mPresenter.getList();
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -100,13 +128,30 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     @Override
     public void setList(List<Booking> data) {
         mData = data;
-        if(data.size()==0){
-            ManagerActivity.instance.hasData(false);
+        if (data.size() == 0) {
+            loadingFragment.setText("暂无数据");
             showProgress();
-        }else {
-            ManagerActivity.instance.hasData(true);
+        } else {
+            loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
+        observable = RxBus.getInstance().register("search", ManagerBookingFragment.class);
+        observable.subscribeOn(Schedulers.io())
+                .map(new Func1<ManagerBookingFragment, List<Booking>>() {
+                    @Override
+                    public List<Booking> call(ManagerBookingFragment managerBookingFragment) {
+                        return mData;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<Booking>>() {
+                    @Override
+                    public void call(List<Booking> mData) {
+                        Intent intent = new Intent(getActivity(), SearchBarActivity.class);
+                        intent.putExtra("list", (Serializable) mData);
+                        startActivity(intent);
+                    }
+                });
     }
 
     @Override
@@ -119,21 +164,31 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     @Override
     public void getBookSuccess(Books book) {
         Intent intent = new Intent(getActivity(), BookInfoActivity.class);
-        intent.putExtra("isManager",true);
+        intent.putExtra("isManager", true);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("book",book);
+        bundle.putSerializable("book", book);
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
     @Override
     public void showProgress() {
-        ManagerActivity.instance.showProgress();
+        ft = getChildFragmentManager().beginTransaction();
+        if (getChildFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT) == null) {
+            ft.add(R.id.loading, loadingFragment, TAG_LOADING_FRAGMENT);
+        }
+        ft.show(loadingFragment);
+        loading.setVisibility(View.VISIBLE);
+        ft.commit();
     }
 
     @Override
     public void hideProgress() {
-        ManagerActivity.instance.hideProgress();
+        ft = getChildFragmentManager().beginTransaction();
+        loadingFragment = (LoadingFragment) getChildFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
+        ft.hide(loadingFragment);
+        loading.setVisibility(View.GONE);
+        ft.commit();
     }
 
     @Override
@@ -145,5 +200,11 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     public void onResume() {
         super.onResume();
         mPresenter.getList();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unregister("search", observable);
     }
 }

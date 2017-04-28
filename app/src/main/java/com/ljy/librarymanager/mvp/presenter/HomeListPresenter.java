@@ -27,6 +27,7 @@ public class HomeListPresenter extends BasePresenter<HomeListView, List<Announce
     }
 
     public void getList() {
+        mView.showProgress();
         homeListModel.getList(this);
     }
 

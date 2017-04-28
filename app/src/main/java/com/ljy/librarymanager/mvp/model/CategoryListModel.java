@@ -1,9 +1,14 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Category;
+import com.ljy.librarymanager.mvp.entity.Collection;
 import com.ljy.librarymanager.mvp.presenter.CategoryListPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
 
+import java.text.Collator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,12 +30,11 @@ public class CategoryListModel {
 
     public void getList(final CategoryListPresenter categoryListPresenter) {
         BmobQuery<Category> bmobQuery = new BmobQuery<Category>();
-        bmobQuery.order("-category_name");
-//        bmobQuery.setLimit(10);
         bmobQuery.findObjects(new FindListener<Category>() {
             @Override
             public void done(List<Category> list, BmobException e) {
                 if (e == null) {
+                    Collections.sort(list);
                     categoryListPresenter.success(list);
                 } else {
                     categoryListPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
@@ -38,6 +42,5 @@ public class CategoryListModel {
             }
         });
     }
-
 
 }

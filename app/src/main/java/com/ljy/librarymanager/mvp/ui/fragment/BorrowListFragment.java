@@ -3,10 +3,13 @@ package com.ljy.librarymanager.mvp.ui.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.BorrowListAdapter;
@@ -32,6 +35,10 @@ import butterknife.BindView;
 
 public class BorrowListFragment extends BaseFragment implements BorrowListView {
 
+    @BindView(R.id.refresh)
+    SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.loading)
+    FrameLayout loading;
     @BindView(R.id.list)
     LoadMoreRecyclerView list;
 
@@ -42,6 +49,9 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
 
     private List<Borrow> mData;
     private BorrowListAdapter mAdapter;
+    private FragmentTransaction ft;
+    private LoadingFragment loadingFragment;
+    private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
 
     @Inject
     public BorrowListFragment() {
@@ -52,7 +62,8 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
         View view = inflater.inflate(R.layout.fragment_borrowlist, container, false);
         mFragmentComponent.inject(this);
         mPresenter.attachView(this);
-        mAdapter = new BorrowListAdapter(getActivity(),mData,false);
+        mAdapter = new BorrowListAdapter(getActivity(), mData, false);
+        loadingFragment = new LoadingFragment();
         return view;
     }
 
@@ -62,6 +73,14 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
             @Override
             public void onItemClick(View view, int position) {
                 mPresenter.getBook(mData.get(position).getBookId());
+            }
+        });
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadingFragment.setText("正在加载...");
+                mPresenter.getList(MainActivity.instance.getAccount());
+                refreshLayout.setRefreshing(false);
             }
         });
     }
@@ -76,10 +95,10 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
     public void setList(List<Borrow> data) {
         mData = data;
         if(data.size()==0){
-            MainActivity.instance.hasData(false);
+            loadingFragment.setText("暂无数据");
             showProgress();
-        }else {
-            MainActivity.instance.hasData(true);
+        }else{
+            loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
     }
@@ -88,20 +107,30 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
     public void getBook(Books book) {
         Intent intent = new Intent(getActivity(), BookInfoActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("book",book);
+        bundle.putSerializable("book", book);
         intent.putExtras(bundle);
-        intent.putExtra("account",MainActivity.instance.getAccount());
+        intent.putExtra("account", MainActivity.instance.getAccount());
         startActivity(intent);
     }
 
     @Override
     public void showProgress() {
-        MainActivity.instance.showProgress();
+        ft = getChildFragmentManager().beginTransaction();
+        if(getChildFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT)==null){
+            ft.add(R.id.loading, loadingFragment, TAG_LOADING_FRAGMENT);
+        }
+        ft.show(loadingFragment);
+        loading.setVisibility(View.VISIBLE);
+        ft.commit();
     }
 
     @Override
     public void hideProgress() {
-        MainActivity.instance.hideProgress();
+        ft = getChildFragmentManager().beginTransaction();
+        loadingFragment =(LoadingFragment) getChildFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
+        ft.hide(loadingFragment);
+        loading.setVisibility(View.GONE);
+        ft.commit();
     }
 
     @Override
@@ -114,4 +143,5 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
         super.onResume();
         mPresenter.getList(MainActivity.instance.getAccount());
     }
+
 }

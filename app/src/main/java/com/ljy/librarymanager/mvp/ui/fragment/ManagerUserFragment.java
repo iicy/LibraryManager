@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
@@ -36,6 +39,10 @@ import butterknife.BindView;
 
 public class ManagerUserFragment extends BaseFragment implements ManagerUserView {
 
+    @BindView(R.id.refresh)
+    SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.loading)
+    FrameLayout loading;
     @BindView(R.id.list)
     LoadMoreRecyclerView list;
 
@@ -47,6 +54,9 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
     private List<User> mData;
     private UserListAdapter mAdapter;
     private ProgressDialog pg;
+    private FragmentTransaction ft;
+    private LoadingFragment loadingFragment;
+    private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
 
     @Inject
     public ManagerUserFragment() {
@@ -62,6 +72,7 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
         pg.setMessage("正在删除！");
         pg.setCancelable(false);
         mAdapter = new UserListAdapter(getActivity(), mData);
+        loadingFragment = new LoadingFragment();
         return view;
     }
 
@@ -93,6 +104,14 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
                 startActivity(intent);
             }
         });
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadingFragment.setText("正在加载...");
+                mPresenter.getList();
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -105,10 +124,10 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
     public void setList(List<User> data) {
         mData = data;
         if(data.size()==0){
-            ManagerActivity.instance.hasData(false);
+            loadingFragment.setText("暂无数据");
             showProgress();
-        }else {
-            ManagerActivity.instance.hasData(true);
+        }else{
+            loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
     }
@@ -122,12 +141,22 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
 
     @Override
     public void showProgress() {
-        ManagerActivity.instance.showProgress();
+        ft = getChildFragmentManager().beginTransaction();
+        if(getChildFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT)==null){
+            ft.add(R.id.loading, loadingFragment, TAG_LOADING_FRAGMENT);
+        }
+        ft.show(loadingFragment);
+        loading.setVisibility(View.VISIBLE);
+        ft.commit();
     }
 
     @Override
     public void hideProgress() {
-        ManagerActivity.instance.hideProgress();
+        ft = getChildFragmentManager().beginTransaction();
+        loadingFragment =(LoadingFragment) getChildFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
+        ft.hide(loadingFragment);
+        loading.setVisibility(View.GONE);
+        ft.commit();
     }
 
     @Override
@@ -140,4 +169,5 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
         super.onResume();
         mPresenter.getList();
     }
+
 }

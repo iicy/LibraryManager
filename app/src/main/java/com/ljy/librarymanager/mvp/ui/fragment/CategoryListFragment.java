@@ -2,10 +2,13 @@ package com.ljy.librarymanager.mvp.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.CategoryListAdapter;
@@ -30,6 +33,10 @@ import butterknife.BindView;
 
 public class CategoryListFragment extends BaseFragment implements CategoryListView {
 
+    @BindView(R.id.refresh)
+    SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.loading)
+    FrameLayout loading;
     @BindView(R.id.list)
     LoadMoreRecyclerView mList;
 
@@ -40,6 +47,9 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
 
     private List<Category> mData;
     private CategoryListAdapter mAdapter;
+    private FragmentTransaction ft;
+    private LoadingFragment loadingFragment;
+    private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
 
     @Inject
     public CategoryListFragment() {
@@ -51,6 +61,7 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
         mFragmentComponent.inject(this);
         mPresenter.attachView(this);
         mAdapter = new CategoryListAdapter(getActivity(),mData);
+        loadingFragment = new LoadingFragment();
         return view;
     }
 
@@ -65,6 +76,14 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
                 startActivity(intent);
             }
         });
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadingFragment.setText("正在加载...");
+                mPresenter.getList();
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -77,22 +96,32 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
     public void setList(List<Category> data) {
         mData = data;
         if(data.size()==0){
-            MainActivity.instance.hasData(false);
+            loadingFragment.setText("暂无数据");
             showProgress();
-        }else {
-            MainActivity.instance.hasData(true);
+        }else{
+            loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
     }
 
     @Override
     public void showProgress() {
-        MainActivity.instance.showProgress();
+        ft = getChildFragmentManager().beginTransaction();
+        if(getChildFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT)==null){
+            ft.add(R.id.loading, loadingFragment, TAG_LOADING_FRAGMENT);
+        }
+        ft.show(loadingFragment);
+        loading.setVisibility(View.VISIBLE);
+        ft.commit();
     }
 
     @Override
     public void hideProgress() {
-        MainActivity.instance.hideProgress();
+        ft = getChildFragmentManager().beginTransaction();
+        loadingFragment =(LoadingFragment) getChildFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
+        ft.hide(loadingFragment);
+        loading.setVisibility(View.GONE);
+        ft.commit();
     }
 
     @Override
@@ -105,4 +134,5 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
         super.onResume();
         mPresenter.getList();
     }
+
 }

@@ -27,9 +27,7 @@ public class ManagerBorrowModel {
 
     public void getList(final ManagerBorrowPresenter managerBorrowPresenter) {
         BmobQuery<Borrow> bmobQuery = new BmobQuery<Borrow>();
-        bmobQuery.order("-createdAt");
-        bmobQuery.order("-updatedAt");
-        bmobQuery.order("status");
+        bmobQuery.order("-updatedAt").order("status");
 //        bmobQuery.setLimit(10);
         bmobQuery.findObjects(new FindListener<Borrow>() {
             @Override
