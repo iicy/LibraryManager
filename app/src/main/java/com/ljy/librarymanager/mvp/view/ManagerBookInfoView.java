@@ -6,6 +6,8 @@ import com.ljy.librarymanager.mvp.entity.Category;
 
 import java.util.List;
 
+import cn.bmob.v3.datatype.BmobFile;
+
 /**
  * Created by luojiayu on 2017/4/6.
  */
@@ -13,6 +15,8 @@ import java.util.List;
 public interface ManagerBookInfoView extends BaseView{
 
     void saveSuccess();
+
+    void uploadPicSuccess(BmobFile pic);
 
     void reset();
 

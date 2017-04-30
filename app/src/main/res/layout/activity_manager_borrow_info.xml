@@ -25,9 +25,11 @@
 
             <ImageView
                 android:id="@+id/pic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/navigation_view_width"
+                android:layout_height="@dimen/big_edit_text_height"
+                android:src="@drawable/ic_image" />
 
             <TextView
                 android:id="@+id/book_name"

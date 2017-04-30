@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Booking;
@@ -97,6 +98,17 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
+        if(book.getPic()!=null){
+            Glide.with(mContext)
+                    .load(book.getPic().getUrl())
+                    .fitCenter()
+                    .placeholder(R.drawable.ic_image)
+                    .thumbnail(0.1f)
+                    .into(pic);
+        }else{
+            Glide.clear(pic);
+            pic.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_image));
+        }
         tv_bookName.setText("书名：" + book.getBookName());
         tv_bookAuthor.setText("作者：" + book.getAuthor());
         tv_bookCategory.setText("分类：" + book.getCategory());
@@ -144,6 +156,9 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
             case R.id.bt_booking: {
                 showProgress();
                 Booking booking = new Booking();
+                if(book.getPic()!=null){
+                    booking.setPic(book.getPic());
+                }
                 booking.setUser(account);
                 booking.setBookName(book.getBookName());
                 booking.setBookId(book.getObjectId());
@@ -153,6 +168,9 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
             case R.id.bt_collect: {
                 showProgress();
                 Collection collection = new Collection();
+                if(book.getPic()!=null){
+                    collection.setPic(book.getPic());
+                }
                 collection.setUser(account);
                 collection.setBookName(book.getBookName());
                 collection.setBookId(book.getObjectId());

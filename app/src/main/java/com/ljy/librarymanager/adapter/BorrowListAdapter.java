@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Borrow;
@@ -63,6 +64,17 @@ public class BorrowListAdapter extends RecyclerView.Adapter<BorrowListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        if(mList.get(position).getPic()!=null){
+            Glide.with(mContext)
+                    .load(mList.get(position).getPic().getUrl())
+                    .fitCenter()
+                    .placeholder(R.drawable.ic_image)
+                    .thumbnail(0.1f)
+                    .into(holder.icon);
+        }else{
+            Glide.clear(holder.icon);
+            holder.icon.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_image));
+        }
         String tag = "";
         if(mList.get(position).getStatus().equals("1"))
             tag = "(已归还)";

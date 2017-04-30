@@ -1,13 +1,19 @@
 package com.ljy.librarymanager;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.ljy.librarymanager.common.Constant;
+import com.ljy.librarymanager.mvp.ui.activity.AddBookActivity;
 import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
@@ -19,6 +25,14 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                //申请WRITE_EXTERNAL_STORAGE权限
+                ActivityCompat.requestPermissions(WelcomeActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        1);
+            }
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

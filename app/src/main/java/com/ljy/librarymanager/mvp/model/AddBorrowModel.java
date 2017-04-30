@@ -11,6 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -46,13 +47,14 @@ public class AddBorrowModel {
             public void done(List<Books> list, BmobException e) {
                 if (e == null && list.size() != 0) {
                     final String bookName = list.get(0).getBookName();
+                    final BmobFile pic = list.get(0).getPic();
                     BmobQuery<User> bmobQuery = new BmobQuery<User>();
                     bmobQuery.addWhereEqualTo("account", borrow.getUser());
                     bmobQuery.findObjects(new FindListener<User>() {
                         @Override
                         public void done(List<User> list, BmobException e) {
                             if (e == null && list.size() != 0) {
-                                addBorrowPresenter.checkSuccess(borrow, bookName);
+                                addBorrowPresenter.checkSuccess(borrow, bookName,pic);
                             } else {
                                 addBorrowPresenter.onError("该用户或图书不存在！");
                             }

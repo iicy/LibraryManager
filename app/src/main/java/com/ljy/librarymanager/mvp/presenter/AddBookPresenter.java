@@ -13,6 +13,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import cn.bmob.v3.datatype.BmobFile;
+
 /**
  * Created by luojiayu on 2017/3/15.
  */
@@ -30,6 +32,10 @@ public class AddBookPresenter extends BasePresenter<AddBookView, String> {
         addBookModel.add(this,book);
     }
 
+    public void uploadPic(BmobFile pic){
+        addBookModel.uploadPic(this,pic);
+    }
+
     public void getCategoryList(){
         addBookModel.getCategoryList(this);
     }
@@ -37,11 +43,15 @@ public class AddBookPresenter extends BasePresenter<AddBookView, String> {
     @Override
     public void success(String s) {
         super.success(s);
-        mView.add();
+        mView.addSuccess();
     }
 
     public void getCategorySuccess(List<Category> list){
         mView.getCategory(list);
+    }
+
+    public void uploadPicSuccess(BmobFile pic){
+        mView.uploadPicSuccess(pic);
     }
 
     @Override

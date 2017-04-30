@@ -1,9 +1,19 @@
 package com.ljy.librarymanager.mvp.ui.activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +24,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Books;
@@ -23,7 +34,9 @@ import com.ljy.librarymanager.mvp.presenter.AddBookPresenter;
 import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.view.AddBookView;
 import com.ljy.librarymanager.mvp.view.AddUserView;
+import com.ljy.librarymanager.utils.FileUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +45,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by luojiayu on 2017/4/11.
@@ -63,6 +77,7 @@ public class AddBookActivity extends BaseActivity implements AddBookView {
     private String category;
     private List<String> categoryList;
     private ArrayAdapter<String> spinnerAdapter;
+    private File sdcardTempFile;
 
     @Inject
     AddBookPresenter mPresenter;
@@ -111,6 +126,14 @@ public class AddBookActivity extends BaseActivity implements AddBookView {
 
             }
         });
+        pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.PICK");
+                intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(intent, 100);
+            }
+        });
     }
 
     @Override
@@ -128,39 +151,55 @@ public class AddBookActivity extends BaseActivity implements AddBookView {
         switch (v.getId()) {
             case R.id.bt_save: {
                 showProgress();
-                Books book = new Books();
-                book.setBookName(ed_bookName.getText().toString());
-                book.setAuthor(ed_bookAuthor.getText().toString());
-                book.setCategory(category);
-                book.setPublication(ed_bookPublication.getText().toString());
-//                book.setPublicationDate(ed_bookPublicationDate.getText().toString());
-                book.setPublicationDate(BmobDate.createBmobDate("yyyy-MM-dd HH:mm:ss",ed_bookPublicationDate.getText().toString()));
-                book.setStock(Integer.parseInt(ed_bookStock.getText().toString()));
-                book.setSummary(ed_bookSummary.getText().toString());
-                mPresenter.add(book);
+                if(sdcardTempFile==null){
+                    Books book = new Books();
+                    add(book);
+                }else{
+                    BmobFile pic = new BmobFile(sdcardTempFile);
+                    mPresenter.uploadPic(pic);
+                }
                 break;
             }
         }
     }
 
     @Override
-    public void add() {
+    public void add(Books book) {
+        book.setBookName(ed_bookName.getText().toString());
+        book.setAuthor(ed_bookAuthor.getText().toString());
+        book.setCategory(category);
+        book.setPublication(ed_bookPublication.getText().toString());
+        book.setPublicationDate(BmobDate.createBmobDate("yyyy-MM-dd HH:mm:ss", ed_bookPublicationDate.getText().toString()));
+        book.setStock(Integer.parseInt(ed_bookStock.getText().toString()));
+        book.setSummary(ed_bookSummary.getText().toString());
+        mPresenter.add(book);
+    }
+
+    @Override
+    public void addSuccess() {
         Toast.makeText(AddBookActivity.this, "保存成功！", Toast.LENGTH_LONG).show();
         finish();
+    }
+
+    @Override
+    public void uploadPicSuccess(BmobFile pic) {
+        Books book = new Books();
+        book.setPic(pic);
+        add(book);
     }
 
     @Override
     public void getCategory(List<Category> data) {
         hideProgress();
         categoryList = new ArrayList<>();
-        int defaultIndex=0;
-        for(int i=0;i<data.size();i++){
+        int defaultIndex = 0;
+        for (int i = 0; i < data.size(); i++) {
             categoryList.add(data.get(i).getCategory_name());
-            if(data.get(i).getCategory_name().equals(category)){
+            if (data.get(i).getCategory_name().equals(category)) {
                 defaultIndex = i;
             }
         }
-        spinnerAdapter=new ArrayAdapter<>(this,R.layout.item_spinner,R.id.spinner_item, categoryList);
+        spinnerAdapter = new ArrayAdapter<>(this, R.layout.item_spinner, R.id.spinner_item, categoryList);
         spinnerAdapter.setDropDownViewResource(R.layout.item_spinner);
         ed_bookCategory.setAdapter(spinnerAdapter);
         ed_bookCategory.setSelection(defaultIndex);
@@ -180,4 +219,22 @@ public class AddBookActivity extends BaseActivity implements AddBookView {
     public void showMsg(String message) {
         Toast.makeText(AddBookActivity.this, "保存失败！", Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 100) {
+            if (data != null) {
+                Uri uri = data.getData();
+                Glide.with(this)
+                        .load(uri)
+                        .fitCenter()
+                        .placeholder(R.drawable.ic_image)
+                        .thumbnail(0.1f)
+                        .into(pic);
+                sdcardTempFile = new File(FileUtil.getPath(uri,this));
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

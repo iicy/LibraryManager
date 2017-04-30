@@ -10,6 +10,8 @@ import com.ljy.librarymanager.mvp.view.AddUserView;
 
 import javax.inject.Inject;
 
+import cn.bmob.v3.datatype.BmobFile;
+
 /**
  * Created by luojiayu on 2017/3/15.
  */
@@ -33,8 +35,9 @@ public class AddBorrowPresenter extends BasePresenter<AddBorrowView, String> {
         mView.add();
     }
 
-    public void checkSuccess(Borrow borrow,String bookName){
+    public void checkSuccess(Borrow borrow, String bookName, BmobFile pic){
         borrow.setBookName(bookName);
+        borrow.setPic(pic);
         addBorrowModel.add(this,borrow);
     }
 

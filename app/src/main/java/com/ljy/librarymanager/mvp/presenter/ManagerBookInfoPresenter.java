@@ -12,6 +12,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import cn.bmob.v3.datatype.BmobFile;
+
 /**
  * Created by luojiayu on 2017/3/15.
  */
@@ -29,6 +31,11 @@ public class ManagerBookInfoPresenter extends BasePresenter<ManagerBookInfoView,
         managerBookInfoModel.save(this,book);
     }
 
+    public void uploadPic(BmobFile pic){
+        managerBookInfoModel.uploadPic(this,pic);
+    }
+
+
     public void getCategoryList(){
         managerBookInfoModel.getCategoryList(this);
     }
@@ -37,6 +44,10 @@ public class ManagerBookInfoPresenter extends BasePresenter<ManagerBookInfoView,
     public void success(String s) {
         super.success(s);
         mView.saveSuccess();
+    }
+
+    public void uploadPicSuccess(BmobFile pic){
+        mView.uploadPicSuccess(pic);
     }
 
     public void getCategorySuccess(List<Category> list){

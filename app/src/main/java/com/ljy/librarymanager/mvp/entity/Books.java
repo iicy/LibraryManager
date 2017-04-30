@@ -4,6 +4,7 @@ import java.util.Date;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by luojiayu on 2017/4/19.
@@ -11,6 +12,7 @@ import cn.bmob.v3.datatype.BmobDate;
 
 public class Books extends BmobObject{
 
+    private BmobFile pic;
     private String bookName;
     private String summary;
     private Integer stock;
@@ -18,6 +20,14 @@ public class Books extends BmobObject{
     private BmobDate publicationDate;
     private String category;
     private String author;
+
+    public BmobFile getPic() {
+        return pic;
+    }
+
+    public void setPic(BmobFile pic) {
+        this.pic = pic;
+    }
 
     public String getBookName() {
         return bookName;

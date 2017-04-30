@@ -19,8 +19,9 @@
             android:layout_height="@dimen/pic_height"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/normal_margin"
-            android:layout_marginRight="@dimen/large_margin"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_marginRight="@dimen/big_margin"
+            android:src="@drawable/ic_image"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +35,6 @@
                 android:id="@+id/item_book_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_padding"
                 android:textSize="@dimen/normal_text_size" />
 
             <TextView

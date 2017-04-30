@@ -12,6 +12,6 @@
     <dimen name="large_margin">20dp</dimen>
     <dimen name="small_padding">5dp</dimen>
     <dimen name="normal_text_size">20dp</dimen>
-    <dimen name="pic_width">50dp</dimen>
-    <dimen name="pic_height">80dp</dimen>
+    <dimen name="pic_width">60dp</dimen>
+    <dimen name="pic_height">100dp</dimen>
 </resources>

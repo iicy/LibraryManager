@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Category;
@@ -63,6 +64,17 @@ public class BookingListAdapter extends RecyclerView.Adapter<BookingListAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        if(mList.get(position).getPic()!=null){
+            Glide.with(mContext)
+                    .load(mList.get(position).getPic().getUrl())
+                    .fitCenter()
+                    .placeholder(R.drawable.ic_image)
+                    .thumbnail(0.1f)
+                    .into(holder.icon);
+        }else{
+            Glide.clear(holder.icon);
+            holder.icon.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_image));
+        }
         holder.bookName.setText("书名："+mList.get(position).getBookName());
         if(SHOW_USER_TAG){
             holder.userName.setText("用户："+mList.get(position).getUser());

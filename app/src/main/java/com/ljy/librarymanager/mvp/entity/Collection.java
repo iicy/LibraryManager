@@ -1,6 +1,7 @@
 package com.ljy.librarymanager.mvp.entity;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by luojiayu on 2017/4/19.
@@ -8,9 +9,18 @@ import cn.bmob.v3.BmobObject;
 
 public class Collection extends BmobObject{
 
+    private BmobFile pic;
     private String user;
     private String bookName;
     private String bookId;
+
+    public BmobFile getPic() {
+        return pic;
+    }
+
+    public void setPic(BmobFile pic) {
+        this.pic = pic;
+    }
 
     public String getBookId() {
         return bookId;

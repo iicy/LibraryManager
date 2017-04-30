@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Books;
@@ -87,6 +88,17 @@ public class ManagerBorrowInfoActivity extends BaseActivity implements ManagerBo
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
+        if(book.getPic()!=null){
+            Glide.with(mContext)
+                    .load(book.getPic().getUrl())
+                    .fitCenter()
+                    .placeholder(R.drawable.ic_image)
+                    .thumbnail(0.1f)
+                    .into(pic);
+        }else{
+            Glide.clear(pic);
+            pic.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_image));
+        }
         tv_bookName.setText("书名："+book.getBookName());
         tv_bookAuthor.setText("作者："+book.getAuthor());
         tv_bookCategory.setText("分类："+book.getCategory());
@@ -134,6 +146,9 @@ public class ManagerBorrowInfoActivity extends BaseActivity implements ManagerBo
         switch (v.getId()) {
             case R.id.bt_save: {
                 showProgress();
+                if(book.getPic()!=null){
+                    borrow.setPic(book.getPic());
+                }
                 if(is_return.isChecked())
                     borrow.setStatus("1");
                 else
