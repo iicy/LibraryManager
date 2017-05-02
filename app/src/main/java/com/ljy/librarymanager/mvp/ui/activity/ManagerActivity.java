@@ -108,7 +108,21 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
                 switch (item.getItemId()){
                     case R.id.manager_toolbar_search: {
                         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.manager_fragment);
-                        RxBus.getInstance().post("search",fragment);
+                        if(fragment instanceof ManagerAnnouncementFragment){
+                            RxBus.getInstance().post("searchAnnounce",fragment);
+                        }
+                        if(fragment instanceof ManagerBookingFragment){
+                            RxBus.getInstance().post("searchBooking",fragment);
+                        }
+                        if(fragment instanceof ManagerUserFragment){
+                            RxBus.getInstance().post("searchUser",fragment);
+                        }
+                        if(fragment instanceof ManagerCategoryFragment){
+                            RxBus.getInstance().post("searchCategory",fragment);
+                        }
+                        if(fragment instanceof ManagerBorrowFragment){
+                            RxBus.getInstance().post("searchBorrow",fragment);
+                        }
                         break;
                     }
                     case R.id.manager_toolbar_add:{

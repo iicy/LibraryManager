@@ -41,8 +41,7 @@ public class LoadingFragment extends BaseFragment {
 
     }
 
-    public void setText(String s) {
+    public void setText(String s){
         text.setText(s);
     }
-
 }

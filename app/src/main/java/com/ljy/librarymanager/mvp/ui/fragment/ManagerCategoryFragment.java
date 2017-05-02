@@ -21,16 +21,24 @@ import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
+import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
 import com.ljy.librarymanager.mvp.view.ManagerCategoryView;
+import com.ljy.librarymanager.utils.RxBus;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by luojiayu on 2017/3/16.
@@ -57,6 +65,7 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
     private FragmentTransaction ft;
     private LoadingFragment loadingFragment;
     private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
+    private Observable<ManagerCategoryFragment> observable;
 
     @Inject
     public ManagerCategoryFragment() {
@@ -129,6 +138,24 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
             loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
+        observable = RxBus.getInstance().register("searchCategory", ManagerCategoryFragment.class);
+        observable.subscribeOn(Schedulers.io())
+                .map(new Func1<ManagerCategoryFragment, List<Category>>() {
+                    @Override
+                    public List<Category> call(ManagerCategoryFragment managerCategoryFragment) {
+                        return mData;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<Category>>() {
+                    @Override
+                    public void call(List<Category> mData) {
+                        Intent intent = new Intent(getActivity(), SearchBarActivity.class);
+                        intent.putExtra("list", (Serializable) mData);
+                        intent.putExtra("searchType","category");
+                        startActivity(intent);
+                    }
+                });
     }
 
     @Override
@@ -167,6 +194,12 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
     public void onResume() {
         super.onResume();
         mPresenter.getList();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unregister("searchCategory", observable);
     }
 
 }

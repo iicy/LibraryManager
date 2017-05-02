@@ -23,6 +23,21 @@ public class BookListModel {
     public BookListModel() {
     }
 
+    public void getAllBooks(final BookListPresenter bookListPresenter) {
+        BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
+        bmobQuery.order("-createdAt");
+        bmobQuery.findObjects(new FindListener<Books>() {
+            @Override
+            public void done(List<Books> list, BmobException e) {
+                if (e == null) {
+                    bookListPresenter.getAllSuccess(list);
+                } else {
+                    bookListPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
+    }
+
     public void getList(final BookListPresenter bookListPresenter, String category) {
         BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
         bmobQuery.addWhereEqualTo("category",category);
