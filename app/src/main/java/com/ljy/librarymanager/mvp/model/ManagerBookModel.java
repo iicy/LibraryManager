@@ -24,6 +24,21 @@ public class ManagerBookModel {
     public ManagerBookModel() {
     }
 
+    public void getAllBooks(final ManagerBookPresenter managerBookPresenter) {
+        BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
+        bmobQuery.order("-createdAt");
+        bmobQuery.findObjects(new FindListener<Books>() {
+            @Override
+            public void done(List<Books> list, BmobException e) {
+                if (e == null) {
+                    managerBookPresenter.getAllSuccess(list);
+                } else {
+                    managerBookPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
+    }
+
     public void getList(final ManagerBookPresenter managerBookPresenter,String category) {
         BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
         bmobQuery.addWhereEqualTo("category",category);

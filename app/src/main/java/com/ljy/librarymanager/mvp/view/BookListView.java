@@ -15,4 +15,5 @@ import java.util.List;
 public interface BookListView extends BaseView {
 
     void setList(List<Books> list);
+    void searchBooks(List<Books> data);
 }

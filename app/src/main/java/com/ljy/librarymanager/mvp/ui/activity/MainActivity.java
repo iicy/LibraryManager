@@ -1,5 +1,6 @@
 package com.ljy.librarymanager.mvp.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
+import com.ljy.librarymanager.mvp.entity.Books;
+import com.ljy.librarymanager.mvp.presenter.MainPresenter;
 import com.ljy.librarymanager.mvp.ui.fragment.BookingListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.BorrowListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CategoryListFragment;
@@ -28,6 +31,9 @@ import com.ljy.librarymanager.mvp.ui.fragment.CollectionListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.HomeListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.LoadingFragment;
 import com.ljy.librarymanager.mvp.view.MainView;
+
+import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -51,6 +57,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     private FragmentTransaction ft;
     private ActionBarDrawerToggle drawerToggle;
+    private ProgressDialog pg;
 
     private String account;
     private String password;
@@ -68,12 +75,15 @@ public class MainActivity extends BaseActivity implements MainView {
     CategoryListFragment categoryListFragment;
     @Inject
     CollectionListFragment collectionListFragment;
+    @Inject
+    MainPresenter mPresenter;
 
     @Override
     protected void loadViewLayout() {
         setContentView(R.layout.activity_main);
         //注入对象
         mActivityComponent.inject(this);
+        mPresenter.attachView(this);
     }
 
     @Override
@@ -98,6 +108,11 @@ public class MainActivity extends BaseActivity implements MainView {
         tv_account= (TextView) view.findViewById(R.id.account);
         tv_username.setText(username);
         tv_account.setText(account);
+
+        pg = new ProgressDialog(this);
+        pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pg.setMessage("请稍候！");
+        pg.setCancelable(false);
     }
 
     @Override
@@ -107,7 +122,8 @@ public class MainActivity extends BaseActivity implements MainView {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.main_toolbar_search: {
-                        startActivity(new Intent(MainActivity.this,SearchBarActivity.class));
+                        showProgress();
+                        mPresenter.getAllBooks();
                         break;
                     }
                 }
@@ -174,10 +190,12 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void showProgress() {
+        pg.show();
     }
 
     @Override
     public void hideProgress() {
+        pg.dismiss();
     }
 
     @Override
@@ -190,6 +208,17 @@ public class MainActivity extends BaseActivity implements MainView {
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_fragment,fragment);
         ft.commit();
+    }
+
+    @Override
+    public void searchBooks(List<Books> data) {
+        hideProgress();
+        Intent intent = new Intent(this, SearchBarActivity.class);
+        intent.putExtra("list", (Serializable) data);
+        intent.putExtra("searchType","book");
+        intent.putExtra("identity","user");
+        intent.putExtra("account",account);
+        startActivity(intent);
     }
 
     @Override

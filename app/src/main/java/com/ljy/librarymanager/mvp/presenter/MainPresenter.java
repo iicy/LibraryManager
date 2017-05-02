@@ -3,9 +3,9 @@ package com.ljy.librarymanager.mvp.presenter;
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.model.BookListModel;
-import com.ljy.librarymanager.mvp.model.ManagerBookModel;
+import com.ljy.librarymanager.mvp.model.MainModel;
 import com.ljy.librarymanager.mvp.view.BookListView;
-import com.ljy.librarymanager.mvp.view.ManagerBookView;
+import com.ljy.librarymanager.mvp.view.MainView;
 
 import java.util.List;
 
@@ -15,31 +15,22 @@ import javax.inject.Inject;
  * Created by luojiayu on 2017/3/15.
  */
 
-public class BookListPresenter extends BasePresenter<BookListView, List<Books>> {
+public class MainPresenter extends BasePresenter<MainView, List<Books>> {
 
-    private BookListModel bookListModel;
+    private MainModel mainModel;
 
     @Inject
-    public BookListPresenter(BookListModel bookListModel) {
-        this.bookListModel = bookListModel;
+    public MainPresenter( MainModel mainModel) {
+        this.mainModel = mainModel;
     }
 
     public void getAllBooks(){
-        bookListModel.getAllBooks(this);
-    }
-
-    public void getList(String category) {
-        mView.showProgress();
-        bookListModel.getList(this,category);
+        mainModel.getAllBooks(this);
     }
 
     @Override
     public void success(List<Books> data) {
         super.success(data);
-        mView.setList(data);
-    }
-
-    public void getAllSuccess(List<Books> data){
         mView.searchBooks(data);
     }
 

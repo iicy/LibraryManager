@@ -135,7 +135,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
             loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
-        observable = RxBus.getInstance().register("search", ManagerBookingFragment.class);
+        observable = RxBus.getInstance().register("searchBooking", ManagerBookingFragment.class);
         observable.subscribeOn(Schedulers.io())
                 .map(new Func1<ManagerBookingFragment, List<Booking>>() {
                     @Override
@@ -149,6 +149,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
                     public void call(List<Booking> mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
                         intent.putExtra("list", (Serializable) mData);
+                        intent.putExtra("searchType","booking");
                         startActivity(intent);
                     }
                 });
@@ -205,6 +206,6 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RxBus.getInstance().unregister("search", observable);
+        RxBus.getInstance().unregister("searchBooking", observable);
     }
 }

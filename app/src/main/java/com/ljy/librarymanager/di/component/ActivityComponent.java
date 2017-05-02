@@ -23,6 +23,7 @@ import com.ljy.librarymanager.mvp.ui.activity.ManagerBorrowInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerUserInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ModifyPasswordActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
+import com.ljy.librarymanager.mvp.ui.activity.SearchResultActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SendCommentActivity;
 import com.ljy.librarymanager.mvp.view.SearchBarView;
 
@@ -47,6 +48,8 @@ public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
 
     void inject(SearchBarActivity searchBarActivity);
+
+    void inject(SearchResultActivity searchResultActivity);
 
     void inject(MainActivity mainActivity);
 

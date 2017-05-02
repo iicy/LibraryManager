@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -29,6 +30,7 @@ import com.ljy.librarymanager.mvp.view.BookInfoView;
 import com.ljy.librarymanager.mvp.view.BookListView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -55,6 +57,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
     private FragmentTransaction ft;
     private LoadingFragment loadingFragment;
     private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
+    private ProgressDialog pg;
 
     private String category;
 
@@ -70,6 +73,10 @@ public class BookListActivity extends BaseActivity implements BookListView {
         mAdapter = new BookListAdapter(this,mData);
         category = getIntent().getStringExtra("category");
         loadingFragment = new LoadingFragment();
+        pg = new ProgressDialog(this);
+        pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pg.setMessage("请稍候！");
+        pg.setCancelable(false);
     }
 
     @Override
@@ -108,6 +115,19 @@ public class BookListActivity extends BaseActivity implements BookListView {
                 loadingFragment.setText("正在加载...");
                 mPresenter.getList(category);
                 refreshLayout.setRefreshing(false);
+            }
+        });
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.main_toolbar_search:{
+                        pg.show();
+                        mPresenter.getAllBooks();
+                        break;
+                    }
+                }
+                return false;
             }
         });
     }
@@ -161,6 +181,16 @@ public class BookListActivity extends BaseActivity implements BookListView {
             loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
+    }
+
+    @Override
+    public void searchBooks(List<Books> data) {
+        pg.dismiss();
+        Intent intent = new Intent(this, SearchBarActivity.class);
+        intent.putExtra("list", (Serializable) data);
+        intent.putExtra("searchType","book");
+        intent.putExtra("identity","user");
+        startActivity(intent);
     }
 
     @Override

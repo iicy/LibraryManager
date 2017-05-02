@@ -84,7 +84,7 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
         mPresenter.attachView(this);
         pg = new ProgressDialog(getActivity());
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在删除！");
+        pg.setMessage("请稍候！");
         pg.setCancelable(false);
         mAdapter = new AnnouncementListAdapter(getActivity(), mData);
         account = ManagerActivity.instance.getAccount();
@@ -148,7 +148,7 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
             loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
-        observable = RxBus.getInstance().register("search", ManagerAnnouncementFragment.class);
+        observable = RxBus.getInstance().register("searchAnnounce", ManagerAnnouncementFragment.class);
         observable.subscribeOn(Schedulers.io())
                 .map(new Func1<ManagerAnnouncementFragment, List<Announcement>>() {
                     @Override
@@ -162,6 +162,8 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
                     public void call(List<Announcement> mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
                         intent.putExtra("list", (Serializable) mData);
+                        intent.putExtra("searchType","announcement");
+                        intent.putExtra("account",account);
                         startActivity(intent);
                     }
                 });
@@ -208,6 +210,6 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RxBus.getInstance().unregister("search", observable);
+        RxBus.getInstance().unregister("searchAnnounce", observable);
     }
 }

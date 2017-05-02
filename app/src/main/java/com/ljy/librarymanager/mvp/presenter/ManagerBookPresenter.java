@@ -25,6 +25,10 @@ public class ManagerBookPresenter extends BasePresenter<ManagerBookView, List<Bo
         this.managerBookModel = managerBookModel;
     }
 
+    public void getAllBooks(){
+        managerBookModel.getAllBooks(this);
+    }
+
     public void getList(String category) {
         mView.showProgress();
         managerBookModel.getList(this,category);
@@ -38,6 +42,10 @@ public class ManagerBookPresenter extends BasePresenter<ManagerBookView, List<Bo
     public void success(List<Books> data) {
         super.success(data);
         mView.setList(data);
+    }
+
+    public void getAllSuccess(List<Books> data){
+        mView.searchBooks(data);
     }
 
     public void deleteSuccess(){

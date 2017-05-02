@@ -17,6 +17,7 @@
     <string name="confirm_new_password_hint">请再次输入新密码</string>
     <string name="checkcode_hint">请输入验证码</string>
     <string name="loading">正在加载...</string>
+    <string name="no_data">暂无数据</string>
     <!-- button -->
     <string name="save">保存</string>
     <string name="reset">还原</string>
