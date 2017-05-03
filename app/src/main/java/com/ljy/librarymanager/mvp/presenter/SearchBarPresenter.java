@@ -7,9 +7,7 @@ import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.entity.User;
-import com.ljy.librarymanager.mvp.model.ManagerAnnouncementModel;
 import com.ljy.librarymanager.mvp.model.SearchBarModel;
-import com.ljy.librarymanager.mvp.view.ManagerAnnouncementView;
 import com.ljy.librarymanager.mvp.view.SearchBarView;
 
 import java.util.List;
@@ -29,25 +27,25 @@ public class SearchBarPresenter extends BasePresenter<SearchBarView, String> {
         this.searchBarModel = searchBarModel;
     }
 
-    public void searchAnnouncement(List<Announcement> data,String key) {
-        searchBarModel.searchAnnouncement(this,data,key);
+    public void searchAnnouncement(String key) {
+        searchBarModel.searchAnnouncement(this,key);
     }
 
-    public void searchBooking(List<Booking> data, String key) {
-        searchBarModel.searchBooking(this,data,key);
+    public void searchBooking(String key) {
+        searchBarModel.searchBooking(this,key);
     }
-    public void searchBooks(List<Books> data, String key) {
-        searchBarModel.searchBooks(this,data,key);
+    public void searchBooks(String key) {
+        searchBarModel.searchBooks(this,key);
     }
-    public void searchBorrow(List<Borrow> data, String key) {
-        searchBarModel.searchBorrow(this,data,key);
+    public void searchBorrow(String key) {
+        searchBarModel.searchBorrow(this,key);
     }
-    public void searchUser(List<User> data, String key) {
-        searchBarModel.searchUser(this,data,key);
+    public void searchUser(String key) {
+        searchBarModel.searchUser(this,key);
     }
 
-    public void searchCategory(List<Category> data, String key) {
-        searchBarModel.searchCategory(this,data,key);
+    public void searchCategory(String key) {
+        searchBarModel.searchCategory(this,key);
     }
 
     @Override

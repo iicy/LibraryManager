@@ -12,11 +12,8 @@ import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
-import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.entity.Comment;
-import com.ljy.librarymanager.mvp.presenter.AddAnnouncementPresenter;
 import com.ljy.librarymanager.mvp.presenter.SendCommentPresenter;
-import com.ljy.librarymanager.mvp.view.AddAnnouncementView;
 import com.ljy.librarymanager.mvp.view.SendCommentView;
 
 import javax.inject.Inject;

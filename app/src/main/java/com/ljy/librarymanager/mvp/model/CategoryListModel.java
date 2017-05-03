@@ -1,14 +1,9 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Category;
-import com.ljy.librarymanager.mvp.entity.Collection;
 import com.ljy.librarymanager.mvp.presenter.CategoryListPresenter;
-import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
 
-import java.text.Collator;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,7 +11,6 @@ import javax.inject.Inject;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by luojiayu on 2017/3/15.

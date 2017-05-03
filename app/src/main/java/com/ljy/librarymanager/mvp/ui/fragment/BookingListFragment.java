@@ -20,10 +20,8 @@ import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.presenter.BookingListPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
-import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.view.BookingListView;
-import com.ljy.librarymanager.mvp.view.HomeListView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
 import java.util.List;

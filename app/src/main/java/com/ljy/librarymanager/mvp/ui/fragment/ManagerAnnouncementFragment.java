@@ -3,16 +3,13 @@ package com.ljy.librarymanager.mvp.ui.fragment;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -20,9 +17,7 @@ import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.AnnouncementListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Announcement;
-import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.presenter.ManagerAnnouncementPresenter;
-import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerAnnouncementInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
@@ -31,7 +26,6 @@ import com.ljy.librarymanager.utils.RxBus;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,10 +34,7 @@ import butterknife.BindView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by luojiayu on 2017/3/16.
@@ -150,18 +141,11 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
         mAdapter.setNewData(mData);
         observable = RxBus.getInstance().register("searchAnnounce", ManagerAnnouncementFragment.class);
         observable.subscribeOn(Schedulers.io())
-                .map(new Func1<ManagerAnnouncementFragment, List<Announcement>>() {
-                    @Override
-                    public List<Announcement> call(ManagerAnnouncementFragment managerBookingFragment) {
-                        return mData;
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Announcement>>() {
+                .subscribe(new Action1<ManagerAnnouncementFragment>() {
                     @Override
-                    public void call(List<Announcement> mData) {
+                    public void call(ManagerAnnouncementFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
-                        intent.putExtra("list", (Serializable) mData);
                         intent.putExtra("searchType","announcement");
                         intent.putExtra("account",account);
                         startActivity(intent);

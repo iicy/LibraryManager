@@ -25,7 +25,6 @@ import com.ljy.librarymanager.mvp.ui.activity.ModifyPasswordActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchResultActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SendCommentActivity;
-import com.ljy.librarymanager.mvp.view.SearchBarView;
 
 import dagger.Component;
 

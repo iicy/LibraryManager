@@ -3,11 +3,7 @@ package com.ljy.librarymanager.mvp.presenter;
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.model.AddAnnouncementModel;
-import com.ljy.librarymanager.mvp.model.HomeListModel;
 import com.ljy.librarymanager.mvp.view.AddAnnouncementView;
-import com.ljy.librarymanager.mvp.view.HomeListView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

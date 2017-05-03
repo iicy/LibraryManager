@@ -4,9 +4,7 @@ import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.model.BookingListModel;
-import com.ljy.librarymanager.mvp.model.ManagerBookingModel;
 import com.ljy.librarymanager.mvp.view.BookingListView;
-import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 
 import java.util.List;
 

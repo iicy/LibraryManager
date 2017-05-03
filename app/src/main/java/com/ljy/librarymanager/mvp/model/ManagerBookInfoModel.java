@@ -3,7 +3,6 @@ package com.ljy.librarymanager.mvp.model;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookInfoPresenter;
-import com.ljy.librarymanager.mvp.presenter.ManagerBookPresenter;
 
 import java.util.List;
 

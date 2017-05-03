@@ -12,13 +12,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
-
 import com.ljy.librarymanager.MyApplication;
 import com.ljy.librarymanager.common.Constant;
 import com.ljy.librarymanager.di.component.ActivityComponent;
 import com.ljy.librarymanager.di.component.DaggerActivityComponent;
 import com.ljy.librarymanager.di.module.ActivityModule;
-import com.ljy.librarymanager.mvp.ui.activity.LoginActivity;
 
 import butterknife.ButterKnife;
 import cn.bmob.v3.Bmob;

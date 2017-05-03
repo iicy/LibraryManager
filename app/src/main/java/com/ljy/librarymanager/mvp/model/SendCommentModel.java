@@ -1,8 +1,6 @@
 package com.ljy.librarymanager.mvp.model;
 
-import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.entity.Comment;
-import com.ljy.librarymanager.mvp.presenter.AddAnnouncementPresenter;
 import com.ljy.librarymanager.mvp.presenter.SendCommentPresenter;
 
 import javax.inject.Inject;

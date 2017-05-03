@@ -2,7 +2,6 @@ package com.ljy.librarymanager.mvp.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,11 +12,8 @@ import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
-import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.entity.User;
-import com.ljy.librarymanager.mvp.presenter.AddAnnouncementPresenter;
 import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
-import com.ljy.librarymanager.mvp.view.AddAnnouncementView;
 import com.ljy.librarymanager.mvp.view.AddUserView;
 
 import javax.inject.Inject;

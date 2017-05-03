@@ -1,11 +1,8 @@
 package com.ljy.librarymanager.mvp.presenter;
 
 import com.ljy.librarymanager.mvp.base.BasePresenter;
-import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.entity.User;
-import com.ljy.librarymanager.mvp.model.AddAnnouncementModel;
 import com.ljy.librarymanager.mvp.model.AddUserModel;
-import com.ljy.librarymanager.mvp.view.AddAnnouncementView;
 import com.ljy.librarymanager.mvp.view.AddUserView;
 
 import javax.inject.Inject;

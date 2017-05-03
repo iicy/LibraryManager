@@ -14,23 +14,18 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
-import com.ljy.librarymanager.adapter.BookingListAdapter;
 import com.ljy.librarymanager.adapter.BorrowListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
-import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.presenter.ManagerBorrowPresenter;
-import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBorrowInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
-import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
 import com.ljy.librarymanager.utils.RxBus;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,7 +34,6 @@ import butterknife.BindView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -139,18 +133,11 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
         mAdapter.setNewData(mData);
         observable = RxBus.getInstance().register("searchBorrow", ManagerBorrowFragment.class);
         observable.subscribeOn(Schedulers.io())
-                .map(new Func1<ManagerBorrowFragment, List<Borrow>>() {
-                    @Override
-                    public List<Borrow> call(ManagerBorrowFragment managerBorrowFragment) {
-                        return mData;
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Borrow>>() {
+                .subscribe(new Action1<ManagerBorrowFragment>() {
                     @Override
-                    public void call(List<Borrow> mData) {
+                    public void call(ManagerBorrowFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
-                        intent.putExtra("list", (Serializable) mData);
                         intent.putExtra("searchType","borrow");
                         startActivity(intent);
                     }

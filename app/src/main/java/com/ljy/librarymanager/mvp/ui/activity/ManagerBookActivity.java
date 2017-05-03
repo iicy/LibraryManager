@@ -19,16 +19,12 @@ import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.BookListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Books;
-import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookPresenter;
 import com.ljy.librarymanager.mvp.ui.fragment.LoadingFragment;
-import com.ljy.librarymanager.mvp.view.BookListView;
 import com.ljy.librarymanager.mvp.view.ManagerBookView;
-import com.ljy.librarymanager.utils.RxBus;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -133,8 +129,9 @@ public class ManagerBookActivity extends BaseActivity implements ManagerBookView
                         break;
                     }
                     case R.id.manager_toolbar_search:{
-                        pg.show();
-                        mPresenter.getAllBooks();
+                        Intent intent = new Intent(ManagerBookActivity.this, SearchBarActivity.class);
+                        intent.putExtra("searchType","book");
+                        startActivity(intent);
                         break;
                     }
                 }
@@ -188,16 +185,6 @@ public class ManagerBookActivity extends BaseActivity implements ManagerBookView
     @Override
     public void showMsg(String message) {
         Toast.makeText(ManagerBookActivity.this, message, Toast.LENGTH_LONG).show();
-    }
-
-
-    @Override
-    public void searchBooks(List<Books> data) {
-        pg.dismiss();
-        Intent intent = new Intent(ManagerBookActivity.this, SearchBarActivity.class);
-        intent.putExtra("list", (Serializable) data);
-        intent.putExtra("searchType","book");
-        startActivity(intent);
     }
 
     @Override

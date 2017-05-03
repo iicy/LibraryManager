@@ -1,15 +1,9 @@
 package com.ljy.librarymanager.mvp.presenter;
 
 import com.ljy.librarymanager.mvp.base.BasePresenter;
-import com.ljy.librarymanager.mvp.entity.Books;
-import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.entity.User;
-import com.ljy.librarymanager.mvp.model.ManagerBorrowModel;
 import com.ljy.librarymanager.mvp.model.ModifyPasswordModel;
-import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
 import com.ljy.librarymanager.mvp.view.ModifyPasswordView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

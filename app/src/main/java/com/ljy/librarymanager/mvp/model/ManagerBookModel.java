@@ -1,9 +1,7 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Books;
-import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookPresenter;
-import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
 
 import java.util.List;
 
@@ -22,21 +20,6 @@ public class ManagerBookModel {
 
     @Inject
     public ManagerBookModel() {
-    }
-
-    public void getAllBooks(final ManagerBookPresenter managerBookPresenter) {
-        BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
-        bmobQuery.order("-createdAt");
-        bmobQuery.findObjects(new FindListener<Books>() {
-            @Override
-            public void done(List<Books> list, BmobException e) {
-                if (e == null) {
-                    managerBookPresenter.getAllSuccess(list);
-                } else {
-                    managerBookPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
-                }
-            }
-        });
     }
 
     public void getList(final ManagerBookPresenter managerBookPresenter,String category) {

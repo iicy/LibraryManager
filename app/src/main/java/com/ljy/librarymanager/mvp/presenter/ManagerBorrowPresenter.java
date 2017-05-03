@@ -1,12 +1,9 @@
 package com.ljy.librarymanager.mvp.presenter;
 
 import com.ljy.librarymanager.mvp.base.BasePresenter;
-import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
-import com.ljy.librarymanager.mvp.model.ManagerBookingModel;
 import com.ljy.librarymanager.mvp.model.ManagerBorrowModel;
-import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
 
 import java.util.List;

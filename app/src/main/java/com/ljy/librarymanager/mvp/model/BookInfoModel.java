@@ -1,11 +1,8 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Booking;
-import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.entity.Collection;
-import com.ljy.librarymanager.mvp.presenter.AddCategoryPresenter;
 import com.ljy.librarymanager.mvp.presenter.BookInfoPresenter;
-import com.ljy.librarymanager.mvp.presenter.ManagerBookingPresenter;
 
 import java.util.List;
 

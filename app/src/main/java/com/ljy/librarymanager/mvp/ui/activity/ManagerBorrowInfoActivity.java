@@ -16,9 +16,7 @@ import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
-import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerBorrowInfoPresenter;
-import com.ljy.librarymanager.mvp.view.BookInfoView;
 import com.ljy.librarymanager.mvp.view.ManagerBorrowInfoView;
 
 import javax.inject.Inject;

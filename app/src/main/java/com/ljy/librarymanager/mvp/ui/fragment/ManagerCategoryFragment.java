@@ -17,18 +17,13 @@ import com.ljy.librarymanager.adapter.CategoryListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
-import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
-import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
-import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
-import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
 import com.ljy.librarymanager.mvp.view.ManagerCategoryView;
 import com.ljy.librarymanager.utils.RxBus;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,7 +32,6 @@ import butterknife.BindView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -140,18 +134,11 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
         mAdapter.setNewData(mData);
         observable = RxBus.getInstance().register("searchCategory", ManagerCategoryFragment.class);
         observable.subscribeOn(Schedulers.io())
-                .map(new Func1<ManagerCategoryFragment, List<Category>>() {
-                    @Override
-                    public List<Category> call(ManagerCategoryFragment managerCategoryFragment) {
-                        return mData;
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Category>>() {
+                .subscribe(new Action1<ManagerCategoryFragment>() {
                     @Override
-                    public void call(List<Category> mData) {
+                    public void call(ManagerCategoryFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
-                        intent.putExtra("list", (Serializable) mData);
                         intent.putExtra("searchType","category");
                         startActivity(intent);
                     }

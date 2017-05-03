@@ -3,22 +3,15 @@ package com.ljy.librarymanager.mvp.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
-import com.ljy.librarymanager.adapter.AnnouncementListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.entity.Booking;
@@ -33,7 +26,6 @@ import com.ljy.librarymanager.widget.SearchView;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -95,23 +87,17 @@ public class SearchBarActivity extends BaseActivity implements SearchBarView {
                                 || (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
                             showProgress();
                             if(searchType.equals("announcement")){
-                                List<Announcement> mData = (List<Announcement>) getIntent().getSerializableExtra("list");
-                                searchBarPresenter.searchAnnouncement(mData,v.getText().toString());
+                                searchBarPresenter.searchAnnouncement(v.getText().toString());
                             }else if(searchType.equals("booking")){
-                                List<Booking> mData = (List<Booking>) getIntent().getSerializableExtra("list");
-                                searchBarPresenter.searchBooking(mData,v.getText().toString());
+                                searchBarPresenter.searchBooking(v.getText().toString());
                             }else if(searchType.equals("book")){
-                                List<Books> mData = (List<Books>) getIntent().getSerializableExtra("list");
-                                searchBarPresenter.searchBooks(mData,v.getText().toString());
+                                searchBarPresenter.searchBooks(v.getText().toString());
                             }else if(searchType.equals("borrow")){
-                                List<Borrow> mData = (List<Borrow>) getIntent().getSerializableExtra("list");
-                                searchBarPresenter.searchBorrow(mData,v.getText().toString());
+                                searchBarPresenter.searchBorrow(v.getText().toString());
                             }else if(searchType.equals("user")){
-                                List<User> mData = (List<User>) getIntent().getSerializableExtra("list");
-                                searchBarPresenter.searchUser(mData,v.getText().toString());
+                                searchBarPresenter.searchUser(v.getText().toString());
                             }else if(searchType.equals("category")){
-                                List<Category> mData = (List<Category>) getIntent().getSerializableExtra("list");
-                                searchBarPresenter.searchCategory(mData,v.getText().toString());
+                                searchBarPresenter.searchCategory(v.getText().toString());
                             }
                         }
                         return true;
