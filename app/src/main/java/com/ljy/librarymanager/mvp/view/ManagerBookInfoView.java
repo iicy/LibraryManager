@@ -1,7 +1,6 @@
 package com.ljy.librarymanager.mvp.view;
 
 import com.ljy.librarymanager.mvp.base.BaseView;
-import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Category;
 
 import java.util.List;

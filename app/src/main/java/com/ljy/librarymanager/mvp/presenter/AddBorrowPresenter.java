@@ -2,11 +2,8 @@ package com.ljy.librarymanager.mvp.presenter;
 
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Borrow;
-import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.model.AddBorrowModel;
-import com.ljy.librarymanager.mvp.model.AddUserModel;
 import com.ljy.librarymanager.mvp.view.AddBorrowView;
-import com.ljy.librarymanager.mvp.view.AddUserView;
 
 import javax.inject.Inject;
 

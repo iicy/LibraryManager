@@ -12,8 +12,6 @@ import java.util.List;
 
 public interface ManagerBookView extends BaseView {
 
-    void searchBooks(List<Books> data);
-
     void setList(List<Books> list);
 
     void deleteSuccess();

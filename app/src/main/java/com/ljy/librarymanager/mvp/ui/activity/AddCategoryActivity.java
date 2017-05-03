@@ -7,17 +7,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Category;
-import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.AddCategoryPresenter;
-import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.view.AddCategoryView;
-import com.ljy.librarymanager.mvp.view.AddUserView;
 
 import javax.inject.Inject;
 

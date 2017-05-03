@@ -7,12 +7,8 @@ import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.entity.User;
-import com.ljy.librarymanager.mvp.model.ManagerBookingModel;
 import com.ljy.librarymanager.mvp.model.SearchResultModel;
-import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.mvp.view.SearchResultView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

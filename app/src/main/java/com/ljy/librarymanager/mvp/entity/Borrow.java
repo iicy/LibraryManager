@@ -1,7 +1,6 @@
 package com.ljy.librarymanager.mvp.entity;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobFile;
 
 /**

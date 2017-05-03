@@ -1,8 +1,6 @@
 package com.ljy.librarymanager.mvp.model;
 
-import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
-import com.ljy.librarymanager.mvp.presenter.ManagerBookInfoPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerBorrowInfoPresenter;
 
 import javax.inject.Inject;

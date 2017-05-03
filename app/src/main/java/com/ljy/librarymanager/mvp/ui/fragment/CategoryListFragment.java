@@ -17,7 +17,6 @@ import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.CategoryListPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
-import com.ljy.librarymanager.mvp.view.BorrowListView;
 import com.ljy.librarymanager.mvp.view.CategoryListView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 

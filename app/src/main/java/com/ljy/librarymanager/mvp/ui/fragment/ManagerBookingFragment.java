@@ -20,16 +20,12 @@ import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookingPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
-import com.ljy.librarymanager.mvp.ui.activity.BookListActivity;
-import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
-import com.ljy.librarymanager.mvp.view.ManagerAnnouncementView;
 import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.utils.RxBus;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,7 +34,6 @@ import butterknife.BindView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -137,18 +132,11 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
         mAdapter.setNewData(mData);
         observable = RxBus.getInstance().register("searchBooking", ManagerBookingFragment.class);
         observable.subscribeOn(Schedulers.io())
-                .map(new Func1<ManagerBookingFragment, List<Booking>>() {
-                    @Override
-                    public List<Booking> call(ManagerBookingFragment managerBookingFragment) {
-                        return mData;
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Booking>>() {
+                .subscribe(new Action1<ManagerBookingFragment>() {
                     @Override
-                    public void call(List<Booking> mData) {
+                    public void call(ManagerBookingFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
-                        intent.putExtra("list", (Serializable) mData);
                         intent.putExtra("searchType","booking");
                         startActivity(intent);
                     }

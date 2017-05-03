@@ -14,7 +14,6 @@ import com.ljy.librarymanager.adapter.AnnouncementListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.presenter.HomeListPresenter;
-import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.view.HomeListView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 

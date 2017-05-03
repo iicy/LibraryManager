@@ -11,16 +11,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
-import com.ljy.librarymanager.mvp.ui.fragment.LoadingFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerAnnouncementFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerBookingFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerBorrowFragment;

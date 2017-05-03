@@ -10,7 +10,6 @@ import com.ljy.librarymanager.mvp.ui.fragment.BookingListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.BorrowListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CategoryListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.HomeListFragment;
-import com.ljy.librarymanager.mvp.ui.fragment.LoadingFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerAnnouncementFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerBookingFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.ManagerBorrowFragment;

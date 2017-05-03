@@ -1,7 +1,6 @@
 package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Announcement;
-import com.ljy.librarymanager.mvp.presenter.HomeListPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerAnnouncementPresenter;
 
 import java.util.List;

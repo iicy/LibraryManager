@@ -11,29 +11,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
-import com.ljy.librarymanager.mvp.entity.Books;
-import com.ljy.librarymanager.mvp.presenter.MainPresenter;
 import com.ljy.librarymanager.mvp.ui.fragment.BookingListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.BorrowListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CategoryListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.CollectionListFragment;
 import com.ljy.librarymanager.mvp.ui.fragment.HomeListFragment;
-import com.ljy.librarymanager.mvp.ui.fragment.LoadingFragment;
 import com.ljy.librarymanager.mvp.view.MainView;
-
-import java.io.Serializable;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -75,15 +66,12 @@ public class MainActivity extends BaseActivity implements MainView {
     CategoryListFragment categoryListFragment;
     @Inject
     CollectionListFragment collectionListFragment;
-    @Inject
-    MainPresenter mPresenter;
 
     @Override
     protected void loadViewLayout() {
         setContentView(R.layout.activity_main);
         //注入对象
         mActivityComponent.inject(this);
-        mPresenter.attachView(this);
     }
 
     @Override
@@ -122,8 +110,11 @@ public class MainActivity extends BaseActivity implements MainView {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.main_toolbar_search: {
-                        showProgress();
-                        mPresenter.getAllBooks();
+                        Intent intent = new Intent(MainActivity.this, SearchBarActivity.class);
+                        intent.putExtra("searchType","book");
+                        intent.putExtra("identity","user");
+                        intent.putExtra("account",account);
+                        startActivity(intent);
                         break;
                     }
                 }
@@ -208,17 +199,6 @@ public class MainActivity extends BaseActivity implements MainView {
         ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_fragment,fragment);
         ft.commit();
-    }
-
-    @Override
-    public void searchBooks(List<Books> data) {
-        hideProgress();
-        Intent intent = new Intent(this, SearchBarActivity.class);
-        intent.putExtra("list", (Serializable) data);
-        intent.putExtra("searchType","book");
-        intent.putExtra("identity","user");
-        intent.putExtra("account",account);
-        startActivity(intent);
     }
 
     @Override

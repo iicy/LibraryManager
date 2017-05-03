@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -21,9 +20,7 @@ import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Category;
-import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookInfoPresenter;
-import com.ljy.librarymanager.mvp.view.BookInfoView;
 import com.ljy.librarymanager.mvp.view.ManagerBookInfoView;
 import com.ljy.librarymanager.utils.FileUtil;
 

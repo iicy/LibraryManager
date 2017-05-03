@@ -2,9 +2,7 @@ package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Category;
-import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
-import com.ljy.librarymanager.mvp.presenter.ManagerUserPresenter;
 
 import java.util.Collections;
 import java.util.List;

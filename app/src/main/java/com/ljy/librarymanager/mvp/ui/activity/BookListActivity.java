@@ -12,25 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.adapter.BookListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Books;
-import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.presenter.BookListPresenter;
-import com.ljy.librarymanager.mvp.presenter.ManagerBookPresenter;
 import com.ljy.librarymanager.mvp.ui.fragment.LoadingFragment;
-import com.ljy.librarymanager.mvp.view.BookInfoView;
 import com.ljy.librarymanager.mvp.view.BookListView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -70,7 +63,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
         //注入对象
         mActivityComponent.inject(this);
         mPresenter.attachView(this);
-        mAdapter = new BookListAdapter(this,mData);
+        mAdapter = new BookListAdapter(this, mData);
         category = getIntent().getStringExtra("category");
         loadingFragment = new LoadingFragment();
         pg = new ProgressDialog(this);
@@ -103,9 +96,9 @@ public class BookListActivity extends BaseActivity implements BookListView {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(BookListActivity.this, BookInfoActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("book",mData.get(position));
+                bundle.putSerializable("book", mData.get(position));
                 intent.putExtras(bundle);
-                intent.putExtra("account",getIntent().getStringExtra("account"));
+                intent.putExtra("account", getIntent().getStringExtra("account"));
                 startActivity(intent);
             }
         });
@@ -120,10 +113,12 @@ public class BookListActivity extends BaseActivity implements BookListView {
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.main_toolbar_search:{
-                        pg.show();
-                        mPresenter.getAllBooks();
+                switch (item.getItemId()) {
+                    case R.id.main_toolbar_search: {
+                        Intent intent = new Intent(BookListActivity.this, SearchBarActivity.class);
+                        intent.putExtra("searchType", "book");
+                        intent.putExtra("identity", "user");
+                        startActivity(intent);
                         break;
                     }
                 }
@@ -149,7 +144,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
     @Override
     public void showProgress() {
         ft = getSupportFragmentManager().beginTransaction();
-        if(getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT)==null){
+        if (getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT) == null) {
             ft.add(R.id.loading, loadingFragment, TAG_LOADING_FRAGMENT);
         }
         ft.show(loadingFragment);
@@ -160,7 +155,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
     @Override
     public void hideProgress() {
         ft = getSupportFragmentManager().beginTransaction();
-        loadingFragment =(LoadingFragment) getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
+        loadingFragment = (LoadingFragment) getSupportFragmentManager().findFragmentByTag(TAG_LOADING_FRAGMENT);
         ft.hide(loadingFragment);
         loading.setVisibility(View.GONE);
         ft.commit();
@@ -174,28 +169,18 @@ public class BookListActivity extends BaseActivity implements BookListView {
     @Override
     public void setList(List<Books> data) {
         mData = data;
-        if(data.size()==0){
+        if (data.size() == 0) {
             loadingFragment.setText("暂无数据");
             showProgress();
-        }else{
+        } else {
             loadingFragment.setText("正在加载...");
         }
         mAdapter.setNewData(mData);
     }
 
     @Override
-    public void searchBooks(List<Books> data) {
-        pg.dismiss();
-        Intent intent = new Intent(this, SearchBarActivity.class);
-        intent.putExtra("list", (Serializable) data);
-        intent.putExtra("searchType","book");
-        intent.putExtra("identity","user");
-        startActivity(intent);
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main_toolbar,menu);
+        getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -3,9 +3,7 @@ package com.ljy.librarymanager.mvp.presenter;
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.model.BookListModel;
-import com.ljy.librarymanager.mvp.model.ManagerBookModel;
 import com.ljy.librarymanager.mvp.view.BookListView;
-import com.ljy.librarymanager.mvp.view.ManagerBookView;
 
 import java.util.List;
 
@@ -24,10 +22,6 @@ public class BookListPresenter extends BasePresenter<BookListView, List<Books>> 
         this.bookListModel = bookListModel;
     }
 
-    public void getAllBooks(){
-        bookListModel.getAllBooks(this);
-    }
-
     public void getList(String category) {
         mView.showProgress();
         bookListModel.getList(this,category);
@@ -37,10 +31,6 @@ public class BookListPresenter extends BasePresenter<BookListView, List<Books>> 
     public void success(List<Books> data) {
         super.success(data);
         mView.setList(data);
-    }
-
-    public void getAllSuccess(List<Books> data){
-        mView.searchBooks(data);
     }
 
     @Override

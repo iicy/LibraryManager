@@ -1,10 +1,10 @@
 package com.ljy.librarymanager.mvp.entity;
 
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 
 import cn.bmob.v3.BmobObject;
-import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by jiayu on 2017/4/3.

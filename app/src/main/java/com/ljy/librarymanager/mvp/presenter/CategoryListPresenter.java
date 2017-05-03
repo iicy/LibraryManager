@@ -3,9 +3,7 @@ package com.ljy.librarymanager.mvp.presenter;
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.model.CategoryListModel;
-import com.ljy.librarymanager.mvp.model.ManagerCategoryModel;
 import com.ljy.librarymanager.mvp.view.CategoryListView;
-import com.ljy.librarymanager.mvp.view.ManagerCategoryView;
 
 import java.util.List;
 

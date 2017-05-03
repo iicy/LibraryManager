@@ -20,7 +20,6 @@ import com.ljy.librarymanager.mvp.presenter.BorrowListPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.MainActivity;
 import com.ljy.librarymanager.mvp.view.BorrowListView;
-import com.ljy.librarymanager.mvp.view.HomeListView;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
 import java.util.List;

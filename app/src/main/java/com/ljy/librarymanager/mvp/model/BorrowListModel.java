@@ -3,7 +3,6 @@ package com.ljy.librarymanager.mvp.model;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.presenter.BorrowListPresenter;
-import com.ljy.librarymanager.mvp.presenter.ManagerBorrowPresenter;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by luojiayu on 2017/3/15.

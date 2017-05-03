@@ -2,11 +2,8 @@ package com.ljy.librarymanager.mvp.presenter;
 
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Category;
-import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.model.ManagerCategoryModel;
-import com.ljy.librarymanager.mvp.model.ManagerUserModel;
 import com.ljy.librarymanager.mvp.view.ManagerCategoryView;
-import com.ljy.librarymanager.mvp.view.ManagerUserView;
 
 import java.util.List;
 

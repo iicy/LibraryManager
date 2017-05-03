@@ -18,18 +18,13 @@ import com.ljy.librarymanager.adapter.UserListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.ManagerUserPresenter;
-import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
-import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
-import com.ljy.librarymanager.mvp.ui.activity.ManagerBookInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerUserInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
-import com.ljy.librarymanager.mvp.view.ManagerCategoryView;
 import com.ljy.librarymanager.mvp.view.ManagerUserView;
 import com.ljy.librarymanager.utils.RxBus;
 import com.ljy.librarymanager.widget.DeleteDialog;
 import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,7 +33,6 @@ import butterknife.BindView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -141,18 +135,11 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
         mAdapter.setNewData(mData);
         observable = RxBus.getInstance().register("searchUser", ManagerUserFragment.class);
         observable.subscribeOn(Schedulers.io())
-                .map(new Func1<ManagerUserFragment, List<User>>() {
-                    @Override
-                    public List<User> call(ManagerUserFragment managerUserFragment) {
-                        return mData;
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<User>>() {
+                .subscribe(new Action1<ManagerUserFragment>() {
                     @Override
-                    public void call(List<User> mData) {
+                    public void call(ManagerUserFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
-                        intent.putExtra("list", (Serializable) mData);
                         intent.putExtra("searchType","user");
                         startActivity(intent);
                     }

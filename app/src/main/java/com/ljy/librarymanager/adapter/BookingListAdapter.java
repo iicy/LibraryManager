@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.entity.Booking;
-import com.ljy.librarymanager.mvp.entity.Category;
 
 import java.util.List;
 

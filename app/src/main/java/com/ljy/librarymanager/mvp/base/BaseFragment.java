@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ljy.librarymanager.MyApplication;
-import com.ljy.librarymanager.di.component.DaggerActivityComponent;
 import com.ljy.librarymanager.di.component.DaggerFragmentComponent;
 import com.ljy.librarymanager.di.component.FragmentComponent;
 import com.ljy.librarymanager.di.module.FragmentModule;

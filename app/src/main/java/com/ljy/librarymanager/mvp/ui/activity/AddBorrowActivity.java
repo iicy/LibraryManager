@@ -13,11 +13,8 @@ import android.widget.Toast;
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Borrow;
-import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.AddBorrowPresenter;
-import com.ljy.librarymanager.mvp.presenter.AddUserPresenter;
 import com.ljy.librarymanager.mvp.view.AddBorrowView;
-import com.ljy.librarymanager.mvp.view.AddUserView;
 
 import javax.inject.Inject;
 
