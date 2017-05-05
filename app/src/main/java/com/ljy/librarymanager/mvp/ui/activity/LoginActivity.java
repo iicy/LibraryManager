@@ -56,7 +56,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         loginPresenter.attachView(this);
         pg = new ProgressDialog(LoginActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在登录！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 

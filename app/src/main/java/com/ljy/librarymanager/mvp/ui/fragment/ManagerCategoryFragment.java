@@ -72,7 +72,7 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
         mPresenter.attachView(this);
         pg = new ProgressDialog(getActivity());
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在删除！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
         mAdapter = new CategoryListAdapter(getActivity(),mData);
         loadingFragment = new LoadingFragment();
@@ -109,7 +109,7 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadingFragment.setText("正在加载...");
+                loadingFragment.setText(getString(R.string.loading));
                 mPresenter.getList();
                 refreshLayout.setRefreshing(false);
             }
@@ -126,10 +126,10 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
     public void setList(List<Category> data) {
         mData = data;
         if(data.size()==0){
-            loadingFragment.setText("暂无数据");
+            loadingFragment.setText(getString(R.string.no_data));
             showProgress();
         }else{
-            loadingFragment.setText("正在加载...");
+            loadingFragment.setText(getString(R.string.loading));
         }
         mAdapter.setNewData(mData);
         observable = RxBus.getInstance().register("searchCategory", ManagerCategoryFragment.class);

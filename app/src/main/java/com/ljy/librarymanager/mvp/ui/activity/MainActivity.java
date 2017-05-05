@@ -48,7 +48,6 @@ public class MainActivity extends BaseActivity implements MainView {
 
     private FragmentTransaction ft;
     private ActionBarDrawerToggle drawerToggle;
-    private ProgressDialog pg;
 
     private String account;
     private String password;
@@ -97,10 +96,6 @@ public class MainActivity extends BaseActivity implements MainView {
         tv_username.setText(username);
         tv_account.setText(account);
 
-        pg = new ProgressDialog(this);
-        pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("请稍候！");
-        pg.setCancelable(false);
     }
 
     @Override
@@ -181,12 +176,10 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void showProgress() {
-        pg.show();
     }
 
     @Override
     public void hideProgress() {
-        pg.dismiss();
     }
 
     @Override

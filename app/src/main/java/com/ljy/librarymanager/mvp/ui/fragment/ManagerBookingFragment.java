@@ -73,7 +73,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
         mPresenter.attachView(this);
         pg = new ProgressDialog(getActivity());
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在删除！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
         mAdapter = new BookingListAdapter(getActivity(), mData, true);
         loadingFragment = new LoadingFragment();
@@ -107,7 +107,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadingFragment.setText("正在加载...");
+                loadingFragment.setText(getString(R.string.loading));
                 mPresenter.getList();
                 refreshLayout.setRefreshing(false);
             }
@@ -124,10 +124,10 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     public void setList(List<Booking> data) {
         mData = data;
         if (data.size() == 0) {
-            loadingFragment.setText("暂无数据");
+            loadingFragment.setText(getString(R.string.no_data));
             showProgress();
         } else {
-            loadingFragment.setText("正在加载...");
+            loadingFragment.setText(getString(R.string.loading));
         }
         mAdapter.setNewData(mData);
         observable = RxBus.getInstance().register("searchBooking", ManagerBookingFragment.class);

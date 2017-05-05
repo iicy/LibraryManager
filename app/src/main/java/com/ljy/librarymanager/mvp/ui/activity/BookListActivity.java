@@ -68,7 +68,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
         loadingFragment = new LoadingFragment();
         pg = new ProgressDialog(this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("请稍候！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 
@@ -105,7 +105,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadingFragment.setText("正在加载...");
+                loadingFragment.setText(getString(R.string.loading));
                 mPresenter.getList(category);
                 refreshLayout.setRefreshing(false);
             }
@@ -170,10 +170,10 @@ public class BookListActivity extends BaseActivity implements BookListView {
     public void setList(List<Books> data) {
         mData = data;
         if (data.size() == 0) {
-            loadingFragment.setText("暂无数据");
+            loadingFragment.setText(getString(R.string.no_data));
             showProgress();
         } else {
-            loadingFragment.setText("正在加载...");
+            loadingFragment.setText(getString(R.string.loading));
         }
         mAdapter.setNewData(mData);
     }

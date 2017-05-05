@@ -44,7 +44,7 @@ public class ManagerUserInfoActivity extends BaseActivity implements ManagerUser
         mActivityComponent.inject(this);
         pg = new ProgressDialog(ManagerUserInfoActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在加载！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 

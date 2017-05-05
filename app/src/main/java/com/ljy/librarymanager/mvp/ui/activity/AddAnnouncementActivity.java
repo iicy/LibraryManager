@@ -47,7 +47,7 @@ public class AddAnnouncementActivity extends BaseActivity implements AddAnnounce
         mPresenter.attachView(this);
         pg = new ProgressDialog(AddAnnouncementActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在保存！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 
