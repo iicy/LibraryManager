@@ -57,7 +57,7 @@ public class ModifyPasswordActivity extends BaseActivity implements ModifyPasswo
         mPresenter.attachView(this);
         pg = new ProgressDialog(ModifyPasswordActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("请稍候！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
         account = getIntent().getStringExtra("account");
         password = getIntent().getStringExtra("password");

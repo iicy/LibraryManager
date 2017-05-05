@@ -48,7 +48,7 @@ public class ManagerAnnouncementInfoActivity extends BaseActivity implements Man
         mPresenter.attachView(this);
         pg = new ProgressDialog(ManagerAnnouncementInfoActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("请稍候！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 

@@ -73,7 +73,7 @@ public class ManagerBorrowInfoActivity extends BaseActivity implements ManagerBo
         mPresenter.attachView(this);
         pg = new ProgressDialog(ManagerBorrowInfoActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在保存！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 

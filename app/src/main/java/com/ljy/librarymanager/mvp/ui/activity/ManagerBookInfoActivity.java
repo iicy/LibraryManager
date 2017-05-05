@@ -82,7 +82,7 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
         mPresenter.attachView(this);
         pg = new ProgressDialog(ManagerBookInfoActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在请求！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 

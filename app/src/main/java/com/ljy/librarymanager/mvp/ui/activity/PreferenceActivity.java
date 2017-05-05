@@ -2,8 +2,11 @@ package com.ljy.librarymanager.mvp.ui.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.ljy.librarymanager.R;
 import com.ljy.librarymanager.widget.DeleteDialog;
@@ -14,6 +17,7 @@ import com.ljy.librarymanager.widget.DeleteDialog;
 
 public class PreferenceActivity extends android.preference.PreferenceActivity {
 
+    private Toolbar mToolbar;
     private Preference modify_password;
     private Preference logout;
 
@@ -23,10 +27,22 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_preference);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("设置");
+        mToolbar.setTitleTextColor(Color.WHITE);
+        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
         addPreferencesFromResource(R.xml.preferences);
 
         account = getIntent().getStringExtra("account");
         password = getIntent().getStringExtra("password");
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         logout = findPreference("logout");
         logout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

@@ -77,7 +77,7 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         mPresenter.attachView(this);
         pg = new ProgressDialog(BookInfoActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("请稍候！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 

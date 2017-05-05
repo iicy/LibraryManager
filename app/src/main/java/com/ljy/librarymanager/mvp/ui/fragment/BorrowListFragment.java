@@ -77,7 +77,7 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadingFragment.setText("正在加载...");
+                loadingFragment.setText(getString(R.string.loading));
                 mPresenter.getList(MainActivity.instance.getAccount());
                 refreshLayout.setRefreshing(false);
             }
@@ -94,10 +94,10 @@ public class BorrowListFragment extends BaseFragment implements BorrowListView {
     public void setList(List<Borrow> data) {
         mData = data;
         if(data.size()==0){
-            loadingFragment.setText("暂无数据");
+            loadingFragment.setText(getString(R.string.no_data));
             showProgress();
         }else{
-            loadingFragment.setText("正在加载...");
+            loadingFragment.setText(getString(R.string.loading));
         }
         mAdapter.setNewData(mData);
     }

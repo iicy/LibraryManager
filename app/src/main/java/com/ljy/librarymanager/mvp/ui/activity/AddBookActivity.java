@@ -78,7 +78,7 @@ public class AddBookActivity extends BaseActivity implements AddBookView {
         mPresenter.attachView(this);
         pg = new ProgressDialog(AddBookActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在保存！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
         category = getIntent().getStringExtra("category");
         mPresenter.getCategoryList();

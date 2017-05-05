@@ -72,7 +72,7 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
         mPresenter.attachView(this);
         pg = new ProgressDialog(getActivity());
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在删除！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
         mAdapter = new UserListAdapter(getActivity(), mData);
         loadingFragment = new LoadingFragment();
@@ -110,7 +110,7 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadingFragment.setText("正在加载...");
+                loadingFragment.setText(getString(R.string.loading));
                 mPresenter.getList();
                 refreshLayout.setRefreshing(false);
             }
@@ -127,10 +127,10 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
     public void setList(List<User> data) {
         mData = data;
         if(data.size()==0){
-            loadingFragment.setText("暂无数据");
+            loadingFragment.setText(getString(R.string.no_data));
             showProgress();
         }else{
-            loadingFragment.setText("正在加载...");
+            loadingFragment.setText(getString(R.string.loading));
         }
         mAdapter.setNewData(mData);
         observable = RxBus.getInstance().register("searchUser", ManagerUserFragment.class);

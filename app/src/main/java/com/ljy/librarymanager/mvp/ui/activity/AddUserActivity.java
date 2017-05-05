@@ -56,7 +56,7 @@ public class AddUserActivity extends BaseActivity implements AddUserView {
         mPresenter.attachView(this);
         pg = new ProgressDialog(AddUserActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在保存！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 

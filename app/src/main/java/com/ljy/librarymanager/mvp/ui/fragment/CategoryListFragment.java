@@ -78,7 +78,7 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadingFragment.setText("正在加载...");
+                loadingFragment.setText(getString(R.string.loading));
                 mPresenter.getList();
                 refreshLayout.setRefreshing(false);
             }
@@ -95,10 +95,10 @@ public class CategoryListFragment extends BaseFragment implements CategoryListVi
     public void setList(List<Category> data) {
         mData = data;
         if(data.size()==0){
-            loadingFragment.setText("暂无数据");
+            loadingFragment.setText(getString(R.string.no_data));
             showProgress();
         }else{
-            loadingFragment.setText("正在加载...");
+            loadingFragment.setText(getString(R.string.loading));
         }
         mAdapter.setNewData(mData);
     }

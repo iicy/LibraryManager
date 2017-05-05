@@ -62,7 +62,7 @@ public class SearchBarActivity extends BaseActivity implements SearchBarView {
         searchBarPresenter.attachView(this);
         pg = new ProgressDialog(SearchBarActivity.this);
         pg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pg.setMessage("正在搜素！");
+        pg.setMessage(getString(R.string.waiting));
         pg.setCancelable(false);
     }
 
