@@ -1,12 +1,16 @@
 package com.ljy.librarymanager.mvp.model;
 
+import android.content.Context;
+
 import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.entity.Category;
+import com.ljy.librarymanager.mvp.entity.SearchHistory;
 import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.SearchBarPresenter;
+import com.ljy.librarymanager.utils.DBManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +20,9 @@ import javax.inject.Inject;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by luojiayu on 2017/3/15.
@@ -165,4 +172,76 @@ public class SearchBarModel {
         });
     }
 
+    public void getSearchHistory(final SearchBarPresenter searchBarPresenter, Context context, String account) {
+        DBManager.getInstance(context)
+                .getSearchHistory(account)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<SearchHistory>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<SearchHistory> searchHistoryList) {
+                        searchBarPresenter.getSearchHistorySuccess(searchHistoryList);
+                    }
+                });
+    }
+
+    public void saveSearchHistory(Context context, String account, String content) {
+        SearchHistory searchHistory = new SearchHistory();
+        searchHistory.setAccount(account);
+        searchHistory.setContent(content);
+        DBManager.getInstance(context)
+                .saveSearchHistory(searchHistory)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+
+                    }
+                });
+    }
+
+    public void clearSearchHistory(SearchBarPresenter searchBarPresenter, Context context, String account) {
+        DBManager.getInstance(context)
+                .clearSearchHistory(account)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+
+                    }
+                });
+        searchBarPresenter.clearSearchHistorySuccess();
+    }
 }

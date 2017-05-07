@@ -7,6 +7,7 @@ import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.entity.Category;
+import com.ljy.librarymanager.mvp.entity.SearchHistory;
 import com.ljy.librarymanager.mvp.entity.User;
 
 import java.util.List;
@@ -28,5 +29,9 @@ public interface SearchBarView extends BaseView {
     void searchUser(List<User> mData);
 
     void searchCategory(List<Category> mData);
+
+    void showSearchHistory(List<SearchHistory> mData);
+
+    void clearSearchHistorySuccess();
 
 }

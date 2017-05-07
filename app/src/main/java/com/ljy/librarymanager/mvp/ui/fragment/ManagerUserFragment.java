@@ -18,6 +18,7 @@ import com.ljy.librarymanager.adapter.UserListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.presenter.ManagerUserPresenter;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerUserInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.view.ManagerUserView;
@@ -141,6 +142,7 @@ public class ManagerUserFragment extends BaseFragment implements ManagerUserView
                     public void call(ManagerUserFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
                         intent.putExtra("searchType","user");
+                        intent.putExtra("account", ManagerActivity.instance.getAccount());
                         startActivity(intent);
                     }
                 });

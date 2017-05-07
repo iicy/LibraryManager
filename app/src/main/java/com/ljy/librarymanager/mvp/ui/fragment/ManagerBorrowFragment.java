@@ -19,6 +19,7 @@ import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.presenter.ManagerBorrowPresenter;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBorrowInfoActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.view.ManagerBorrowView;
@@ -139,6 +140,7 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
                     public void call(ManagerBorrowFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
                         intent.putExtra("searchType","borrow");
+                        intent.putExtra("account", ManagerActivity.instance.getAccount());
                         startActivity(intent);
                     }
                 });

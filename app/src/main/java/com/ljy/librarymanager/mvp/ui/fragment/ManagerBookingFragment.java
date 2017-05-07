@@ -20,6 +20,7 @@ import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.presenter.ManagerBookingPresenter;
 import com.ljy.librarymanager.mvp.ui.activity.BookInfoActivity;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.view.ManagerBookingView;
 import com.ljy.librarymanager.utils.RxBus;
@@ -138,6 +139,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
                     public void call(ManagerBookingFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
                         intent.putExtra("searchType","booking");
+                        intent.putExtra("account", ManagerActivity.instance.getAccount());
                         startActivity(intent);
                     }
                 });

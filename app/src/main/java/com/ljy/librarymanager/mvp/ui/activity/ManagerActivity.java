@@ -91,8 +91,8 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
         username = intent.getStringExtra("username");
 
         View view = manager_navigation.getHeaderView(0);
-        tv_username= (TextView) view.findViewById(R.id.username);
-        tv_account= (TextView) view.findViewById(R.id.account);
+        tv_username = (TextView) view.findViewById(R.id.username);
+        tv_account = (TextView) view.findViewById(R.id.account);
         tv_username.setText(username);
         tv_account.setText(account);
     }
@@ -102,45 +102,41 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
         manager_toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.manager_toolbar_search: {
                         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.manager_fragment);
-                        if(fragment instanceof ManagerAnnouncementFragment){
-                            RxBus.getInstance().post("searchAnnounce",fragment);
-                        }
-                        if(fragment instanceof ManagerBookingFragment){
-                            RxBus.getInstance().post("searchBooking",fragment);
-                        }
-                        if(fragment instanceof ManagerUserFragment){
-                            RxBus.getInstance().post("searchUser",fragment);
-                        }
-                        if(fragment instanceof ManagerCategoryFragment){
-                            RxBus.getInstance().post("searchCategory",fragment);
-                        }
-                        if(fragment instanceof ManagerBorrowFragment){
-                            RxBus.getInstance().post("searchBorrow",fragment);
+                        if (fragment instanceof ManagerAnnouncementFragment) {
+                            RxBus.getInstance().post("searchAnnounce", fragment);
+                        } else if (fragment instanceof ManagerBookingFragment) {
+                            RxBus.getInstance().post("searchBooking", fragment);
+                        } else if (fragment instanceof ManagerUserFragment) {
+                            RxBus.getInstance().post("searchUser", fragment);
+                        } else if (fragment instanceof ManagerCategoryFragment) {
+                            RxBus.getInstance().post("searchCategory", fragment);
+                        } else if (fragment instanceof ManagerBorrowFragment) {
+                            RxBus.getInstance().post("searchBorrow", fragment);
                         }
                         break;
                     }
-                    case R.id.manager_toolbar_add:{
+                    case R.id.manager_toolbar_add: {
                         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.manager_fragment);
-                        if(fragment instanceof ManagerAnnouncementFragment){
-                            Intent intent = new Intent(ManagerActivity.this,AddAnnouncementActivity.class);
-                            intent.putExtra("account",account);
+                        if (fragment instanceof ManagerAnnouncementFragment) {
+                            Intent intent = new Intent(ManagerActivity.this, AddAnnouncementActivity.class);
+                            intent.putExtra("account", account);
                             startActivity(intent);
                         }
-                        if(fragment instanceof ManagerUserFragment){
-                            Intent intent = new Intent(ManagerActivity.this,AddUserActivity.class);
+                        if (fragment instanceof ManagerUserFragment) {
+                            Intent intent = new Intent(ManagerActivity.this, AddUserActivity.class);
                             startActivity(intent);
                         }
-                        if(fragment instanceof ManagerCategoryFragment){
-                            Intent intent = new Intent(ManagerActivity.this,AddCategoryActivity.class);
+                        if (fragment instanceof ManagerCategoryFragment) {
+                            Intent intent = new Intent(ManagerActivity.this, AddCategoryActivity.class);
                             startActivity(intent);
                         }
-                        if(fragment instanceof ManagerBorrowFragment){
-                            Intent intent = new Intent(ManagerActivity.this,AddBorrowActivity.class);
-                            intent.putExtra("manager",account);
-                            intent.putExtra("passowrd",password);
+                        if (fragment instanceof ManagerBorrowFragment) {
+                            Intent intent = new Intent(ManagerActivity.this, AddBorrowActivity.class);
+                            intent.putExtra("manager", account);
+                            intent.putExtra("passowrd", password);
                             startActivity(intent);
                         }
                         break;
@@ -152,34 +148,34 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
         manager_navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.nav_manager_announcement:{
+                switch (item.getItemId()) {
+                    case R.id.nav_manager_announcement: {
                         manager_toolbar.setTitle("公告管理");
                         changeFragment(managerAnnouncementFragment);
                         break;
                     }
-                    case R.id.nav_manager_booking:{
+                    case R.id.nav_manager_booking: {
                         manager_toolbar.setTitle("预订记录");
                         changeFragment(managerBookingFragment);
                         break;
                     }
-                    case R.id.nav_manager_borrow:{
+                    case R.id.nav_manager_borrow: {
                         manager_toolbar.setTitle("借阅记录");
                         changeFragment(managerBorrowFragment);
                         break;
                     }
-                    case R.id.nav_manager_category:{
+                    case R.id.nav_manager_category: {
                         manager_toolbar.setTitle("分类管理");
                         changeFragment(managerCategoryFragment);
                         break;
                     }
-                    case R.id.nav_manager_user:{
+                    case R.id.nav_manager_user: {
                         manager_toolbar.setTitle("用户管理");
                         changeFragment(managerUserFragment);
                         break;
                     }
-                    case R.id.nav_manager_settings:{
-                        Intent i = new Intent(ManagerActivity.this,PreferenceActivity.class);
+                    case R.id.nav_manager_settings: {
+                        Intent i = new Intent(ManagerActivity.this, PreferenceActivity.class);
                         startActivity(i);
                         break;
                     }
@@ -221,17 +217,17 @@ public class ManagerActivity extends BaseActivity implements ManagerView {
     @Override
     public void changeFragment(Fragment fragment) {
         ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.manager_fragment,fragment);
+        ft.replace(R.id.manager_fragment, fragment);
         ft.commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_manager_toolbar,menu);
+        getMenuInflater().inflate(R.menu.menu_manager_toolbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    public String getAccount(){
+    public String getAccount() {
         return account;
     }
 

@@ -1,11 +1,14 @@
 package com.ljy.librarymanager.mvp.presenter;
 
+import android.content.Context;
+
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Announcement;
 import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Borrow;
 import com.ljy.librarymanager.mvp.entity.Category;
+import com.ljy.librarymanager.mvp.entity.SearchHistory;
 import com.ljy.librarymanager.mvp.entity.User;
 import com.ljy.librarymanager.mvp.model.SearchBarModel;
 import com.ljy.librarymanager.mvp.view.SearchBarView;
@@ -34,18 +37,33 @@ public class SearchBarPresenter extends BasePresenter<SearchBarView, String> {
     public void searchBooking(String key) {
         searchBarModel.searchBooking(this,key);
     }
+
     public void searchBooks(String key) {
         searchBarModel.searchBooks(this,key);
     }
+
     public void searchBorrow(String key) {
         searchBarModel.searchBorrow(this,key);
     }
+
     public void searchUser(String key) {
         searchBarModel.searchUser(this,key);
     }
 
     public void searchCategory(String key) {
         searchBarModel.searchCategory(this,key);
+    }
+
+    public void getSearchHistory(Context context, String account) {
+        searchBarModel.getSearchHistory(this, context, account);
+    }
+
+    public void saveSearchHistory(Context context, String account, String content) {
+        searchBarModel.saveSearchHistory(context, account, content);
+    }
+
+    public void clearSearchHistory(Context context, String account) {
+        searchBarModel.clearSearchHistory(this, context, account);
     }
 
     @Override
@@ -77,6 +95,14 @@ public class SearchBarPresenter extends BasePresenter<SearchBarView, String> {
     public void searchCategorySuccess(List<Category> data){
         mView.hideProgress();
         mView.searchCategory(data);
+    }
+
+    public void getSearchHistorySuccess(List<SearchHistory> data) {
+        mView.showSearchHistory(data);
+    }
+
+    public void clearSearchHistorySuccess() {
+        mView.clearSearchHistorySuccess();
     }
 
     @Override

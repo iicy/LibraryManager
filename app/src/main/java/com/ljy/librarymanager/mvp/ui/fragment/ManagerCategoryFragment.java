@@ -17,6 +17,7 @@ import com.ljy.librarymanager.adapter.CategoryListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseFragment;
 import com.ljy.librarymanager.mvp.entity.Category;
 import com.ljy.librarymanager.mvp.presenter.ManagerCategoryPresenter;
+import com.ljy.librarymanager.mvp.ui.activity.ManagerActivity;
 import com.ljy.librarymanager.mvp.ui.activity.ManagerBookActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.view.ManagerCategoryView;
@@ -140,6 +141,7 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
                     public void call(ManagerCategoryFragment mData) {
                         Intent intent = new Intent(getActivity(), SearchBarActivity.class);
                         intent.putExtra("searchType","category");
+                        intent.putExtra("account", ManagerActivity.instance.getAccount());
                         startActivity(intent);
                     }
                 });
