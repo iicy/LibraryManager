@@ -8,6 +8,7 @@ import cn.bmob.v3.BmobObject;
 
 public class Comment extends BmobObject {
     private String user;
+    private String username;
     private String content;
     private String bookId;
 
@@ -17,6 +18,14 @@ public class Comment extends BmobObject {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getContent() {

@@ -3,8 +3,11 @@ package com.ljy.librarymanager.mvp.presenter;
 import com.ljy.librarymanager.mvp.base.BasePresenter;
 import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Collection;
+import com.ljy.librarymanager.mvp.entity.Comment;
 import com.ljy.librarymanager.mvp.model.BookInfoModel;
 import com.ljy.librarymanager.mvp.view.BookInfoView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,6 +22,10 @@ public class BookInfoPresenter extends BasePresenter<BookInfoView, String> {
     @Inject
     public BookInfoPresenter(BookInfoModel bookInfoModel) {
         this.bookInfoModel = bookInfoModel;
+    }
+
+    public void getComments(String bookId) {
+        bookInfoModel.getComments(this, bookId);
     }
 
     public void addBooking(Booking booking) {
@@ -57,6 +64,11 @@ public class BookInfoPresenter extends BasePresenter<BookInfoView, String> {
     public void success(String s) {
         super.success(s);
         mView.success();
+    }
+
+    public void getCommentsSuccess(List<Comment> data) {
+        mView.hideProgress();
+        mView.getComments(data);
     }
 
     @Override

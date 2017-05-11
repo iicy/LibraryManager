@@ -9,13 +9,9 @@ import java.util.List;
  * Created by luojiayu on 2017/4/6.
  */
 
-public interface BookInfoView extends BaseView{
+public interface ManagerCommentsView extends BaseView {
 
-    void success();
-
-    void hasBooking(boolean result,String id);
-
-    void hasCollect(boolean result,String id);
+    void deleteSuccess();
 
     void getComments(List<Comment> data);
 }

@@ -13,12 +13,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.ljy.librarymanager.R;
+import com.ljy.librarymanager.adapter.CommentListAdapter;
 import com.ljy.librarymanager.mvp.base.BaseActivity;
 import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Books;
 import com.ljy.librarymanager.mvp.entity.Collection;
+import com.ljy.librarymanager.mvp.entity.Comment;
 import com.ljy.librarymanager.mvp.presenter.BookInfoPresenter;
 import com.ljy.librarymanager.mvp.view.BookInfoView;
+import com.ljy.librarymanager.widget.FullyLinearLayoutManager;
+import com.ljy.librarymanager.widget.LoadMoreRecyclerView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -58,6 +64,11 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
     Button bt_undo_collect;
     @BindView(R.id.bt_send_comment)
     Button bt_send_comment;
+    @BindView(R.id.no_comment)
+    TextView no_comment;
+    @BindView(R.id.list)
+    LoadMoreRecyclerView list;
+
     private ProgressDialog pg;
 
     private Books book;
@@ -65,6 +76,8 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
     private String bookingId;
     private String collectionId;
     private boolean isManager;
+    private List<Comment> mList;
+    private CommentListAdapter mAdapter;
 
     @Inject
     BookInfoPresenter mPresenter;
@@ -92,6 +105,14 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
+        mAdapter = new CommentListAdapter(this, mList);
+        FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(this);
+        list.setNestedScrollingEnabled(false);
+        //设置布局管理器
+        list.setLayoutManager(linearLayoutManager);
+//        list.setLayoutManager(new LinearLayoutManager(this));
+        list.setAdapter(mAdapter);
+
         if(book.getPic()!=null){
             Glide.with(mContext)
                     .load(book.getPic().getUrl())
@@ -107,7 +128,7 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         tv_bookAuthor.setText("作者：" + book.getAuthor());
         tv_bookCategory.setText("分类：" + book.getCategory());
         tv_bookPublication.setText("出版社：" + book.getPublication());
-        tv_bookPublicationDate.setText("出版日期：" + book.getPublicationDate().getDate());
+        tv_bookPublicationDate.setText("出版日期：" + book.getPublicationDate().getDate().split(" ")[0]);
         tv_bookStock.setText("库存：" + book.getStock());
         tv_bookSummary.setText("简介：" + book.getSummary());
         if (isManager) {
@@ -252,9 +273,21 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
     }
 
     @Override
+    public void getComments(List<Comment> data) {
+        mList = data;
+        if (mList.size() == 0 || mList == null) {
+            no_comment.setVisibility(View.VISIBLE);
+        } else {
+            no_comment.setVisibility(View.GONE);
+            mAdapter.setNewData(data);
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         mPresenter.hasBooking(account, book.getObjectId());
         mPresenter.hasCollect(account, book.getObjectId());
+        mPresenter.getComments(book.getObjectId());
     }
 }

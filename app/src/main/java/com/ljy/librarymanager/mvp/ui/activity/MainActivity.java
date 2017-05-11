@@ -1,6 +1,5 @@
 package com.ljy.librarymanager.mvp.ui.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -202,6 +201,10 @@ public class MainActivity extends BaseActivity implements MainView {
 
     public String getAccount(){
         return account;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
 }

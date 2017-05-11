@@ -2,6 +2,7 @@ package com.ljy.librarymanager.mvp.model;
 
 import com.ljy.librarymanager.mvp.entity.Booking;
 import com.ljy.librarymanager.mvp.entity.Collection;
+import com.ljy.librarymanager.mvp.entity.Comment;
 import com.ljy.librarymanager.mvp.presenter.BookInfoPresenter;
 
 import java.util.List;
@@ -105,6 +106,22 @@ public class BookInfoModel {
             public void done(BmobException e) {
                 if (e == null) {
                     bookInfoPresenter.success("");
+                } else {
+                    bookInfoPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
+    }
+
+    public void getComments(final BookInfoPresenter bookInfoPresenter, String bookId) {
+        BmobQuery<Comment> bmobQuery = new BmobQuery<>();
+        bmobQuery.addWhereEqualTo("bookId", bookId);
+        bmobQuery.order("-createdAt");
+        bmobQuery.findObjects(new FindListener<Comment>() {
+            @Override
+            public void done(List<Comment> list, BmobException e) {
+                if (e == null) {
+                    bookInfoPresenter.getCommentsSuccess(list);
                 } else {
                     bookInfoPresenter.onError("bmobFail:" + e.getMessage() + "," + e.getErrorCode());
                 }

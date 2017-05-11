@@ -93,6 +93,7 @@ public class SendCommentActivity extends BaseActivity implements SendCommentView
                 content = et_content.getText().toString();
                 Comment comment= new Comment();
                 comment.setUser(account);
+                comment.setUsername(MainActivity.instance.getUsername());
                 comment.setContent(content);
                 comment.setBookId(bookId);
                 mPresenter.send(comment);

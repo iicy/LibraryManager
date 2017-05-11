@@ -1,5 +1,6 @@
 package com.ljy.librarymanager.mvp.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +29,7 @@ import com.ljy.librarymanager.utils.FileUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -54,11 +58,13 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
     @BindView(R.id.book_publication)
     EditText tv_bookPublication;
     @BindView(R.id.book_publication_date)
-    EditText tv_bookPublicationDate;
+    TextView tv_bookPublicationDate;
     @BindView(R.id.book_stock)
     EditText tv_bookStock;
     @BindView(R.id.book_summary)
     EditText tv_bookSummary;
+    @BindView(R.id.bt_manager_comments)
+    Button bt_manager_comments;
     @BindView(R.id.bt_save)
     Button bt_save;
     @BindView(R.id.bt_reset)
@@ -70,6 +76,7 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
     int defaultIndex = 0;
     private Books book;
     private File sdcardTempFile;
+    private Calendar c = Calendar.getInstance();
 
     @Inject
     ManagerBookInfoPresenter mPresenter;
@@ -107,8 +114,10 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
                 finish();
             }
         });
+        bt_manager_comments.setOnClickListener(this);
         bt_save.setOnClickListener(this);
         bt_reset.setOnClickListener(this);
+        tv_bookPublicationDate.setOnClickListener(this);
         pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +141,41 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.book_publication_date: {
+                // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
+                new DatePickerDialog(ManagerBookInfoActivity.this,
+                        // 绑定监听器
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                String month;
+                                String day;
+                                if ((monthOfYear + 1) < 10) {
+                                    month = "0" + (monthOfYear + 1);
+                                } else {
+                                    month = "" + (monthOfYear + 1);
+                                }
+                                if (dayOfMonth < 10) {
+                                    day = "0" + dayOfMonth;
+                                } else {
+                                    day = "" + dayOfMonth;
+                                }
+                                tv_bookPublicationDate.setText(year + "-" + month
+                                        + "-" + day);
+                            }
+                        }
+                        // 设置初始日期
+                        , c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
+                        .get(Calendar.DAY_OF_MONTH)).show();
+                break;
+            }
+            case R.id.bt_manager_comments: {
+                Intent intent = new Intent(ManagerBookInfoActivity.this, ManagerCommentsActivity.class);
+                intent.putExtra("bookId", book.getObjectId());
+                startActivity(intent);
+                break;
+            }
             case R.id.bt_save: {
                 showProgress();
                 if (sdcardTempFile == null) {
@@ -169,7 +213,7 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
         book.setAuthor(tv_bookAuthor.getText().toString());
         book.setCategory(tv_bookCategory.getSelectedItem().toString());
         book.setPublication(tv_bookPublication.getText().toString());
-        book.setPublicationDate(new BmobDate(new Date()).createBmobDate("yyyy-MM-dd HH:mm:ss", tv_bookPublicationDate.getText().toString()));
+        book.setPublicationDate(new BmobDate(new Date()).createBmobDate("yyyy-MM-dd", tv_bookPublicationDate.getText().toString()));
         book.setStock(Integer.parseInt(tv_bookStock.getText().toString()));
         book.setSummary(tv_bookSummary.getText().toString());
         mPresenter.save(book);
@@ -204,7 +248,7 @@ public class ManagerBookInfoActivity extends BaseActivity implements ManagerBook
         tv_bookAuthor.setText(book.getAuthor());
         tv_bookCategory.setSelection(defaultIndex);
         tv_bookPublication.setText(book.getPublication());
-        tv_bookPublicationDate.setText(book.getPublicationDate().getDate());
+        tv_bookPublicationDate.setText(book.getPublicationDate().getDate().split(" ")[0]);
         tv_bookStock.setText(book.getStock() + "");
         tv_bookSummary.setText(book.getSummary());
     }

@@ -75,7 +75,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
         holder.name.setText(mList.get(position).getBookName());
         holder.author.setText("作者："+mList.get(position).getAuthor());
         holder.pulication.setText("出版社："+mList.get(position).getPublication());
-        holder.date.setText("出版日期："+mList.get(position).getPublicationDate().getDate());
+        holder.date.setText("出版日期：" + mList.get(position).getPublicationDate().getDate().split(" ")[0]);
         holder.itemView.setTag(position);
     }
 
