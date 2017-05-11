@@ -2,6 +2,7 @@ package com.ljy.librarymanager.mvp.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -207,4 +208,17 @@ public class MainActivity extends BaseActivity implements MainView {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+        SharedPreferences sp = this.getSharedPreferences("loginFlag", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("username", username);
+        editor.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tv_username.setText(username);
+    }
 }

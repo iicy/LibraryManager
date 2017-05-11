@@ -26,6 +26,7 @@ import com.ljy.librarymanager.mvp.ui.activity.ModifyPasswordActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchBarActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SearchResultActivity;
 import com.ljy.librarymanager.mvp.ui.activity.SendCommentActivity;
+import com.ljy.librarymanager.mvp.ui.activity.UserInfoActivity;
 
 import dagger.Component;
 
@@ -84,4 +85,6 @@ public interface ActivityComponent {
     void inject(SendCommentActivity sendCommentActivity);
 
     void inject(ModifyPasswordActivity modifyPasswordActivity);
+
+    void inject(UserInfoActivity userInfoActivity);
 }

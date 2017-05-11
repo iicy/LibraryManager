@@ -52,6 +52,7 @@
         <activity android:name=".mvp.ui.activity.ManagerCommentsActivity" />
         <activity android:name=".mvp.ui.activity.SendCommentActivity"/>
         <activity android:name=".mvp.ui.activity.ModifyPasswordActivity"/>
+        <activity android:name=".mvp.ui.activity.UserInfoActivity" />
     </application>
 
 </manifest>
