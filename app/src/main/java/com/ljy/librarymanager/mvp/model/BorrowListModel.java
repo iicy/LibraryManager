@@ -22,11 +22,11 @@ public class BorrowListModel {
     public BorrowListModel() {
     }
 
-    public void getList(final BorrowListPresenter borrowListPresenter,String account) {
+    public void getList(final BorrowListPresenter borrowListPresenter, String account, int more) {
         BmobQuery<Borrow> bmobQuery = new BmobQuery<Borrow>();
         bmobQuery.addWhereEqualTo("user",account);
         bmobQuery.order("-createdAt").order("status");
-//        bmobQuery.setLimit(10);
+        bmobQuery.setLimit(10 + more);
         bmobQuery.findObjects(new FindListener<Borrow>() {
             @Override
             public void done(List<Borrow> list, BmobException e) {

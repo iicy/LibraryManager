@@ -22,10 +22,11 @@ public class CollectionListModel {
     public CollectionListModel() {
     }
 
-    public void getList(final CollectionListPresenter collectionListPresenter, String account) {
+    public void getList(final CollectionListPresenter collectionListPresenter, String account, int more) {
         BmobQuery<Collection> bmobQuery = new BmobQuery<Collection>();
         bmobQuery.addWhereEqualTo("user",account);
         bmobQuery.order("-createdAt");
+        bmobQuery.setLimit(10 + more);
         bmobQuery.findObjects(new FindListener<Collection>() {
             @Override
             public void done(List<Collection> list, BmobException e) {

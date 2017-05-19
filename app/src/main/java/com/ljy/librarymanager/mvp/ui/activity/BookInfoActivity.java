@@ -78,6 +78,7 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
     private boolean isManager;
     private List<Comment> mList;
     private CommentListAdapter mAdapter;
+    private int more = 0;
 
     @Inject
     BookInfoPresenter mPresenter;
@@ -153,6 +154,13 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         bt_undo_booking.setOnClickListener(this);
         bt_undo_collect.setOnClickListener(this);
         bt_send_comment.setOnClickListener(this);
+        list.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+            @Override
+            public void loadMore() {
+                more += 10;
+                mPresenter.getComments(book.getObjectId(), more);
+            }
+        });
     }
 
     @Override
@@ -288,6 +296,6 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         super.onResume();
         mPresenter.hasBooking(account, book.getObjectId());
         mPresenter.hasCollect(account, book.getObjectId());
-        mPresenter.getComments(book.getObjectId());
+        mPresenter.getComments(book.getObjectId(), 0);
     }
 }

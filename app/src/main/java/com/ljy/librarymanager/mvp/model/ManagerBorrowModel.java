@@ -23,10 +23,10 @@ public class ManagerBorrowModel {
     public ManagerBorrowModel() {
     }
 
-    public void getList(final ManagerBorrowPresenter managerBorrowPresenter) {
+    public void getList(final ManagerBorrowPresenter managerBorrowPresenter, int more) {
         BmobQuery<Borrow> bmobQuery = new BmobQuery<Borrow>();
         bmobQuery.order("-updatedAt").order("status");
-//        bmobQuery.setLimit(10);
+        bmobQuery.setLimit(10 + more);
         bmobQuery.findObjects(new FindListener<Borrow>() {
             @Override
             public void done(List<Borrow> list, BmobException e) {

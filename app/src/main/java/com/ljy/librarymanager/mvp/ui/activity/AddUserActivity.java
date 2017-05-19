@@ -34,6 +34,8 @@ public class AddUserActivity extends BaseActivity implements AddUserView {
     EditText et_account;
     @BindView(R.id.password)
     EditText et_password;
+    @BindView(R.id.id_num)
+    EditText et_id_num;
     @BindView(R.id.manager)
     RadioButton rb_manager;
     @BindView(R.id.simple_user)
@@ -44,6 +46,7 @@ public class AddUserActivity extends BaseActivity implements AddUserView {
     private String username;
     private String account;
     private String password;
+    private String id_num;
 
     @Inject
     AddUserPresenter mPresenter;
@@ -98,10 +101,12 @@ public class AddUserActivity extends BaseActivity implements AddUserView {
                 username = et_username.getText().toString();
                 account = et_account.getText().toString();
                 password = et_password.getText().toString();
+                id_num = et_id_num.getText().toString();
                 User user = new User();
                 user.setUsername(username);
                 user.setAccount(account);
                 user.setPassword(password);
+                user.setId_num(id_num);
                 if(rb_manager.isChecked())
                     user.setPermission("0");
                 else if(rb_simple_user.isChecked())

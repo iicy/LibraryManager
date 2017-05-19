@@ -22,10 +22,10 @@ public class ManagerAnnouncementModel {
     public ManagerAnnouncementModel() {
     }
 
-    public void getList(final ManagerAnnouncementPresenter managerAnnouncementPresenter) {
+    public void getList(final ManagerAnnouncementPresenter managerAnnouncementPresenter, int more) {
         BmobQuery<Announcement> bmobQuery = new BmobQuery<Announcement>();
         bmobQuery.order("-updatedAt");
-        bmobQuery.setLimit(10);
+        bmobQuery.setLimit(10 + more);
         bmobQuery.findObjects(new FindListener<Announcement>() {
             @Override
             public void done(List<Announcement> list, BmobException e) {

@@ -22,9 +22,9 @@ public class ManagerAnnouncementPresenter extends BasePresenter<ManagerAnnouncem
         this.managerAnnouncementModel = managerAnnouncementModel;
     }
 
-    public void getList() {
+    public void getList(int more) {
         mView.showProgress();
-        managerAnnouncementModel.getList(this);
+        managerAnnouncementModel.getList(this, more);
     }
 
     public void delete(Announcement announcement){

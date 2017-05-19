@@ -23,9 +23,9 @@ public class ManagerBookingPresenter extends BasePresenter<ManagerBookingView, L
         this.managerBookingModel = managerBookingModel;
     }
 
-    public void getList() {
+    public void getList(int more) {
         mView.showProgress();
-        managerBookingModel.getList(this);
+        managerBookingModel.getList(this, more);
     }
 
     public void getBook(String bookId){

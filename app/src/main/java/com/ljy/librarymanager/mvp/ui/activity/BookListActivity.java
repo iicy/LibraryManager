@@ -53,6 +53,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
     private ProgressDialog pg;
 
     private String category;
+    private int more = 0;
 
     @Inject
     BookListPresenter mPresenter;
@@ -74,7 +75,11 @@ public class BookListActivity extends BaseActivity implements BookListView {
 
     @Override
     protected void init() {
-        mToolbar.setTitle(category);
+        if (category == null || category.equals("")) {
+            mToolbar.setTitle("全部图书");
+        } else {
+            mToolbar.setTitle(category);
+        }
         mToolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -106,7 +111,8 @@ public class BookListActivity extends BaseActivity implements BookListView {
             @Override
             public void onRefresh() {
                 loadingFragment.setText(getString(R.string.loading));
-                mPresenter.getList(category);
+                mPresenter.getList(category, 0);
+                more = 0;
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -123,6 +129,13 @@ public class BookListActivity extends BaseActivity implements BookListView {
                     }
                 }
                 return false;
+            }
+        });
+        list.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+            @Override
+            public void loadMore() {
+                more += 5;
+                mPresenter.getList(category, more);
             }
         });
     }
@@ -187,6 +200,6 @@ public class BookListActivity extends BaseActivity implements BookListView {
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getList(category);
+        mPresenter.getList(category, 0);
     }
 }

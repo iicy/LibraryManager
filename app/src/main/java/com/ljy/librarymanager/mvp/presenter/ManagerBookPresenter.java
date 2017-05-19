@@ -22,9 +22,9 @@ public class ManagerBookPresenter extends BasePresenter<ManagerBookView, List<Bo
         this.managerBookModel = managerBookModel;
     }
 
-    public void getList(String category) {
+    public void getList(String category, int more) {
         mView.showProgress();
-        managerBookModel.getList(this,category);
+        managerBookModel.getList(this, category, more);
     }
 
     public void delete(Books books){

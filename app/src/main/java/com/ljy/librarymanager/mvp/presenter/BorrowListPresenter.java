@@ -23,9 +23,9 @@ public class BorrowListPresenter extends BasePresenter<BorrowListView, List<Borr
         this.borrowListModel = borrowListModel;
     }
 
-    public void getList(String account) {
+    public void getList(String account, int more) {
         mView.showProgress();
-        borrowListModel.getList(this,account);
+        borrowListModel.getList(this, account, more);
     }
 
     public void getBook(String bookId){

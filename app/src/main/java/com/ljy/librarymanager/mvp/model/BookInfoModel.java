@@ -113,10 +113,11 @@ public class BookInfoModel {
         });
     }
 
-    public void getComments(final BookInfoPresenter bookInfoPresenter, String bookId) {
+    public void getComments(final BookInfoPresenter bookInfoPresenter, String bookId, int more) {
         BmobQuery<Comment> bmobQuery = new BmobQuery<>();
         bmobQuery.addWhereEqualTo("bookId", bookId);
         bmobQuery.order("-createdAt");
+        bmobQuery.setLimit(10 + more);
         bmobQuery.findObjects(new FindListener<Comment>() {
             @Override
             public void done(List<Comment> list, BmobException e) {

@@ -63,6 +63,7 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
     private Observable<ManagerAnnouncementFragment> observable;
 
     private String account;
+    private int more = 0;
 
     @Inject
     public ManagerAnnouncementFragment() {
@@ -117,8 +118,16 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
             @Override
             public void onRefresh() {
                 loadingFragment.setText(getString(R.string.loading));
-                mPresenter.getList();
+                mPresenter.getList(0);
+                more = 0;
                 refreshLayout.setRefreshing(false);
+            }
+        });
+        list.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+            @Override
+            public void loadMore() {
+                more += 10;
+                mPresenter.getList(more);
             }
         });
     }
@@ -156,7 +165,8 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
     @Override
     public void deleteSuccess() {
         pg.dismiss();
-        mPresenter.getList();
+        mPresenter.getList(0);
+        more = 0;
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
     }
 
@@ -188,7 +198,7 @@ public class ManagerAnnouncementFragment extends BaseFragment implements Manager
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getList();
+        mPresenter.getList(0);
     }
 
     @Override

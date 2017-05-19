@@ -208,12 +208,26 @@ public class MainActivity extends BaseActivity implements MainView {
         return username;
     }
 
+    public Toolbar getMain_toolbar() {
+        return main_toolbar;
+    }
+
     public void setUsername(String username) {
         this.username = username;
         SharedPreferences sp = this.getSharedPreferences("loginFlag", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("username", username);
         editor.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!main_toolbar.getTitle().toString().equals("主页")) {
+            main_toolbar.setTitle("主页");
+            changeFragment(homeListFragment);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

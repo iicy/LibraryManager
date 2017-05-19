@@ -19,14 +19,17 @@ public class User extends BmobObject{
     private String password;
     private String username;
     private String permission;
-    @Generated(hash = 1757012403)
+    private String id_num;
+
+    @Generated(hash = 147784318)
     public User(Long id, String account, String password, String username,
-            String permission) {
+                String permission, String id_num) {
         this.id = id;
         this.account = account;
         this.password = password;
         this.username = username;
         this.permission = permission;
+        this.id_num = id_num;
     }
     @Generated(hash = 586692638)
     public User() {
@@ -60,5 +63,13 @@ public class User extends BmobObject{
     }
     public void setPermission(String permission) {
         this.permission = permission;
+    }
+
+    public String getId_num() {
+        return id_num;
+    }
+
+    public void setId_num(String id_num) {
+        this.id_num = id_num;
     }
 }

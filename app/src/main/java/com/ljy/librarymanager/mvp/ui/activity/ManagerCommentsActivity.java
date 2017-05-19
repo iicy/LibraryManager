@@ -50,6 +50,7 @@ public class ManagerCommentsActivity extends BaseActivity implements ManagerComm
     private ProgressDialog pg;
 
     private String bookId;
+    private int more = 0;
 
     @Inject
     ManagerCommentsPresenter mPresenter;
@@ -92,7 +93,8 @@ public class ManagerCommentsActivity extends BaseActivity implements ManagerComm
             @Override
             public void onRefresh() {
                 loadingFragment.setText(getString(R.string.loading));
-                mPresenter.getComments(bookId);
+                mPresenter.getComments(bookId, 0);
+                more = 0;
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -110,6 +112,13 @@ public class ManagerCommentsActivity extends BaseActivity implements ManagerComm
                     }
                 });
                 deleteDialog.show();
+            }
+        });
+        list.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+            @Override
+            public void loadMore() {
+                more += 10;
+                mPresenter.getComments(bookId, more);
             }
         });
     }
@@ -156,14 +165,15 @@ public class ManagerCommentsActivity extends BaseActivity implements ManagerComm
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getComments(bookId);
+        mPresenter.getComments(bookId, 0);
     }
 
     @Override
     public void deleteSuccess() {
         pg.dismiss();
         Toast.makeText(ManagerCommentsActivity.this, "删除成功！", Toast.LENGTH_LONG).show();
-        mPresenter.getComments(bookId);
+        mPresenter.getComments(bookId, 0);
+        more = 0;
     }
 
     @Override

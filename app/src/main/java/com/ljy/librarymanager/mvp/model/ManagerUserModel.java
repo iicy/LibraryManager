@@ -22,10 +22,10 @@ public class ManagerUserModel {
     public ManagerUserModel() {
     }
 
-    public void getList(final ManagerUserPresenter managerUserPresenter) {
+    public void getList(final ManagerUserPresenter managerUserPresenter, int more) {
         BmobQuery<User> bmobQuery = new BmobQuery<User>();
         bmobQuery.order("-updatedAt").order("-permission");
-        bmobQuery.setLimit(10);
+        bmobQuery.setLimit(20 + more);
         bmobQuery.findObjects(new FindListener<User>() {
             @Override
             public void done(List<User> list, BmobException e) {

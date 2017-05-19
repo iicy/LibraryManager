@@ -33,6 +33,8 @@ public class UserInfoActivity extends BaseActivity implements UserInfoView {
     TextView user_username;
     @BindView(R.id.permission)
     TextView user_permission;
+    @BindView(R.id.id_num)
+    TextView user_id_num;
     @BindView(R.id.create_date)
     TextView user_create_date;
     @BindView(R.id.modify)
@@ -113,6 +115,7 @@ public class UserInfoActivity extends BaseActivity implements UserInfoView {
         username = user.getUsername();
         user_account.setText("账号: " + user.getAccount());
         user_username.setText("用户名: " + user.getUsername());
+        user_id_num.setText("身份证号: " + user.getId_num());
         if (user.getPermission().equals("0")) {
             user_permission.setText("身份: " + "管理员");
             ManagerActivity.instance.setUsername(username);

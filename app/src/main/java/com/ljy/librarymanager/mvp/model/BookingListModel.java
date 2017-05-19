@@ -22,11 +22,11 @@ public class BookingListModel {
     public BookingListModel() {
     }
 
-    public void getList(final BookingListPresenter bookingListPresenter,String account) {
+    public void getList(final BookingListPresenter bookingListPresenter, String account, int more) {
         BmobQuery<Booking> bmobQuery = new BmobQuery<Booking>();
         bmobQuery.addWhereEqualTo("user",account);
         bmobQuery.order("-createdAt");
-//        bmobQuery.setLimit(10);
+        bmobQuery.setLimit(10 + more);
         bmobQuery.findObjects(new FindListener<Booking>() {
             @Override
             public void done(List<Booking> list, BmobException e) {

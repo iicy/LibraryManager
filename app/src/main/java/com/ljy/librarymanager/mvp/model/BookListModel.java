@@ -21,11 +21,13 @@ public class BookListModel {
     public BookListModel() {
     }
 
-    public void getList(final BookListPresenter bookListPresenter, String category) {
+    public void getList(final BookListPresenter bookListPresenter, String category, int more) {
         BmobQuery<Books> bmobQuery = new BmobQuery<Books>();
-        bmobQuery.addWhereEqualTo("category",category);
+        if (category != null) {
+            bmobQuery.addWhereEqualTo("category", category);
+        }
         bmobQuery.order("-createdAt");
-//        bmobQuery.setLimit(10);
+        bmobQuery.setLimit(10 + more);
         bmobQuery.findObjects(new FindListener<Books>() {
             @Override
             public void done(List<Books> list, BmobException e) {

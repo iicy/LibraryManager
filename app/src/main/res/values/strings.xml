@@ -7,6 +7,7 @@
     <string name="username">用户名</string>
     <string name="account">账号</string>
     <string name="password">密码</string>
+    <string name="id_num">身份证号</string>
     <string name="manager">管理员</string>
     <string name="permission">权限</string>
     <string name="normal_user">普通用户</string>

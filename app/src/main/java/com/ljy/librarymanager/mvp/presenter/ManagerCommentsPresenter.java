@@ -26,9 +26,9 @@ public class ManagerCommentsPresenter extends BasePresenter<ManagerCommentsView,
         managerCommentsModel.delete(this, comment);
     }
 
-    public void getComments(String bookId) {
+    public void getComments(String bookId, int more) {
         mView.showProgress();
-        managerCommentsModel.getComments(this, bookId);
+        managerCommentsModel.getComments(this, bookId, more);
     }
 
     @Override

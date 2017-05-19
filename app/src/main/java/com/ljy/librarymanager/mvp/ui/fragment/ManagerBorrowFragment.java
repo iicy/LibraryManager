@@ -62,6 +62,7 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
     private LoadingFragment loadingFragment;
     private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
     private Observable<ManagerBorrowFragment> observable;
+    private int more = 0;
 
     @Inject
     public ManagerBorrowFragment() {
@@ -110,8 +111,16 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
             @Override
             public void onRefresh() {
                 loadingFragment.setText(getString(R.string.loading));
-                mPresenter.getList();
+                mPresenter.getList(0);
+                more = 0;
                 refreshLayout.setRefreshing(false);
+            }
+        });
+        list.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+            @Override
+            public void loadMore() {
+                more += 10;
+                mPresenter.getList(more);
             }
         });
     }
@@ -149,7 +158,8 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
     @Override
     public void deleteSuccess() {
         pg.dismiss();
-        mPresenter.getList();
+        mPresenter.getList(0);
+        more = 0;
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
     }
 
@@ -192,7 +202,7 @@ public class ManagerBorrowFragment extends BaseFragment implements ManagerBorrow
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getList();
+        mPresenter.getList(0);
     }
 
     @Override

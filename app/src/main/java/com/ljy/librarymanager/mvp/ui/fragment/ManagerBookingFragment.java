@@ -62,6 +62,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     private LoadingFragment loadingFragment;
     private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
     private Observable<ManagerBookingFragment> observable;
+    private int more = 0;
 
     @Inject
     public ManagerBookingFragment() {
@@ -109,8 +110,16 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
             @Override
             public void onRefresh() {
                 loadingFragment.setText(getString(R.string.loading));
-                mPresenter.getList();
+                mPresenter.getList(0);
+                more = 0;
                 refreshLayout.setRefreshing(false);
+            }
+        });
+        list.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+            @Override
+            public void loadMore() {
+                more += 10;
+                mPresenter.getList(more);
             }
         });
     }
@@ -148,7 +157,8 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     @Override
     public void deleteSuccess() {
         pg.dismiss();
-        mPresenter.getList();
+        mPresenter.getList(0);
+        more = 0;
         Toast.makeText(getActivity(), "删除成功！", Toast.LENGTH_LONG).show();
     }
 
@@ -190,7 +200,7 @@ public class ManagerBookingFragment extends BaseFragment implements ManagerBooki
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getList();
+        mPresenter.getList(0);
     }
 
     @Override

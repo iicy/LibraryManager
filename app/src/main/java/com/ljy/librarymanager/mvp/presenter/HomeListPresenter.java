@@ -22,9 +22,9 @@ public class HomeListPresenter extends BasePresenter<HomeListView, List<Announce
         this.homeListModel = homeListModel;
     }
 
-    public void getList() {
+    public void getList(int more) {
         mView.showProgress();
-        homeListModel.getList(this);
+        homeListModel.getList(this, more);
     }
 
     @Override

@@ -48,6 +48,17 @@
         android:maxLines="1"
         android:padding="@dimen/small_padding" />
 
+    <EditText
+        android:id="@+id/id_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_margin"
+        android:background="@drawable/bg_edit"
+        android:gravity="start"
+        android:hint="@string/id_num"
+        android:maxLines="1"
+        android:padding="@dimen/small_padding" />
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

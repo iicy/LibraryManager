@@ -22,9 +22,9 @@ public class ManagerUserPresenter extends BasePresenter<ManagerUserView, List<Us
         this.managerUserModel = managerUserModel;
     }
 
-    public void getList() {
+    public void getList(int more) {
         mView.showProgress();
-        managerUserModel.getList(this);
+        managerUserModel.getList(this, more);
     }
 
     public void delete(User user){

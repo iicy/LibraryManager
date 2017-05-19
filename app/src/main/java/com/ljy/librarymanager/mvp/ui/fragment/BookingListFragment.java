@@ -54,6 +54,7 @@ public class BookingListFragment extends BaseFragment implements BookingListView
     private FragmentTransaction ft;
     private LoadingFragment loadingFragment;
     private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
+    private int more = 0;
 
     @Inject
     public BookingListFragment() {
@@ -86,8 +87,16 @@ public class BookingListFragment extends BaseFragment implements BookingListView
             @Override
             public void onRefresh() {
                 loadingFragment.setText(getString(R.string.loading));
-                mPresenter.getList(MainActivity.instance.getAccount());
+                mPresenter.getList(MainActivity.instance.getAccount(), 0);
+                more = 0;
                 refreshLayout.setRefreshing(false);
+            }
+        });
+        list.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+            @Override
+            public void loadMore() {
+                more += 10;
+                mPresenter.getList(MainActivity.instance.getAccount(), more);
             }
         });
     }
@@ -149,7 +158,7 @@ public class BookingListFragment extends BaseFragment implements BookingListView
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getList(MainActivity.instance.getAccount());
+        mPresenter.getList(MainActivity.instance.getAccount(), 0);
     }
 
 }

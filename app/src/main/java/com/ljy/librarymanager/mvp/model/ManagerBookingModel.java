@@ -23,10 +23,10 @@ public class ManagerBookingModel {
     public ManagerBookingModel() {
     }
 
-    public void getList(final ManagerBookingPresenter managerBookingPresenter) {
+    public void getList(final ManagerBookingPresenter managerBookingPresenter, int more) {
         BmobQuery<Booking> bmobQuery = new BmobQuery<Booking>();
         bmobQuery.order("-createdAt");
-//        bmobQuery.setLimit(10);
+        bmobQuery.setLimit(10 + more);
         bmobQuery.findObjects(new FindListener<Booking>() {
             @Override
             public void done(List<Booking> list, BmobException e) {

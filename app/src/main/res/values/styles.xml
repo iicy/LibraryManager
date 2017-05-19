@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -15,7 +15,7 @@
 
     <!-- 设置欢迎页秒开,避免白屏黑屏 -->
     <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/bg_launch</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 

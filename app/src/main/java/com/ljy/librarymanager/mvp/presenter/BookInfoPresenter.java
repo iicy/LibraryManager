@@ -24,8 +24,8 @@ public class BookInfoPresenter extends BasePresenter<BookInfoView, String> {
         this.bookInfoModel = bookInfoModel;
     }
 
-    public void getComments(String bookId) {
-        bookInfoModel.getComments(this, bookId);
+    public void getComments(String bookId, int more) {
+        bookInfoModel.getComments(this, bookId, more);
     }
 
     public void addBooking(Booking booking) {

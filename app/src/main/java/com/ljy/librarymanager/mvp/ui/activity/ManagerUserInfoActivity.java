@@ -31,6 +31,8 @@ public class ManagerUserInfoActivity extends BaseActivity implements ManagerUser
     TextView user_password;
     @BindView(R.id.user_permission)
     TextView user_permission;
+    @BindView(R.id.user_id_num)
+    TextView user_id_num;
     @BindView(R.id.user_created_date)
     TextView user_created_date;
     private ProgressDialog pg;
@@ -60,6 +62,7 @@ public class ManagerUserInfoActivity extends BaseActivity implements ManagerUser
         user_name.setText("用户名：" + user.getUsername());
         user_account.setText("账号：" + user.getAccount());
         user_password.setText("密码：" + user.getPassword());
+        user_id_num.setText("身份证号：" + user.getId_num());
         if (user.getPermission().equals("0")) {
             user_permission.setText("权限：管理员");
         } else {

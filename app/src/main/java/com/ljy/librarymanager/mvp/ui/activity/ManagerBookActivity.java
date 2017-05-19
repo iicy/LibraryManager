@@ -54,6 +54,7 @@ public class ManagerBookActivity extends BaseActivity implements ManagerBookView
     private static final String TAG_LOADING_FRAGMENT = "LOADING_FRAGMENT";
 
     private String category;
+    private int more = 0;
 
     @Inject
     ManagerBookPresenter mPresenter;
@@ -142,8 +143,16 @@ public class ManagerBookActivity extends BaseActivity implements ManagerBookView
             @Override
             public void onRefresh() {
                 loadingFragment.setText(getString(R.string.loading));
-                mPresenter.getList(category);
+                mPresenter.getList(category, 0);
+                more = 0;
                 refreshLayout.setRefreshing(false);
+            }
+        });
+        list.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+            @Override
+            public void loadMore() {
+                more += 10;
+                mPresenter.getList(category, more);
             }
         });
     }
@@ -202,7 +211,8 @@ public class ManagerBookActivity extends BaseActivity implements ManagerBookView
     @Override
     public void deleteSuccess() {
         hideProgress();
-        mPresenter.getList(category);
+        mPresenter.getList(category, 0);
+        more = 0;
         Toast.makeText(this, "删除成功！", Toast.LENGTH_LONG).show();
     }
 
@@ -215,6 +225,6 @@ public class ManagerBookActivity extends BaseActivity implements ManagerBookView
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.getList(category);
+        mPresenter.getList(category, 0);
     }
 }

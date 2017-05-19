@@ -22,9 +22,9 @@ public class BookListPresenter extends BasePresenter<BookListView, List<Books>> 
         this.bookListModel = bookListModel;
     }
 
-    public void getList(String category) {
+    public void getList(String category, int more) {
         mView.showProgress();
-        bookListModel.getList(this,category);
+        bookListModel.getList(this, category, more);
     }
 
     @Override

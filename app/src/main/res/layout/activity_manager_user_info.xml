@@ -63,6 +63,19 @@
                 android:textSize="@dimen/normal_text_size" />
 
             <TextView
+                android:id="@+id/user_id_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/normal_margin"
+                android:layout_marginRight="@dimen/normal_margin"
+                android:layout_marginTop="@dimen/small_padding"
+                android:gravity="start"
+                android:paddingLeft="@dimen/small_padding"
+                android:paddingRight="@dimen/small_padding"
+                android:text="@string/id_num"
+                android:textSize="@dimen/normal_text_size" />
+
+            <TextView
                 android:id="@+id/user_permission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
