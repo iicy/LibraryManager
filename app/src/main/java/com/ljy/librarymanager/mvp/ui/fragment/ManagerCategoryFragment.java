@@ -176,6 +176,7 @@ public class ManagerCategoryFragment extends BaseFragment implements ManagerCate
 
     @Override
     public void showMsg(String message) {
+        pg.dismiss();
         Toast.makeText(getActivity(), "无法删除！该分类不为空！", Toast.LENGTH_LONG).show();
     }
 

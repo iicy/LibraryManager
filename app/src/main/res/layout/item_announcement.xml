@@ -15,11 +15,11 @@
         android:padding="@dimen/small_padding">
 
         <TextView
+            android:padding="@dimen/small_padding"
             android:id="@+id/announcement_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/normal_text_size" />
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/announcement_date"

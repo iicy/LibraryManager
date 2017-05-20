@@ -1,5 +1,6 @@
 package com.ljy.librarymanager.mvp.ui.activity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,6 +29,7 @@ import com.ljy.librarymanager.utils.FileUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -66,6 +69,7 @@ public class AddBookActivity extends BaseActivity implements AddBookView {
     private List<String> categoryList;
     private ArrayAdapter<String> spinnerAdapter;
     private File sdcardTempFile;
+    private Calendar c = Calendar.getInstance();
 
     @Inject
     AddBookPresenter mPresenter;
@@ -102,6 +106,7 @@ public class AddBookActivity extends BaseActivity implements AddBookView {
             }
         });
         bt_save.setOnClickListener(this);
+        ed_bookPublicationDate.setOnClickListener(this);
         ed_bookCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -146,6 +151,35 @@ public class AddBookActivity extends BaseActivity implements AddBookView {
                     BmobFile pic = new BmobFile(sdcardTempFile);
                     mPresenter.uploadPic(pic);
                 }
+                break;
+            }
+            case R.id.book_publication_date: {
+                // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
+                new DatePickerDialog(AddBookActivity.this,
+                        // 绑定监听器
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                String month;
+                                String day;
+                                if ((monthOfYear + 1) < 10) {
+                                    month = "0" + (monthOfYear + 1);
+                                } else {
+                                    month = "" + (monthOfYear + 1);
+                                }
+                                if (dayOfMonth < 10) {
+                                    day = "0" + dayOfMonth;
+                                } else {
+                                    day = "" + dayOfMonth;
+                                }
+                                ed_bookPublicationDate.setText(year + "-" + month
+                                        + "-" + day);
+                            }
+                        }
+                        // 设置初始日期
+                        , c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
+                        .get(Calendar.DAY_OF_MONTH)).show();
                 break;
             }
         }

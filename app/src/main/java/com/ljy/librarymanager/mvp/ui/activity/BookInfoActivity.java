@@ -131,7 +131,7 @@ public class BookInfoActivity extends BaseActivity implements BookInfoView {
         tv_bookPublication.setText("出版社：" + book.getPublication());
         tv_bookPublicationDate.setText("出版日期：" + book.getPublicationDate().getDate().split(" ")[0]);
         tv_bookStock.setText("库存：" + book.getStock());
-        tv_bookSummary.setText("简介：" + book.getSummary());
+        tv_bookSummary.setText("简介：\n\n" + book.getSummary());
         if (isManager) {
             bt_booking.setVisibility(View.GONE);
             bt_collect.setVisibility(View.GONE);
