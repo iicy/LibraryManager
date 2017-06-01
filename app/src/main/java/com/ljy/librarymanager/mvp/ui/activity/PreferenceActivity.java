@@ -59,6 +59,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
                         editor.putBoolean("login", false);
                         editor.commit();
                         Intent i = new Intent(PreferenceActivity.this,LoginActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
                         finish();
                     }
